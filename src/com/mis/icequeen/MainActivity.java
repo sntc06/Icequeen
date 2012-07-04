@@ -14,6 +14,17 @@ public class MainActivity extends Activity {
 	
 	private TextView textView;
 	
+	// CoverFlow 顯示的圖片 
+	private final int[] RESOURCE_IMAGES = {
+			R.drawable.image01,
+			R.drawable.image02,
+			R.drawable.image03,
+			R.drawable.image04,
+			R.drawable.image05,
+			R.drawable.image06
+	};
+	private final int COVERFLOW_INIT_POSITION = 0;
+	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,13 +59,16 @@ public class MainActivity extends Activity {
      */
     private void setupCoverFlow(final CoverFlow mCoverFlow, final boolean reflect) {
         BaseAdapter coverImageAdapter;
+        
         if (reflect) {
             coverImageAdapter = new ReflectingImageAdapter(new ResourceImageAdapter(this));
         } else {
             coverImageAdapter = new ResourceImageAdapter(this);
+            ((ResourceImageAdapter) coverImageAdapter).setResources(RESOURCE_IMAGES);
         }
+       
         mCoverFlow.setAdapter(coverImageAdapter);
-        mCoverFlow.setSelection(2, true);
+        mCoverFlow.setSelection(COVERFLOW_INIT_POSITION, true);
         setupListeners(mCoverFlow);
     }
 

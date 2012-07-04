@@ -64,6 +64,7 @@ containing a value of this type.
         public static final int image03=0x7f020004;
         public static final int image04=0x7f020005;
         public static final int image05=0x7f020006;
+        public static final int image06=0x7f020007;
     }
     public static final class id {
         public static final int btnLearn=0x7f050003;
