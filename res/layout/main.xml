@@ -20,7 +20,7 @@
 		coverflow:imageHeight="150dip" 
 		android:id="@+id/coverflow" 
 		android:layout_width="fill_parent"
-		android:layout_height="wrap_content" 
+		android:layout_height="200dip" 
 		android:layout_marginTop="5dip" >
     </pl.polidea.coverflow.CoverFlow>
 	
