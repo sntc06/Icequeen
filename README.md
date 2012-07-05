@@ -2,5 +2,3 @@ Icequeen
 ========
 
 Project Icequeen
-
-MIS
