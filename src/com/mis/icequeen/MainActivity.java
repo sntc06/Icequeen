@@ -2,6 +2,8 @@ package com.mis.icequeen;
 
 import pl.polidea.coverflow.*;
 import android.app.Activity;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -31,6 +33,16 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         setupView();
+        
+        getIntent().setData(Uri.parse("content://com.mis.icequeen.testprovider"));
+        Uri uri_test = getIntent().getData();
+        Cursor c = managedQuery(uri_test, null, null, null, null);
+        if(c.getCount()!=0)
+        {	c.moveToFirst();
+        System.out.println(c.getString(0));
+        }else 
+        	System.out.println("FAIL");
+        c.close();
     }
 
 	/**
