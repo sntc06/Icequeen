@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -17,11 +18,11 @@ import android.net.Uri;
 public class TestProvider extends ContentProvider {
 	private final String DATABASE_PATH = android.os.Environment.getExternalStorageDirectory().getAbsolutePath()	+ "/phonebook";
 	public static final String PATH = "/phonebook";
-	private final String DATABASE_FILENAME = "vls";
-	SQLiteDatabase db = openDatabase();
+	private final String DATABASE_FILENAME = "vls.db";
+	SQLiteDatabase db ;
 	//SQLiteOpenHelper-建立資料庫PhoneContentDB和Table:Users
 	private static class DatabaseHelper extends SQLiteOpenHelper {
-		private static final String DATABASE_NAME = "vls";
+		private static final String DATABASE_NAME = "vls.db";
 		private static final int DATABASE_VERSION = 1;
 		//建立PhoneContentDB資料庫
 		private DatabaseHelper(Context ctx) {
@@ -48,6 +49,7 @@ public class TestProvider extends ContentProvider {
     //實作Content Providers的onCreate()
     @Override
     public boolean onCreate() {
+    	db=openDatabase(getContext());
     	databaseHelper = new DatabaseHelper(getContext());
         return true;
     }
@@ -76,17 +78,19 @@ public class TestProvider extends ContentProvider {
     //實作Content Providers的delete()
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
-    	//SQLiteDatabase db = databaseHelper.getWritableDatabase();
+    	//SQLiteDatabase db = databaseHelper.getWritableDatabase(); 
 		db.delete(UserSchema.TABLE_NAME, selection ,null);
 		db.close();
 		return 0;
 	}
+   
     //實作Content Providers的update()
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
-        SQLiteDatabase db = databaseHelper.getReadableDatabase();
-        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
-        qb.setTables(UserSchema.TABLE_NAME);
+        //SQLiteDatabase db = databaseHelper.getReadableDatabase();
+        //SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+        //qb.setTables(UserSchema.TABLE_NAME);
+        //Log.i("ICEQUEEN", db.isReadOnly()+"");
         Cursor c = db.query("WORD", projection, selection, selectionArgs, null, null, null);
         return c;
     }
@@ -97,16 +101,17 @@ public class TestProvider extends ContentProvider {
         return null;
     }
     
-    private SQLiteDatabase openDatabase() {
+	private SQLiteDatabase openDatabase(Context context) {
     	try {
 			File myDataPath = new File(DATABASE_PATH+PATH);
+			System.out.println(DATABASE_PATH+PATH);
 			String databaseFilename = myDataPath+ "/" + DATABASE_FILENAME;
 			if (!myDataPath.exists()) {
 				myDataPath.mkdirs();	
 			}
 			if (!(new File(databaseFilename)).exists())
 			{				
-				InputStream is = this.getContext().getResources().openRawResource(R.raw.vls);
+				InputStream is = context.getResources().openRawResource(R.raw.vls);
 				FileOutputStream fos = new FileOutputStream(databaseFilename);
 				byte[] buffer = new byte[8192];
 				int count = 0;
@@ -117,12 +122,13 @@ public class TestProvider extends ContentProvider {
 				fos.close();
 				is.close();
 			}
-			SQLiteDatabase database = SQLiteDatabase.openDatabase(databaseFilename, null, 0);
+			SQLiteDatabase database = SQLiteDatabase.openDatabase(databaseFilename, null, -1);
 			return database;
 		}
 		catch (Exception e)
 		{
 			Log.i("DB","DB_DIR_Exception: ");
+			e.printStackTrace();
 		}
 		return null;
     }
