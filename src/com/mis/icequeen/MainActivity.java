@@ -39,7 +39,7 @@ public class MainActivity extends Activity {
         Cursor c = managedQuery(uri_test, null, null, null, null);
         if(c.getCount()!=0)
         {	c.moveToFirst();
-        System.out.println(c.getString(0));
+        System.out.println(c.getString(1));
         }else 
         	System.out.println("FAIL");
         c.close();
