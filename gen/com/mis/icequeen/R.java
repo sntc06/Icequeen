@@ -68,16 +68,24 @@ containing a value of this type.
         public static final int image06=0x7f020008;
     }
     public static final class id {
-        public static final int btnLearn=0x7f060003;
-        public static final int btnReview=0x7f060004;
-        public static final int btnTest=0x7f060005;
-        public static final int coverflow=0x7f060001;
-        public static final int tvAppName=0x7f060000;
-        public static final int tvSelectedChapter=0x7f060002;
+        public static final int btnConfirmChapter=0x7f060006;
+        public static final int btnLearn=0x7f06000a;
+        public static final int btnReview=0x7f06000b;
+        public static final int btnSelectAll=0x7f060004;
+        public static final int btnSelectFinal=0x7f060003;
+        public static final int btnSelectMid=0x7f060002;
+        public static final int btnTest=0x7f06000c;
+        public static final int chapterCB=0x7f060001;
+        public static final int chapterSelectionList=0x7f060005;
+        public static final int chapterTitleTV=0x7f060000;
+        public static final int coverflow=0x7f060008;
+        public static final int tvAppName=0x7f060007;
+        public static final int tvSelectedChapter=0x7f060009;
     }
     public static final class layout {
-        public static final int chapter_selection=0x7f030000;
-        public static final int main=0x7f030001;
+        public static final int chapter_list=0x7f030000;
+        public static final int chapter_selection=0x7f030001;
+        public static final int main=0x7f030002;
     }
     public static final class raw {
         public static final int group8=0x7f040000;

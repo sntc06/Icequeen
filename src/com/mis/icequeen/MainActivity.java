@@ -2,14 +2,17 @@ package com.mis.icequeen;
 
 import pl.polidea.coverflow.*;
 import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
@@ -58,6 +61,15 @@ public class MainActivity extends Activity {
         //final CoverFlow reflectingCoverFlow = (CoverFlow) findViewById(this.getResources().getIdentifier(
         //        "coverflowReflect", "id", "pl.polidea.coverflow"));
         //setupCoverFlow(reflectingCoverFlow, true);
+        
+        Button btnLearn = (Button) findViewById(R.id.btnLearn);
+        Button btnReview = (Button) findViewById(R.id.btnReview);
+        Button btnTest = (Button) findViewById(R.id.btnTest);
+        ButtonListener buttonListener = new ButtonListener();
+        btnLearn.setOnClickListener(buttonListener);
+        btnReview.setOnClickListener(buttonListener);
+        btnTest.setOnClickListener(buttonListener);
+        
 		
 	}
 
@@ -109,5 +121,30 @@ public class MainActivity extends Activity {
                 textView.setText("Nothing clicked!");
             }
         });
+    }
+    
+    private class ButtonListener implements OnClickListener {
+
+		@Override
+		public void onClick(View v) {
+			
+			//String selection;
+			switch (v.getId()) {
+			case R.id.btnLearn:
+				//selection = "ChapterSelectionActivity";
+				break;
+			case R.id.btnReview:
+				//review
+				break;
+			case R.id.btnTest:
+				//test
+				break;
+			}
+			
+			Intent intent = new Intent(MainActivity.this, ChapterSelectionActivity.class);
+	        startActivity(intent);
+
+		}
+    	
     }
 }

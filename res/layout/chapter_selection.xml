@@ -3,6 +3,56 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        
+    <Button
+            android:id="@+id/btnSelectMid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="btnSelectMid" />
+        
+        <Button
+            android:id="@+id/btnSelectFinal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="btnSelectFinal" />
+        
+        <Button
+            android:id="@+id/btnSelectAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="btnSelectAll" />
+        
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <ListView
+            android:id="@+id/chapterSelectionList"
+            android:layout_width="match_parent"
+            android:layout_height="382dp" >
+
+        </ListView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >       
+        
+        
+        <Button
+            android:id="@+id/btnConfirmChapter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="btnConfirmChapter" />
+        
+    </LinearLayout>
 
 </LinearLayout>
