@@ -6,10 +6,6 @@ package com.mis.icequeen;
 import android.app.Activity;
 import android.os.Bundle;
 
-/**
- * @author Snowman
- *
- */
 public class LearningActivity extends Activity {
 
 	@Override
