@@ -7,6 +7,7 @@ import java.io.InputStream;
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -16,13 +17,13 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 
 public class TestProvider extends ContentProvider {
-	private final String DATABASE_PATH = android.os.Environment.getExternalStorageDirectory().getAbsolutePath()	+ "/phonebook";
-	public static final String PATH = "/phonebook";
-	private final String DATABASE_FILENAME = "vls.db";
+	private final String DATABASE_PATH = android.os.Environment.getExternalStorageDirectory().getAbsolutePath()	+ "/icequeen";
+	public static final String PATH = "/db";
+	private final String DATABASE_FILENAME = "iceqdb.db";
 	SQLiteDatabase db ;
 	//SQLiteOpenHelper-建立資料庫PhoneContentDB和Table:Users
 	private static class DatabaseHelper extends SQLiteOpenHelper {
-		private static final String DATABASE_NAME = "vls.db";
+		private static final String DATABASE_NAME = "iceq.db";
 		private static final int DATABASE_VERSION = 1;
 		//建立PhoneContentDB資料庫
 		private DatabaseHelper(Context ctx) {
@@ -54,9 +55,9 @@ public class TestProvider extends ContentProvider {
         return true;
     }
     public interface UserSchema {
-		String TABLE_NAME = "WORD";          //Table Name
-		String ID = "w_id";                    //ID
-		String USER_NAME = "s_word";       //User Name
+		String TABLE_NAME = "VOCABULARY";          //Table Name
+		String ID = "v_id";                    //ID
+		String USER_NAME = "voc";       //User Name
 		}
     //實作Content Providers的insert()
     @Override
@@ -91,8 +92,18 @@ public class TestProvider extends ContentProvider {
         //SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
         //qb.setTables(UserSchema.TABLE_NAME);
         //Log.i("ICEQUEEN", db.isReadOnly()+"");
-        Cursor c = db.query("WORD", projection, selection, selectionArgs, null, null, null);
-        return c;
+    	Cursor c=null;
+    	if (uri.equals(Uri.parse("content://com.mis.icequeen.testprovider/getall")))
+    		return getAllVoc();
+    	else if (uri.toString().startsWith("content://com.mis.icequeen.testprovider/gbid")){
+    		String[] t= uri.toString().split(":");
+    		int i =Integer.valueOf(t[2]);
+    		System.out.println(i);
+    		return getVOCbyID(i);
+    		}
+    	  	c = db.query("VOCABULARY", projection, selection, selectionArgs, null, null, null);
+    	db.close();
+        return c;	
     }
     //實作Content Providers的getType()
     @Override
@@ -100,6 +111,79 @@ public class TestProvider extends ContentProvider {
         // TODO Auto-generated method stub
         return null;
     }
+    //return all vocabularies in string[], start with 0
+    public Cursor getAllVoc(){
+    	Cursor c = db.query("MEANING", new String[] {"m_text"}, null, null, null,null,null);
+    	return c;
+    	/*c.moveToFirst();
+        String[] s = new String[c.getCount()];
+        for (int i = 0; i < s.length; i++) {
+			s[i] = c.getString(0);
+			c.moveToNext();
+        }
+        c.close();
+        db.close();
+        */
+    }
+    public Cursor getVOCbyID(int id){
+    	Cursor c = db.query("VOCABULARY", new String[] {"voc"}, "v_id='"+ id +"'", null, null,null,null);
+    	return c;
+    
+    }
+    
+    
+    /*
+     * public String getVOCbyID(int id){
+    	db = openDatabase();
+    	SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+        qb.setTables("VOCABULARY");
+        Cursor c = qb.query(db, new String[] {"voc"}, "v_id='"+ id +"'", null, null,null,null);
+        c.moveToFirst();
+        String result =c.getString(0);
+		c.close();
+        db.close();
+        return result;
+    
+    }
+    
+    public String getStatusbyID(int id, ContentValues values){
+    	db = openDatabase();
+    	SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+        qb.setTables("VOCABULARY_SET");
+        Cursor c = qb.query(db, new String[] {"ls_id"}, "v_id='"+ id +"'", null, null,null,null);
+        c.moveToFirst();
+        int temp=c.getInt(0);
+		c.close();
+		qb.setTables("LEARNING_STATUS");
+		c = qb.query(db, new String[] {"status"}, "ls_id='"+ temp +"'", null, null,null,null);
+		c.moveToFirst();
+		String result=c.getString(0);
+		c.close();
+        db.close();
+        return result;
+    
+    }
+    
+    public int updatebyID(int id, ContentValues values){
+    	db = openDatabase();
+    	SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+    	qb.setTables("VOCABULARY_SET");
+        Cursor c = qb.query(db, new String[] {"ls_id"}, "v_id='"+ id +"'", null, null,null,null);
+        c.moveToFirst();
+        int temp=c.getInt(0);
+		c.close();
+		db.update("LEARNING_STATUS", values, "ls_id='"+ temp +"'", null);
+    	db.close();
+    	return 0;
+    }
+    
+    public int addTest(ContentValues values){
+    	db = openDatabase();
+    	db.insert("TEST", null, values);
+		db.close();
+    	return 0;
+    }
+     * */
     
 	private SQLiteDatabase openDatabase(Context context) {
     	try {
@@ -111,7 +195,7 @@ public class TestProvider extends ContentProvider {
 			}
 			if (!(new File(databaseFilename)).exists())
 			{				
-				InputStream is = context.getResources().openRawResource(R.raw.vls);
+				InputStream is = context.getResources().openRawResource(R.raw.iceq);
 				FileOutputStream fos = new FileOutputStream(databaseFilename);
 				byte[] buffer = new byte[8192];
 				int count = 0;
