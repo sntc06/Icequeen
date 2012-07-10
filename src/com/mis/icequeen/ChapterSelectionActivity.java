@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import com.mis.icequeen.ChapterListAdapter.ViewHolder;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -77,8 +78,11 @@ public class ChapterSelectionActivity extends Activity {
 				for(int i=0; i<list.getCount(); i++) {    
 	                if(ChapterListAdapter.isSelected.get(i)) {
 	                	Log.i("ChapterSelected","i="+(i+1));	                	
-	                }    
-	            }    
+	                }
+	            }
+				Intent it = new Intent(ChapterSelectionActivity.this, LearningActivity.class);
+				startActivity(it);
+				
 				
 			}
         	

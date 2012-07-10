@@ -99,8 +99,9 @@ containing a value of this type.
     }
     public static final class raw {
         public static final int group8=0x7f040000;
-        public static final int phonebook=0x7f040001;
-        public static final int vls=0x7f040002;
+        public static final int iceq=0x7f040001;
+        public static final int phonebook=0x7f040002;
+        public static final int vls=0x7f040003;
     }
     public static final class string {
         public static final int app_name=0x7f050000;

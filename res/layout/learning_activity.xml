@@ -66,12 +66,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="上一個" />
-
+
         <RatingBar
             android:id="@+id/ratingBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:numStars="3" />
+            android:numStars="3"
+            android:stepSize="1.0" />
 
         <Button
             android:id="@+id/btnNext"
