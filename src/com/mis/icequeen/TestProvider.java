@@ -15,7 +15,7 @@ import android.util.Log;
 import android.content.ContentProvider;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
-
+//kerker
 public class TestProvider extends ContentProvider {
 	private final String DATABASE_PATH = android.os.Environment.getExternalStorageDirectory().getAbsolutePath()	+ "/icequeen";
 	public static final String PATH = "/db";
