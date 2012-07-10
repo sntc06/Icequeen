@@ -32,6 +32,7 @@ public class ChapterSelectionActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chapter_selection);
         setupView();
+        //test
     }
 
 	/**
