@@ -13,6 +13,15 @@ public class LearningActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.learning_activity);
+		setupView();
+		
+	}
+
+	/**
+	 * 
+	 */
+	private void setupView() {
+		// TODO Auto-generated method stub
 		
 	}
 
