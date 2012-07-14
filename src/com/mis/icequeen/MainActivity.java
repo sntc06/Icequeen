@@ -56,13 +56,13 @@ public class MainActivity extends Activity {
 	private void setupView() {
 		// TODO Auto-generated method stub
 		textView = (TextView) findViewById(R.id.tvSelectedChapter);
-        final CoverFlow coverFlow1 = (CoverFlow) findViewById(this.getResources().getIdentifier("coverflow", "id",
-                "com.mis.icequeen"));
-        setupCoverFlow(coverFlow1, false);
+        //final CoverFlow coverFlow1 = (CoverFlow) findViewById(this.getResources().getIdentifier("coverflow", "id",
+        //        "com.mis.icequeen"));
+        //setupCoverFlow(coverFlow1, false);
         //Reflection
-        //final CoverFlow reflectingCoverFlow = (CoverFlow) findViewById(this.getResources().getIdentifier(
-        //        "coverflowReflect", "id", "pl.polidea.coverflow"));
-        //setupCoverFlow(reflectingCoverFlow, true);
+        final CoverFlow reflectingCoverFlow = (CoverFlow) findViewById(this.getResources().getIdentifier(
+                "coverflowReflection", "id", "com.mis.icequeen"));
+        setupCoverFlow(reflectingCoverFlow, true);
         
         Button btnLearn = (Button) findViewById(R.id.btnLearn);
         Button btnReview = (Button) findViewById(R.id.btnReview);
@@ -87,7 +87,9 @@ public class MainActivity extends Activity {
         BaseAdapter coverImageAdapter;
         
         if (reflect) {
-            coverImageAdapter = new ReflectingImageAdapter(new ResourceImageAdapter(this));
+        	ResourceImageAdapter resourceImageAdapter = new ResourceImageAdapter(this);
+            coverImageAdapter = new ReflectingImageAdapter(resourceImageAdapter);
+            resourceImageAdapter.setResources(RESOURCE_IMAGES);
         } else {
             coverImageAdapter = new ResourceImageAdapter(this);
             ((ResourceImageAdapter) coverImageAdapter).setResources(RESOURCE_IMAGES);

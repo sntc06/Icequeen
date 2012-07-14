@@ -16,12 +16,25 @@
     <pl.polidea.coverflow.CoverFlow 
     	xmlns:coverflow="http://schemas.android.com/apk/res/com.mis.icequeen"
     	class="pl.polidea.coverflow.CoverFlow" 
-		coverflow:imageWidth="100dip" 
-		coverflow:imageHeight="150dip" 
+		coverflow:imageWidth="200dip" 
+		coverflow:imageHeight="200dip" 
 		android:id="@+id/coverflow" 
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content" 
 		android:layout_marginTop="5dip" >
+    </pl.polidea.coverflow.CoverFlow>
+    <pl.polidea.coverflow.CoverFlow 
+    	xmlns:coverflow="http://schemas.android.com/apk/res/com.mis.icequeen"
+    	class="pl.polidea.coverflow.CoverFlow" 
+		coverflow:imageWidth="200dip" 
+		coverflow:imageHeight="200dip" 
+		android:id="@+id/coverflowReflection" 
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content" 
+		android:layout_marginTop="5dip"
+		coverflow:withReflection="true"
+		coverflow:imageReflectionRatio="0.2" 
+		coverflow:reflectionGap="2dip" >
     </pl.polidea.coverflow.CoverFlow>
 	
 	
