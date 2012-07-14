@@ -7,20 +7,23 @@
         		android:centerColor="#00CCFF"
         		android:endColor="#0000CC"
 	        	android:angle="90"/>
-    		<padding android:left="7dp"
-    	    	android:top="7dp"
-	        	android:right="7dp"
-	        	android:bottom="7dp" />
+    		<padding android:left="10dp"
+    	    	android:top="10dp"
+	        	android:right="10dp"
+	        	android:bottom="10dp" />
 	    	<stroke
 	        	android:width="2dip"
-    	    	android:color="#FFFFFF" />
-    		<corners android:radius= "8dp" />
+    	    	android:color="#ACACAC" />
+    		<corners android:radius= "3dp" />
 		</shape>
     </item>
     <item>
         <shape>
-            <gradient android:startColor="#FFA10A" android:endColor="#FFB947" android:angle="90" />
-            <stroke android:width="2dip" android:color="#cccccc" />
+            <gradient 
+                android:startColor="#FFFFFF"
+                android:endColor="#DCDDDF" 
+                android:angle="270" />
+            <stroke android:width="2dip" android:color="#ACACAC" />
             <corners android:radius="3dp" />
             <padding android:left="10dp" android:top="10dp" android:right="10dp" android:bottom="10dp" />
         </shape>
