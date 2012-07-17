@@ -6,6 +6,8 @@ package com.mis.icequeen;
 import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -33,7 +35,19 @@ public class ChapterSelectionActivity extends Activity {
 	 * 
 	 */
 	private void setupView() {
-		
+		getIntent().setData(Uri.parse("content://com.mis.icequeen.testprovider/getAllChapter"));
+        Uri uri = getIntent().getData();
+        Cursor c = managedQuery(uri, null, null, null, null);
+        c.moveToFirst();
+		// Insert data
+		data = new ArrayList<String>();
+		for (int i=0; i<c.getCount(); i++) {
+			System.out.println(c.getString(0));
+			data.add(c.getString(0));
+			if(c.getPosition()!=c.getCount()-1)
+				c.moveToNext();
+		}
+		c.close();
 		
         
         // ÂI¤F½T©w«ö¶s

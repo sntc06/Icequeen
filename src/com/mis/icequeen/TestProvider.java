@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 
-import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.UriMatcher;
@@ -101,10 +100,24 @@ public class TestProvider extends ContentProvider {
     		System.out.println(i);
     		return getVOCbyID(i);
     		}
+    	else if (uri.toString().startsWith("content://com.mis.icequeen.testprovider/getsetbyid")){
+    		String[] t= uri.toString().split(":");
+    		System.out.println(t[2]);
+    		return getSETbyID(t[2]);
+    		}
     	  	c = db.query("VOCABULARY", projection, selection, selectionArgs, null, null, null);
     	db.close();
         return c;	
     }
+    private Cursor getSETbyID(String t) {
+    	Cursor c = db.rawQuery("SELECT a.v_id,voc,m_text,class_cht,class_eng,s_text,s_explain FROM VOCABULARY v JOIN VOCABULARY_SET a on a.v_id=v.v_id JOIN CLASS c on a.c_id=c.c_id JOIN old_SENTENCE s on a.s_id=s.s_id JOIN MEANING m on s.wt_id=m.m_id where a.v_id=?",new String[]{t});
+    	return c;
+		// TODO Auto-generated method stub
+	}
+    private Cursor getAllCpt() {
+    	Cursor c = db.query("CHAPTER_RANGE", new String[] {"chapter_text"}, null, null, null,null,null);
+    	return c;
+	}
     //¹ê§@Content ProvidersªºgetType()
     @Override
     public String getType(Uri uri) {
