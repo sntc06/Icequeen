@@ -64,6 +64,7 @@ public class ChapterSelectionActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				Intent it = new Intent(ChapterSelectionActivity.this, LearningActivity.class);
+				it.putExtra("ID",761);
 				startActivity(it);
 			}
         });
