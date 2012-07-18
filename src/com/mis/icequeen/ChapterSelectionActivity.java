@@ -55,7 +55,7 @@ public class ChapterSelectionActivity extends Activity {
 		data.clear();
 		for (int i=1; i<=10; i++) 
 			data.add("Chapter "+i);
-		Log.i("TEST", data.toString());
+		Log.i("TEST_CH", data.toString());
 		
 		LinearLayout chapterLinearLayoutMid = (LinearLayout) findViewById(R.id.chapterLinearLayoutMid);
 		LinearLayout chapterLinearLayoutFinal = (LinearLayout) findViewById(R.id.chapterLinearLayoutFinal);
