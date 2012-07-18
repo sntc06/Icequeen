@@ -53,7 +53,7 @@ public class ChapterSelectionActivity extends Activity {
 		
 		// TODO: Fill in test chapter data
 		data.clear();
-		for (int i=1; i<=10; i++) 
+		for (int i=1; i<=11; i++) 
 			data.add("Chapter "+i);
 		Log.i("TEST_CH", data.toString());
 		
