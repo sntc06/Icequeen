@@ -91,6 +91,7 @@ public class TestProvider extends ContentProvider {
         //SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
         //qb.setTables(UserSchema.TABLE_NAME);
         //Log.i("ICEQUEEN", db.isReadOnly()+"");
+    	db=openDatabase(getContext());
     	Cursor c=null;
     	if (uri.equals(Uri.parse("content://com.mis.icequeen.testprovider/getall")))
     		return getAllVoc();
