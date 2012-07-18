@@ -56,10 +56,8 @@ public class MainActivity extends Activity {
 	private void setupView() {
 		// TODO Auto-generated method stub
 		textView = (TextView) findViewById(R.id.tvSelectedChapter);
-        //final CoverFlow coverFlow1 = (CoverFlow) findViewById(this.getResources().getIdentifier("coverflow", "id",
-        //        "com.mis.icequeen"));
-        //setupCoverFlow(coverFlow1, false);
-        //Reflection
+
+        //CoverFlow Reflection
         final CoverFlow reflectingCoverFlow = (CoverFlow) findViewById(this.getResources().getIdentifier(
                 "coverflowReflection", "id", "com.mis.icequeen"));
         setupCoverFlow(reflectingCoverFlow, true);

@@ -46,7 +46,7 @@
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
-        android:layout_height="300dip" >
+        android:layout_height="350dip" >
     
     
     <LinearLayout
@@ -85,6 +85,7 @@
             android:id="@+id/checkBoxFinal"
             android:layout_width="wrap_content"
             android:layout_height="32dp"
+            android:layout_marginTop="12dp" 
             android:text="期末考" />
 
         <LinearLayout
@@ -102,47 +103,24 @@
     
     </ScrollView>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
-
-        <Button
-            android:id="@+id/btnSelectMid"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="btnSelectMid" />
-
-        <Button
-            android:id="@+id/btnSelectFinal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="btnSelectFinal" />
-
-        <Button
-            android:id="@+id/btnSelectAll"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="btnSelectAll" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
+
         <Button
             android:id="@+id/btnConfirmChapter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="btnConfirmChapter" />
-    </LinearLayout>
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/button_style"
+            android:textColor="#4B4B4B" 
+            android:gravity="center"
+            android:text="確認選擇" />
 
-    
+    </RelativeLayout>
+
+	    
 
 
 

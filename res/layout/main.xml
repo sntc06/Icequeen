@@ -9,7 +9,8 @@
         android:id="@+id/tvAppName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SnowtecTest"
+        android:layout_margin="20dp" 
+        android:text="單字大學堂"
         android:textAppearance="?android:attr/textAppearanceLarge" />
     
     <!-- coverFlow -->
@@ -19,20 +20,10 @@
     	class="pl.polidea.coverflow.CoverFlow" 
 		coverflow:imageWidth="200dip" 
 		coverflow:imageHeight="200dip" 
-		android:id="@+id/coverflow" 
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content" 
-		android:layout_marginTop="5dip" >
-    </pl.polidea.coverflow.CoverFlow>
-    <pl.polidea.coverflow.CoverFlow 
-    	xmlns:coverflow="http://schemas.android.com/apk/res/com.mis.icequeen"
-    	class="pl.polidea.coverflow.CoverFlow" 
-		coverflow:imageWidth="200dip" 
-		coverflow:imageHeight="200dip" 
 		android:id="@+id/coverflowReflection" 
 		android:layout_width="fill_parent"
-		android:layout_height="wrap_content" 
-		android:layout_marginTop="5dip"
+		android:layout_height="300dp" 
+		android:layout_marginTop="20dip"
 		coverflow:withReflection="true"
 		coverflow:imageReflectionRatio="0.2" 
 		coverflow:reflectionGap="2dip" >
@@ -50,26 +41,37 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
-
+
         <Button
             android:id="@+id/btnLearn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Learn" />
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_style"
+            android:text="學習模式"
+            android:textColor="#4B4B4B" />
 
         <Button
             android:id="@+id/btnReview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Review" />
+            android:layout_marginLeft="10dp"
+            android:text="複習模式" 
+            android:background="@drawable/button_style"
+            android:textColor="#4B4B4B"
+            android:layout_weight="1" />
 
         <Button
             android:id="@+id/btnTest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Test" 
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"
+            android:text="測驗模式" 
             android:background="@drawable/button_style"
-            android:textColor="#4B4B4B"/>
+            android:textColor="#4B4B4B"
+            android:layout_weight="1" />
     </LinearLayout>
 
 
