@@ -88,8 +88,8 @@ containing a value of this type.
         public static final int btnSelectMid=0x7f070009;
         public static final int btnTest=0x7f07001c;
         public static final int button1=0x7f070011;
-        public static final int chapterLinearLayout1=0x7f070006;
-        public static final int chapterLinearLayout2=0x7f070008;
+        public static final int chapterLinearLayoutFinal=0x7f070008;
+        public static final int chapterLinearLayoutMid=0x7f070006;
         public static final int checkBoxFinal=0x7f070007;
         public static final int checkBoxMid=0x7f070005;
         public static final int coverflow=0x7f070017;

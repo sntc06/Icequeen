@@ -57,12 +57,22 @@ public class ChapterSelectionActivity extends Activity {
 			data.add("Chapter "+i);
 		Log.i("TEST", data.toString());
 		
-		LinearLayout chapterLinearLayout1 = (LinearLayout) findViewById(R.id.chapterLinearLayout1);
+		LinearLayout chapterLinearLayoutMid = (LinearLayout) findViewById(R.id.chapterLinearLayoutMid);
+		LinearLayout chapterLinearLayoutFinal = (LinearLayout) findViewById(R.id.chapterLinearLayoutFinal);
 		CheckBox[] checkboxes = new CheckBox[data.size()];
-		for (int i=0; i<data.size(); i++) {
+		
+		int half = data.size() / 2;
+		
+		for (int i=0; i<half; i++) {
 			checkboxes[i] = new CheckBox(this);
 			checkboxes[i].setText(data.get(i));
-			chapterLinearLayout1.addView(checkboxes[i]);
+			chapterLinearLayoutMid.addView(checkboxes[i]);
+		}
+		
+		for (int i=half; i<data.size(); i++) {
+			checkboxes[i] = new CheckBox(this);
+			checkboxes[i].setText(data.get(i));
+			chapterLinearLayoutFinal.addView(checkboxes[i]);
 		}
 		
         
