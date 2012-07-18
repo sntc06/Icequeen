@@ -44,7 +44,7 @@ public class LearningActivity extends Activity {
         	set.moveToFirst();
         	word.setText(set.getString(1));
         	meaning.setText(set.getString(2));
-        	classes.setText(set.getString(3)+" "+set.getString(4));
+        	classes.setText(set.getString(3)+"  "+set.getString(4));
         	sentence.setText(set.getString(5)+"\n"+set.getString(6));
         	count.setText(nowvocid+"/963");
         }else
