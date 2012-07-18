@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/background_color"
     android:orientation="vertical" >
-
+	<!-- 書本資訊 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="72dp" >
@@ -41,18 +41,28 @@
         </LinearLayout>
     </LinearLayout>
 
+    <!-- 章節選擇 -->
+    
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="300dip" >
+    
+    
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
-
+
+        <!-- 期中考 -->
         <CheckBox
-            android:id="@+id/checkBox1"
+            android:id="@+id/checkBoxMid"
             android:layout_width="wrap_content"
             android:layout_height="32dp"
             android:text="期中考" />
 
         <LinearLayout
+            android:id="@+id/chapterLinearLayout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -60,22 +70,37 @@
             android:layout_marginRight="20dp"
             android:background="@drawable/checkbox_background" >
             
-            <CheckBox
+            <!-- <CheckBox
                 android:id="@+id/checkBox2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="CheckBox"
-                android:button="@drawable/checkbox" />
+                android:button="@drawable/checkbox" /> CheckBox style -->
 
-            <CheckBox
-                android:id="@+id/checkBox3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="CheckBox" />
+
+        </LinearLayout>
+        
+        <!-- 期末考 -->
+        <CheckBox
+            android:id="@+id/checkBoxFinal"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:text="期末考" />
+
+        <LinearLayout
+            android:id="@+id/chapterLinearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/checkbox_background" >
 
         </LinearLayout>
 
     </LinearLayout>
+    
+    </ScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -116,5 +141,9 @@
             android:layout_height="wrap_content"
             android:text="btnConfirmChapter" />
     </LinearLayout>
+
+    
+
+
 
 </LinearLayout>

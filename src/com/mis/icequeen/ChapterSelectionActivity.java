@@ -13,6 +13,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 /**
@@ -55,7 +57,13 @@ public class ChapterSelectionActivity extends Activity {
 			data.add("Chapter "+i);
 		Log.i("TEST", data.toString());
 		
-		
+		LinearLayout chapterLinearLayout1 = (LinearLayout) findViewById(R.id.chapterLinearLayout1);
+		CheckBox[] checkboxes = new CheckBox[data.size()];
+		for (int i=0; i<data.size(); i++) {
+			checkboxes[i] = new CheckBox(this);
+			checkboxes[i].setText(data.get(i));
+			chapterLinearLayout1.addView(checkboxes[i]);
+		}
 		
         
         // ÂI¤F½T©w«ö¶s
