@@ -32,7 +32,7 @@ public class ChapterSelectionActivity extends Activity {
     }
 
 	/**
-	 * 
+	 *  Generate chapters
 	 */
 	private void setupView() {
 		getIntent().setData(Uri.parse("content://com.mis.icequeen.testprovider/getAllChapter"));
@@ -48,6 +48,14 @@ public class ChapterSelectionActivity extends Activity {
 				c.moveToNext();
 		}
 		c.close();
+		
+		// TODO: Fill in test chapter data
+		data.clear();
+		for (int i=1; i<=10; i++) 
+			data.add("Chapter "+i);
+		Log.i("TEST", data.toString());
+		
+		
 		
         
         // ÂI¤F½T©w«ö¶s
