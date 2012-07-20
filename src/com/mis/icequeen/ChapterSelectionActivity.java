@@ -79,7 +79,6 @@ public class ChapterSelectionActivity extends Activity {
         // ÂI¤F½T©w«ö¶s
         Button btnConfirmChapter = (Button) findViewById(R.id.btnConfirmChapter);
         btnConfirmChapter.setOnClickListener(new OnClickListener(){
-			@Override
 			public void onClick(View arg0) {
 				Intent it = new Intent(ChapterSelectionActivity.this, LearningActivity.class);
 				it.putExtra("ID",761);

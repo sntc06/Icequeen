@@ -3,9 +3,12 @@
  */
 package com.mis.icequeen;
 
+import java.io.IOException;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -30,14 +33,14 @@ public class LearningActivity extends Activity {
 		getIntent().setData(Uri.parse("content://com.mis.icequeen.testprovider/getsetbyid:"+nowvocid));
 	    Uri uri = getIntent().getData();
 	    
-	    TextView word = (TextView) findViewById(R.id.tvWord);
+	    final TextView word = (TextView) findViewById(R.id.tvWord);
         TextView meaning = (TextView) findViewById(R.id.tvMeaning);
         TextView classes = (TextView) findViewById(R.id.tvClass);
         TextView sentence = (TextView) findViewById(R.id.tvSentence);
         TextView count = (TextView) findViewById(R.id.tvCount);
         Button btnPrev = (Button) findViewById(R.id.btnPrevious);
         Button btnNext = (Button) findViewById(R.id.btnNext);
-        
+        Button play = (Button) findViewById(R.id.pronounce);
         Cursor set = managedQuery(uri, null, null, null, null);
         if(set.getCount()!=0)
         {
@@ -75,6 +78,29 @@ public class LearningActivity extends Activity {
             		{
             		 Toast.makeText(v.getContext(), "已經在最後面了!", Toast.LENGTH_SHORT).show();
             		}
+        	}
+        	
+        });
+        play.setOnClickListener(new OnClickListener(){
+        	public void onClick(View v) {
+        		{
+        		  String playfile=word.getText().toString();
+        		  int id=getResources().getIdentifier(getPackageName()+":raw/"+playfile, null, null);
+        		  
+        		  MediaPlayer mPlayer = MediaPlayer.create(LearningActivity.this,id);
+        		  
+                  try {
+                      mPlayer.prepare();
+                  } catch (IllegalStateException e) {
+                      // TODO Auto-generated catch block
+                      e.printStackTrace();
+                  } catch (IOException e) {
+                      // TODO Auto-generated catch block
+                      e.printStackTrace();
+                  }
+
+                  mPlayer.start();
+        		}
         	}
         	
         });

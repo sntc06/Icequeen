@@ -106,19 +106,16 @@ public class MainActivity extends Activity {
      */
     private void setupListeners(final CoverFlow mCoverFlow) {
         mCoverFlow.setOnItemClickListener(new OnItemClickListener() {
-            @Override
             public void onItemClick(final AdapterView< ? > parent, final View view, final int position, final long id) {
                 textView.setText("Item clicked! : " + id);
             }
 
         });
         mCoverFlow.setOnItemSelectedListener(new OnItemSelectedListener() {
-            @Override
             public void onItemSelected(final AdapterView< ? > parent, final View view, final int position, final long id) {
                 textView.setText("Item selected! : " + id);
             }
 
-            @Override
             public void onNothingSelected(final AdapterView< ? > parent) {
                 textView.setText("Nothing clicked!");
             }
@@ -127,7 +124,6 @@ public class MainActivity extends Activity {
     
     private class ButtonListener implements OnClickListener {
 
-		@Override
 		public void onClick(View v) {
 			
 			//String selection;
