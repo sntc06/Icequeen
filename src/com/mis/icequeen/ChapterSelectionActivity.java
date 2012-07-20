@@ -37,25 +37,29 @@ public class ChapterSelectionActivity extends Activity {
 	 *  Generate chapters
 	 */
 	private void setupView() {
-		getIntent().setData(Uri.parse("content://com.mis.icequeen.testprovider/getAllChapter"));
+		
+		data = new ArrayList<String>();
+		
+		//TODO: FIX get all chapter
+		/*getIntent().setData(Uri.parse("content://com.mis.icequeen.testprovider/getAllChapter"));
         Uri uri = getIntent().getData();
         Cursor c = managedQuery(uri, null, null, null, null);
         c.moveToFirst();
 		// Insert data
-		data = new ArrayList<String>();
+		
 		for (int i=0; i<c.getCount(); i++) {
 			System.out.println(c.getString(0));
 			data.add(c.getString(0));
 			if(c.getPosition()!=c.getCount()-1)
 				c.moveToNext();
 		}
-		c.close();
+		c.close();*/
 		
 		// TODO: Fill in test chapter data
 		data.clear();
 		for (int i=1; i<=11; i++) 
 			data.add("Chapter "+i);
-		Log.i("TEST_CH", data.toString());
+		Log.i("FILL_CH", data.toString());
 		
 		LinearLayout chapterLinearLayoutMid = (LinearLayout) findViewById(R.id.chapterLinearLayoutMid);
 		LinearLayout chapterLinearLayoutFinal = (LinearLayout) findViewById(R.id.chapterLinearLayoutFinal);
@@ -77,6 +81,7 @@ public class ChapterSelectionActivity extends Activity {
 		
         
         // ÂI¤F½T©w«ö¶s
+		// TODO: Confirm chapter selection
         Button btnConfirmChapter = (Button) findViewById(R.id.btnConfirmChapter);
         btnConfirmChapter.setOnClickListener(new OnClickListener(){
 			public void onClick(View arg0) {

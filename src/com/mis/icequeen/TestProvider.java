@@ -14,7 +14,7 @@ import android.util.Log;
 import android.content.ContentProvider;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
-//kerker
+
 public class TestProvider extends ContentProvider {
 	private final String DATABASE_PATH = android.os.Environment.getExternalStorageDirectory().getAbsolutePath()	+ "/icequeen";
 	public static final String PATH = "/db";
@@ -51,6 +51,7 @@ public class TestProvider extends ContentProvider {
     public boolean onCreate() {
     	db=openDatabase(getContext());
     	databaseHelper = new DatabaseHelper(getContext());
+    	db.close();
         return true;
     }
     public interface UserSchema {
@@ -107,7 +108,10 @@ public class TestProvider extends ContentProvider {
     		return getSETbyID(t[2]);
     		}
     	  	c = db.query("VOCABULARY", projection, selection, selectionArgs, null, null, null);
-    	db.close();
+    	
+    	if (db != null )
+    		db.close();
+    	
         return c;	
     }
     private Cursor getSETbyID(String t) {
