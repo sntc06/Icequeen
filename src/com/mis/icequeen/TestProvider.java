@@ -6,13 +6,11 @@ import java.io.InputStream;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.content.ContentProvider;
-import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 
 public class TestProvider extends ContentProvider {
@@ -234,4 +232,5 @@ public class TestProvider extends ContentProvider {
 		}
 		return null;
     }
+
 }
