@@ -18,7 +18,7 @@
     <pl.polidea.coverflow.CoverFlow 
     	xmlns:coverflow="http://schemas.android.com/apk/res/com.mis.icequeen"
     	class="pl.polidea.coverflow.CoverFlow" 
-		coverflow:imageWidth="200dip" 
+		coverflow:imageWidth="180dip" 
 		coverflow:imageHeight="200dip" 
 		android:id="@+id/coverflowReflection" 
 		android:layout_width="fill_parent"
@@ -32,16 +32,11 @@
 	
 	<!-- end coverflow -->
 
-    <TextView
-        android:id="@+id/tvSelectedChapter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SelectedChapter" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
-
+        
         <Button
             android:id="@+id/btnLearn"
             android:layout_width="wrap_content"
@@ -50,7 +45,8 @@
             android:layout_weight="1"
             android:background="@drawable/button_style"
             android:text="學習模式"
-            android:textColor="#4B4B4B" />
+            android:textColor="#4B4B4B"
+            android:textSize="16dip" />
 
         <Button
             android:id="@+id/btnReview"
@@ -60,7 +56,8 @@
             android:text="複習模式" 
             android:background="@drawable/button_style"
             android:textColor="#4B4B4B"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textSize="16dip" />
 
         <Button
             android:id="@+id/btnTest"
@@ -71,7 +68,8 @@
             android:text="測驗模式" 
             android:background="@drawable/button_style"
             android:textColor="#4B4B4B"
-            android:layout_weight="1" />
+            android:layout_weight="1" 
+            android:textSize="16dip" />
     </LinearLayout>
 
 

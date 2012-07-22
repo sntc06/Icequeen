@@ -7,15 +7,17 @@
 	<!-- 書本資訊 -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="72dp" >
-
+        android:layout_height="0dp"
+        android:layout_weight="2.5" >
         <ImageView
             android:id="@+id/imageView1"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_menu_preferences" />
+            android:layout_margin="5dp"
+            android:src="@drawable/image02" />
 
         <LinearLayout
+            android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="vertical" >
@@ -25,18 +27,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Economics"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textSize="28dp" />
 
             <TextView
                 android:id="@+id/tvSelectedAuthor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="14dp"
                 android:text="John Sloman" />
 
             <TextView
                 android:id="@+id/tvSelectedVersion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="14dp"
                 android:text="version 6" />
         </LinearLayout>
     </LinearLayout>
@@ -46,7 +50,8 @@
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
-        android:layout_height="350dip" >
+        android:layout_height="0dip"
+        android:layout_weight="6"  >
     
     
     <LinearLayout
@@ -107,19 +112,23 @@
     
     </ScrollView>
 
-    <RelativeLayout
-        
+    
+    <!-- 按鈕區 -->
+    
+    <RelativeLayout    
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="0dp"
+        android:layout_weight="1.5"  >
         <Button
             android:id="@+id/btnConfirmChapter"
             android:layout_width="120dp"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_centerInParent="true"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/button_style"
-            android:textColor="#4B4B4B" 
+            android:textColor="#4B4B4B"
+            android:textSize="20dp" 
             android:gravity="center"
             android:text="確認選擇" />
 

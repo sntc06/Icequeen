@@ -16,8 +16,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
-	
-	private TextView textView;
+
+	private static long selectedBookId;
 	
 	// CoverFlow 顯示的圖片 
 	private final int[] RESOURCE_IMAGES = {
@@ -54,8 +54,6 @@ public class MainActivity extends Activity {
 	 *  建立畫面 
 	 */
 	private void setupView() {
-		// TODO Auto-generated method stub
-		textView = (TextView) findViewById(R.id.tvSelectedChapter);
 
         //CoverFlow Reflection
         final CoverFlow reflectingCoverFlow = (CoverFlow) findViewById(this.getResources().getIdentifier(
@@ -107,18 +105,15 @@ public class MainActivity extends Activity {
     private void setupListeners(final CoverFlow mCoverFlow) {
         mCoverFlow.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(final AdapterView< ? > parent, final View view, final int position, final long id) {
-                textView.setText("Item clicked! : " + id);
+            	selectedBookId = id;
             }
 
         });
         mCoverFlow.setOnItemSelectedListener(new OnItemSelectedListener() {
             public void onItemSelected(final AdapterView< ? > parent, final View view, final int position, final long id) {
-                textView.setText("Item selected! : " + id);
+            	selectedBookId = id;
             }
-
-            public void onNothingSelected(final AdapterView< ? > parent) {
-                textView.setText("Nothing clicked!");
-            }
+            public void onNothingSelected(final AdapterView< ? > parent) { /*Do nothing */ }
         });
     }
     
@@ -126,21 +121,27 @@ public class MainActivity extends Activity {
 
 		public void onClick(View v) {
 			
+			Intent it = new Intent();
+			
 			//String selection;
-			/*switch (v.getId()) {
+			
+			switch (v.getId()) {
 			case R.id.btnLearn:
 				//selection = "ChapterSelectionActivity";
+				it.setClass(MainActivity.this, ChapterSelectionActivity.class);
 				break;
-			case R.id.btnNext:
+			case R.id.btnReview:
 				//review
 				break;
 			case R.id.btnTest:
 				//test
 				break;
-			}*/
+			default:
+				break;
+			}
 			
-			Intent intent = new Intent(MainActivity.this, ChapterSelectionActivity.class);
-	        startActivity(intent);
+			it.putExtra("BOOK", (int)selectedBookId);
+	        startActivity(it);
 
 		}
     	
