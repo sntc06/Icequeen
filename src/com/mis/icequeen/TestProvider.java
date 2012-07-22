@@ -94,6 +94,9 @@ public class TestProvider extends ContentProvider {
     	Cursor c=null;
     	if (uri.equals(Uri.parse("content://com.mis.icequeen.testprovider/getall")))
     		return getAllVoc();
+    	else if (uri.toString().startsWith("content://com.mis.icequeen.testprovider/getAllChapter")){
+    		return getAllCpt();
+    		}
     	else if (uri.toString().startsWith("content://com.mis.icequeen.testprovider/gbid")){
     		String[] t= uri.toString().split(":");
     		int i =Integer.valueOf(t[2]);
