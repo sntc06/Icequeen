@@ -60,7 +60,8 @@
             android:layout_width="wrap_content"
             android:layout_height="36dp"
             android:layout_marginLeft="10dp"
-            android:text="期中考" />
+            android:text="期中考"
+            android:button="@drawable/checkbox" />
 
         <LinearLayout
             android:id="@+id/chapterLinearLayoutMid"
@@ -88,7 +89,8 @@
             android:layout_height="36dp"
             android:layout_marginTop="12dp"
             android:layout_marginLeft="10dp"
-            android:text="期末考" />
+            android:text="期末考" 
+            android:button="@drawable/checkbox" />
 
         <LinearLayout
             android:id="@+id/chapterLinearLayoutFinal"

@@ -74,12 +74,14 @@ public class ChapterSelectionActivity extends Activity {
 		for (int i=0; i < data.size()/2; i++) {
 			checkboxes[i] = new CheckBox(this);
 			checkboxes[i].setText(data.get(i));
+			checkboxes[i].setButtonDrawable(this.getResources().getDrawable(R.drawable.checkbox));
 			chapterLinearLayoutMid.addView(checkboxes[i]);
 		}
 		
 		for (int i= data.size()/2 ; i<data.size(); i++) {
 			checkboxes[i] = new CheckBox(this);
 			checkboxes[i].setText(data.get(i));
+			checkboxes[i].setButtonDrawable(this.getResources().getDrawable(R.drawable.checkbox));
 			chapterLinearLayoutFinal.addView(checkboxes[i]);
 		}
 		
