@@ -127,17 +127,17 @@ public class MainActivity extends Activity {
 		public void onClick(View v) {
 			
 			//String selection;
-			switch (v.getId()) {
+			/*switch (v.getId()) {
 			case R.id.btnLearn:
 				//selection = "ChapterSelectionActivity";
 				break;
-			case R.id.btnReview:
+			case R.id.btnNext:
 				//review
 				break;
 			case R.id.btnTest:
 				//test
 				break;
-			}
+			}*/
 			
 			Intent intent = new Intent(MainActivity.this, ChapterSelectionActivity.class);
 	        startActivity(intent);
