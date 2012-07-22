@@ -41,7 +41,7 @@ public class ChapterSelectionActivity extends Activity {
 		data = new ArrayList<String>();
 		
 		//TODO: FIX get all chapter
-		/*getIntent().setData(Uri.parse("content://com.mis.icequeen.testprovider/getAllChapter"));
+		getIntent().setData(Uri.parse("content://com.mis.icequeen.testprovider/getAllChapter"));
         Uri uri = getIntent().getData();
         Cursor c = managedQuery(uri, null, null, null, null);
         c.moveToFirst();
@@ -53,14 +53,14 @@ public class ChapterSelectionActivity extends Activity {
 			if(c.getPosition()!=c.getCount()-1)
 				c.moveToNext();
 		}
-		c.close();*/
+		c.close();
 		
 		// TODO: Fill in test chapter data
-		data.clear();
+		/*data.clear();
 		for (int i=1; i<=11; i++) 
 			data.add("Chapter "+i);
 		Log.i("FILL_CH", data.toString());
-		
+		*/
 		LinearLayout chapterLinearLayoutMid = (LinearLayout) findViewById(R.id.chapterLinearLayoutMid);
 		LinearLayout chapterLinearLayoutFinal = (LinearLayout) findViewById(R.id.chapterLinearLayoutFinal);
 		CheckBox[] checkboxes = new CheckBox[data.size()];
