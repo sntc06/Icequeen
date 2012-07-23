@@ -104,7 +104,7 @@ public class ChapterSelectionActivity extends Activity {
 			});
 			
         // ÂI¤F½T©w«ö¶s
-		// TODO: Confirm chapter selection
+		// Confirm chapter selection
         Button btnConfirmChapter = (Button) findViewById(R.id.btnConfirmChapter);
         btnConfirmChapter.setOnClickListener(new OnClickListener(){
 			public void onClick(View arg0) {
