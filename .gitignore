@@ -1,2 +1,5 @@
 /project.properties
+/gen
 /gen/*
+/bin
+/bin/*

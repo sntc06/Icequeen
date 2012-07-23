@@ -24,8 +24,7 @@ import android.widget.ListView;
  */
 public class ChapterSelectionActivity extends Activity {
 	
-	private static ArrayList<String> data;
-	CheckBox[] checkboxes;
+	private ArrayList<String> data;
 
 	
     @Override
@@ -65,22 +64,18 @@ public class ChapterSelectionActivity extends Activity {
 		*/
 		LinearLayout chapterLinearLayoutMid = (LinearLayout) findViewById(R.id.chapterLinearLayoutMid);
 		LinearLayout chapterLinearLayoutFinal = (LinearLayout) findViewById(R.id.chapterLinearLayoutFinal);
-		checkboxes = new CheckBox[data.size()];
-		
-		//dataSize = data.size();
-		//dataHalf = data.size() / 2;
 		final CheckBox[] checkboxes = new CheckBox[data.size()];
 		
 		final int half = data.size() / 2;
 		
-		for (int i=0; i < data.size()/2; i++) {
+		for (int i=0; i<half; i++) {
 			checkboxes[i] = new CheckBox(this);
 			checkboxes[i].setText(data.get(i));
 			checkboxes[i].setButtonDrawable(this.getResources().getDrawable(R.drawable.checkbox));
 			chapterLinearLayoutMid.addView(checkboxes[i]);
 		}
 		
-		for (int i= data.size()/2 ; i<data.size(); i++) {
+		for (int i=half; i<data.size(); i++) {
 			checkboxes[i] = new CheckBox(this);
 			checkboxes[i].setText(data.get(i));
 			checkboxes[i].setButtonDrawable(this.getResources().getDrawable(R.drawable.checkbox));
@@ -91,43 +86,6 @@ public class ChapterSelectionActivity extends Activity {
 		CheckBox checkBoxFinal = (CheckBox) findViewById(R.id.checkBoxFinal);
 		checkBoxMid.setOnCheckedChangeListener(new OnCheckedChangeListener()
 		{
-		    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
-		    {
-		        if ( isChecked )
-		        {
-		    		for (int i=0; i< data.size()/2 ; i++) {
-		    			checkboxes[i].setChecked(true);
-		    		}
-		        }
-		        else {
-		    		for (int i=0; i< data.size()/2 ; i++) {
-		    			checkboxes[i].setChecked(false);
-		    		}
-		        }
-
-		    }
-		});
-		
-		checkBoxFinal.setOnCheckedChangeListener(new OnCheckedChangeListener()
-		{
-		    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
-		    {
-		        if ( isChecked )
-		        {
-		    		for (int i= data.size()/2 ; i< data.size() ; i++) {
-		    			checkboxes[i].setChecked(true);
-		    		}
-		        }
-		        else {
-		    		for (int i= data.size()/2 ; i< data.size() ; i++) {
-		    			checkboxes[i].setChecked(false);
-		    		}
-		        }
-
-		    }
-		});
-		
-        
 		   public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
 			   for (int i=0; i<half; i++) {
 				   checkboxes[i].setChecked(isChecked);
