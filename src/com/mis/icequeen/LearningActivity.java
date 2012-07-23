@@ -4,6 +4,7 @@
 package com.mis.icequeen;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,12 +15,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class LearningActivity extends Activity {
+	private ArrayList<Integer> showlist;
 	static int nowvocid =762;
-
+    int[] cptrange;
+    int from,to,totalstart,totalend,totalvoc,cptstart,cptend,nextcptstart,nextcptend;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -27,9 +31,38 @@ public class LearningActivity extends Activity {
 		Bundle extras = getIntent().getExtras();
 		setContentView(R.layout.learning_activity);
 		setupView();
-			
-		nowvocid = extras.getInt("ID");
+		Uri total;
+		Cursor test;
+		int index;
+		
+		showlist = new ArrayList<Integer>();
+		index = extras.getInt("index");
+		
 		System.out.println("received intent"+nowvocid);
+		if(extras.getBoolean("init")){
+			cptrange = extras.getIntArray("selected");
+			for(int i=0;i<cptrange.length;i++){
+				if(cptrange[i]==1){
+					getIntent().setData(Uri.parse("content://com.mis.icequeen.testprovider/getVOCbyChapter:"+(i+1)));
+					total = getIntent().getData();
+					test =managedQuery(total, null, null, null, null);
+					test.moveToFirst();
+					for(int j=0;j<test.getCount();j++){
+						showlist.add(test.getInt(0));
+						if(!test.isLast())
+							test.moveToNext();
+					}
+					System.out.println(showlist.size());
+					test.close();
+				}
+			}
+		 
+		}else
+			showlist=extras.getIntegerArrayList("showlist");
+			
+		nowvocid=showlist.get(index);
+		
+		
 		getIntent().setData(Uri.parse("content://com.mis.icequeen.testprovider/getsetbyid:"+nowvocid));
 	    Uri uri = getIntent().getData();
 	    
@@ -41,6 +74,10 @@ public class LearningActivity extends Activity {
         Button btnPrev = (Button) findViewById(R.id.btnPrevious);
         Button btnNext = (Button) findViewById(R.id.btnNext);
         Button play = (Button) findViewById(R.id.pronounce);
+        ImageView KK = (ImageView) findViewById(R.id.KKView1);
+        //test
+        
+        
         Cursor set = managedQuery(uri, null, null, null, null);
         if(set.getCount()!=0)
         {
@@ -49,17 +86,26 @@ public class LearningActivity extends Activity {
         	meaning.setText(set.getString(2));
         	classes.setText(set.getString(3)+"    "+set.getString(4));
         	sentence.setText(set.getString(5)+"\n"+set.getString(6));
-        	count.setText(nowvocid+"/963");
+        	count.setText((index+1)+"/"+showlist.size());
         }else
         	System.out.println("error1");
         
+        String vockk=word.getText().toString();
+        
+        int id=getResources().getIdentifier(getPackageName()+":drawable/"+vockk, null, null);
+        
+        KK.setImageResource(id);
+        
         btnPrev.setOnClickListener(new OnClickListener(){
         	public void onClick(View v) {
-        		if(nowvocid!=761){
-        		Intent intent = new Intent(LearningActivity.this, LearningActivity.class);
-        		intent.putExtra("ID",nowvocid-1);
-        		finish();
-        		startActivity(intent);
+        		if(nowvocid!=showlist.get(0)){
+        			Intent intent = new Intent(LearningActivity.this, LearningActivity.class);
+        			intent.putExtra("init", false);
+        			intent.putExtra("selected",cptrange);
+        			intent.putExtra("index",showlist.indexOf(nowvocid)-1);
+        			intent.putIntegerArrayListExtra("showlist", showlist);
+        			finish();
+        			startActivity(intent);
         		}else
         		{
         		 Toast.makeText(v.getContext(), "已經在最前面了!", Toast.LENGTH_SHORT).show();
@@ -69,9 +115,12 @@ public class LearningActivity extends Activity {
         });
         btnNext.setOnClickListener(new OnClickListener(){
         	public void onClick(View v) {
-        		if(nowvocid!=963){
+        		if(nowvocid!=showlist.get(showlist.size()-1)){
+        			
             		Intent intent = new Intent(LearningActivity.this, LearningActivity.class);
-            		intent.putExtra("ID",nowvocid+1);
+            		intent.putExtra("init", false);
+            		intent.putExtra("index",showlist.indexOf(nowvocid)+1);
+            		intent.putIntegerArrayListExtra("showlist", showlist);
             		finish();
             		startActivity(intent);
             		}else
@@ -108,9 +157,6 @@ public class LearningActivity extends Activity {
 	    
 	}
 
-	/**
-	 * 
-	 */
 	private void setupView() {
 		// TODO Auto-generated method stub
 		

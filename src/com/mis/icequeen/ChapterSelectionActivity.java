@@ -49,7 +49,6 @@ public class ChapterSelectionActivity extends Activity {
         Cursor c = managedQuery(uri, null, null, null, null);
         c.moveToFirst();
 		// Insert data
-		
 		for (int i=0; i<c.getCount(); i++) {
 			System.out.println(c.getString(0));
 			data.add(c.getString(0));
@@ -70,6 +69,9 @@ public class ChapterSelectionActivity extends Activity {
 		
 		//dataSize = data.size();
 		//dataHalf = data.size() / 2;
+		final CheckBox[] checkboxes = new CheckBox[data.size()];
+		
+		final int half = data.size() / 2;
 		
 		for (int i=0; i < data.size()/2; i++) {
 			checkboxes[i] = new CheckBox(this);
@@ -85,7 +87,6 @@ public class ChapterSelectionActivity extends Activity {
 			chapterLinearLayoutFinal.addView(checkboxes[i]);
 		}
 		
-		// Mid & Final button
 		CheckBox checkBoxMid = (CheckBox) findViewById(R.id.checkBoxMid);
 		CheckBox checkBoxFinal = (CheckBox) findViewById(R.id.checkBoxFinal);
 		checkBoxMid.setOnCheckedChangeListener(new OnCheckedChangeListener()
@@ -127,13 +128,40 @@ public class ChapterSelectionActivity extends Activity {
 		});
 		
         
+		   public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+			   for (int i=0; i<half; i++) {
+				   checkboxes[i].setChecked(isChecked);
+				}
+				
+			}
+		});
+		checkBoxFinal.setOnCheckedChangeListener(new OnCheckedChangeListener()
+		{
+			   public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+				   for (int i=half; i<data.size(); i++) {
+					   checkboxes[i].setChecked(isChecked);
+					}
+					
+				}
+			});
+			
         // ÂI¤F½T©w«ö¶s
 		// TODO: Confirm chapter selection
         Button btnConfirmChapter = (Button) findViewById(R.id.btnConfirmChapter);
         btnConfirmChapter.setOnClickListener(new OnClickListener(){
 			public void onClick(View arg0) {
+				int cptrange[] = new int[data.size()];
 				Intent it = new Intent(ChapterSelectionActivity.this, LearningActivity.class);
-				it.putExtra("ID",761);
+				
+				for(int i=0 ;i<data.size();i++)	{
+					if(checkboxes[i].isChecked())
+						cptrange[i]=1;
+					else
+						cptrange[i]=0;
+				}
+				it.putExtra("init", true);
+				it.putExtra("index", 0);
+				it.putExtra("selected", cptrange);
 				startActivity(it);
 			}
         });

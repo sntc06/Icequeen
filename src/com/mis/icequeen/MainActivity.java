@@ -124,13 +124,12 @@ public class MainActivity extends Activity {
 			Intent it = new Intent();
 			
 			//String selection;
-			
 			switch (v.getId()) {
 			case R.id.btnLearn:
 				//selection = "ChapterSelectionActivity";
 				it.setClass(MainActivity.this, ChapterSelectionActivity.class);
 				break;
-			case R.id.btnReview:
+			case R.id.btnNext:
 				//review
 				break;
 			case R.id.btnTest:

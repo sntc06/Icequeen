@@ -20,6 +20,14 @@
                 android:text="單字"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
+            <ImageView
+                android:id="@+id/KKView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/button_style"
+                android:maxHeight="25dip"
+                android:maxWidth="50dip" />
+
             <TextView
                 android:id="@+id/tvMeaning"
                 android:layout_width="wrap_content"

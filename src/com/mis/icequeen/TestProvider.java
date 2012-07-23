@@ -17,7 +17,7 @@ public class TestProvider extends ContentProvider {
 	private final String DATABASE_PATH = android.os.Environment.getExternalStorageDirectory().getAbsolutePath()	+ "/icequeen";
 	public static final String PATH = "/db";
 	private final String DATABASE_FILENAME = "iceqdb.db";
-	SQLiteDatabase db ;
+	static SQLiteDatabase db ;
 	//SQLiteOpenHelper-建立資料庫PhoneContentDB和Table:Users
 	private static class DatabaseHelper extends SQLiteOpenHelper {
 		private static final String DATABASE_NAME = "iceq.db";
@@ -47,6 +47,7 @@ public class TestProvider extends ContentProvider {
     //實作Content Providers的onCreate()
     @Override
     public boolean onCreate() {
+    	
     	db=openDatabase(getContext());
     	databaseHelper = new DatabaseHelper(getContext());
     	db.close();
@@ -90,7 +91,8 @@ public class TestProvider extends ContentProvider {
         //SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
         //qb.setTables(UserSchema.TABLE_NAME);
         //Log.i("ICEQUEEN", db.isReadOnly()+"");
-    	db=openDatabase(getContext());
+    	if(!db.isOpen())
+    		db=openDatabase(getContext());
     	Cursor c=null;
     	if (uri.equals(Uri.parse("content://com.mis.icequeen.testprovider/getall")))
     		return getAllVoc();
@@ -115,10 +117,13 @@ public class TestProvider extends ContentProvider {
     	
         return c;	
     }
-    private Cursor getSETbyID(String t) {
+    private Cursor getVOCbyChapter(String cr) {
+    	Cursor c = db.rawQuery("SELECT a.v_id,voc FROM VOCABULARY v JOIN VOCABULARY_SET a on a.v_id=v.v_id where a.cr_id=?",new String[]{cr});
+    	return c;
+	}
+	private Cursor getSETbyID(String t) {
     	Cursor c = db.rawQuery("SELECT a.v_id,voc,m_text,class_cht,class_eng,s_text,s_explain FROM VOCABULARY v JOIN VOCABULARY_SET a on a.v_id=v.v_id JOIN CLASS c on a.c_id=c.c_id JOIN old_SENTENCE s on a.s_id=s.s_id JOIN MEANING m on s.wt_id=m.m_id where a.v_id=?",new String[]{t});
     	return c;
-		// TODO Auto-generated method stub
 	}
     private Cursor getAllCpt() {
     	Cursor c = db.query("CHAPTER_RANGE", new String[] {"chapter_text"}, null, null, null,null,null);
