@@ -3,6 +3,64 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Result:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/tvScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="100%"
+        android:textColor="#FF0000"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TIme:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00:10:12"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/btnViewError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="瀏覽錯誤單字"
+        android:background="@drawable/button_style"
+        android:textColor="#4B4B4B"
+        android:textSize="20dp" 
+        android:gravity="center" />
+
+    <Button
+        android:id="@+id/btnRetry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="再測一次"
+        android:background="@drawable/button_style"
+        android:textColor="#4B4B4B"
+        android:textSize="20dp" 
+        android:gravity="center" />
     
+    <Button
+        android:id="@+id/btnReselect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="回章節選擇"
+        android:background="@drawable/button_style"
+        android:textColor="#4B4B4B"
+        android:textSize="20dp" 
+        android:gravity="center" />
 
 </LinearLayout>

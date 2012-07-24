@@ -2,7 +2,103 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_color"
     android:orientation="vertical" >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="390dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tvWord"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="單字"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <ImageView
+                android:id="@+id/KKView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/button_style"
+                android:maxHeight="25dip"
+                android:maxWidth="50dip" />
+
+            <TextView
+                android:id="@+id/tvMeaning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="單字說明"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/tvClass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="單字詞性" />
+
+            <TextView
+                android:id="@+id/tvSentence"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="單字例句"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <Button
+                android:id="@+id/pronounce"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="發音" />
+
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="移除星等" />
+
+        </LinearLayout>
+
+    </FrameLayout>
     
+    <TextView
+        android:id="@+id/tvCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="第幾個之第幾個" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/btnPrevious"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="上一個" />
+
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="3"
+            android:stepSize="1.0" />
+
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="下一個" />
+
+    </LinearLayout>
+
+
 
 </LinearLayout>
