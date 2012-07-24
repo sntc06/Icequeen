@@ -17,9 +17,16 @@
         	android:layout_height="wrap_content"
         	android:text="複習模式"
         	android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/tvSelectedChapter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="選擇的章節："
+            android:textAppearance="?android:attr/textAppearanceMedium" />
         
        	<RatingBar
-	    	android:id="@+id/ratingBar1"
+	    	android:id="@+id/ratingBar"
 	    	android:layout_width="wrap_content"
 	    	android:layout_height="wrap_content"
 	    	android:numStars="3"
@@ -42,6 +49,7 @@
             android:id="@+id/pendingVocLinearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="5dp" 
             android:orientation="vertical"
             android:background="@drawable/checkbox_background" >
 

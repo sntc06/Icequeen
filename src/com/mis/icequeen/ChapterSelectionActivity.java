@@ -58,9 +58,7 @@ public class ChapterSelectionActivity extends Activity {
 		data = new ArrayList<String>();
 
 		// TODO: FIX get all chapter
-		getIntent()
-				.setData(
-						Uri.parse("content://com.mis.icequeen.testprovider/getAllChapter"));
+		getIntent().setData(Uri.parse("content://com.mis.icequeen.testprovider/getAllChapter"));
 		Uri uri = getIntent().getData();
 		Cursor c = managedQuery(uri, null, null, null, null);
 		c.moveToFirst();
