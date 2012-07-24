@@ -96,6 +96,10 @@ public class PreReview extends Activity {
     private class ButtonListener implements OnClickListener {
 		public void onClick(View arg0) {
 			
+			Intent it = new Intent();
+			it.setClass(PreReview.this, Review.class);
+			startActivity(it);
+			
 		}
     }
 
