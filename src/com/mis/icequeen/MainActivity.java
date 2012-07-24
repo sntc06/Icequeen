@@ -59,7 +59,7 @@ public class MainActivity extends Activity {
         final CoverFlow reflectingCoverFlow = (CoverFlow) findViewById(this.getResources().getIdentifier(
                 "coverflowReflection", "id", "com.mis.icequeen"));
         setupCoverFlow(reflectingCoverFlow, true);
-        
+        setTitle(getResources().getString(R.string.app_name));
         Button btnLearn = (Button) findViewById(R.id.btnLearn);
         Button btnReview = (Button) findViewById(R.id.btnReview);
         Button btnTest = (Button) findViewById(R.id.btnTest);
@@ -122,24 +122,28 @@ public class MainActivity extends Activity {
 		public void onClick(View v) {
 			
 			Intent it = new Intent();
+			String mode = "";
 			
-			//String selection;
 			switch (v.getId()) {
 			case R.id.btnLearn:
-				//selection = "ChapterSelectionActivity";
-				it.setClass(MainActivity.this, ChapterSelectionActivity.class);
+				mode = "LEARN";
 				break;
-			case R.id.btnNext:
+			case R.id.btnReview:
 				//review
+				mode = "REVIEW";
 				break;
 			case R.id.btnTest:
 				//test
+				mode = "TEST";
 				break;
 			default:
 				break;
 			}
 			
+			// chosen book id
+			it.putExtra("MODE", mode);
 			it.putExtra("BOOK", (int)selectedBookId);
+			it.setClass(MainActivity.this, ChapterSelectionActivity.class);
 	        startActivity(it);
 
 		}
