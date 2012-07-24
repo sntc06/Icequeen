@@ -4,11 +4,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class PreReview extends Activity {
 	
@@ -26,11 +29,15 @@ public class PreReview extends Activity {
         Intent it = getIntent();
         
         tvSelectedChapter = (TextView) findViewById(R.id.tvSelectedChapter);
+        tvSelectedChapter.setText("Chosen chapter: <CHANGE_ME>");
         RatingBarListener ratingBarListener = new RatingBarListener(); 
     	ratingBar = (RatingBar) findViewById(R.id.ratingBar);
     	ratingBar.setOnRatingBarChangeListener(ratingBarListener);
     	pendingVocLinearLayout = (LinearLayout) findViewById(R.id.pendingVocLinearLayout);
+    	
+    	ButtonListener buttonListener = new ButtonListener();
     	btnConfirmReview = (Button) findViewById(R.id.btnConfirmReview);
+    	btnConfirmReview.setOnClickListener(buttonListener);
     	
         refreshPendingVoc( (int) ratingBar.getRating() );
         
@@ -41,7 +48,6 @@ public class PreReview extends Activity {
      * @param rating
      */
     private void refreshPendingVoc(int rating) {
-    	
     	TextView tempTV;
     	switch (rating) {
     	case 0:
@@ -82,7 +88,15 @@ public class PreReview extends Activity {
 		public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
 			refreshPendingVoc( (int) rating );
 		}
-    	
+    }
+    
+    /**
+     * ½T»{°e¥X
+     */
+    private class ButtonListener implements OnClickListener {
+		public void onClick(View arg0) {
+			
+		}
     }
 
 }
