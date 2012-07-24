@@ -28,7 +28,7 @@ public class MainActivity extends Activity {
 			R.drawable.image05,
 			R.drawable.image06
 	};
-	private final int COVERFLOW_INIT_POSITION = 0;
+	public final int COVERFLOW_INIT_POSITION = 2;
 	
     /** Called when the activity is first created. */
     @Override

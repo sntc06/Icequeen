@@ -38,9 +38,11 @@ public class ChapterSelectionActivity extends Activity {
 		BOOK = intent.getExtras().getInt("BOOK");
 		
 		// setting Title
-		if (MODE == "LEARN") setTitle(getResources().getString(R.string.mode_learn));
-		else if (MODE == "REVIEW") setTitle(getResources().getString(R.string.mode_review));
-		else if (MODE == "TEST") setTitle(getResources().getString(R.string.mode_test));
+		
+		if (MODE.equals("LEARN")) setTitle(getResources().getString(R.string.mode_learn));
+		else if (MODE.equals("REVIEW")) setTitle(getResources().getString(R.string.mode_review));
+		else if (MODE.equals("TEST")) setTitle(getResources().getString(R.string.mode_test));
+		
 		
 		Log.i("INT", "received intent MODE=" + MODE + ";BOOK=" + BOOK);
 
@@ -125,8 +127,12 @@ public class ChapterSelectionActivity extends Activity {
 		btnConfirmChapter.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
 				int cptrange[] = new int[data.size()];
-				Intent it = new Intent(ChapterSelectionActivity.this,
-						LearningActivity.class);
+				//Intent it = new Intent(ChapterSelectionActivity.this, LearningActivity.class);
+				Intent it = new Intent();
+				
+				if (MODE.equals("LEARN")) it.setClass(ChapterSelectionActivity.this, LearningActivity.class);
+				else if (MODE.equals("REVIEW")) it.setClass(ChapterSelectionActivity.this, PreReview.class);
+				else if (MODE.equals("TEST")) it.setClass(ChapterSelectionActivity.this, PreTest.class);
 
 				for (int i = 0; i < data.size(); i++) {
 					if (checkboxes[i].isChecked())
@@ -140,6 +146,7 @@ public class ChapterSelectionActivity extends Activity {
 				
 				it.putExtra("MODE", MODE);
 				it.putExtra("BOOK", BOOK);
+				Log.i("INT", "received intent MODE=" + MODE + ";BOOK=" + BOOK);
 				startActivity(it);
 			}
 		});

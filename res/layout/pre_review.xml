@@ -2,7 +2,76 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_color"
     android:orientation="vertical" >
-    
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="2"  >
+        
+        <TextView
+        	android:id="@+id/textView1"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:text="複習模式"
+        	android:textAppearance="?android:attr/textAppearanceLarge" />
+        
+       	<RatingBar
+	    	android:id="@+id/ratingBar1"
+	    	android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
+	    	android:numStars="3"
+	    	android:stepSize="1.0" />
+        
+    </LinearLayout>
+
+
+        
+	<!-- 單字預覽區 -->
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp" >
+
+        <LinearLayout
+            android:id="@+id/pendingVocLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/checkbox_background" >
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pending voc" />
+
+        </LinearLayout>
+    </ScrollView>
+
+	<!-- 按鈕區 -->
+    <RelativeLayout    
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"  >
+        <Button
+            android:id="@+id/btnConfirmReview"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/button_style"
+            android:textColor="#4B4B4B"
+            android:textSize="20dp" 
+            android:gravity="center"
+            android:text="確認選擇" />
+    </RelativeLayout>
+
 
 </LinearLayout>
