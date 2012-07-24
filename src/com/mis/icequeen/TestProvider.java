@@ -6,11 +6,13 @@ import java.io.InputStream;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.content.ContentProvider;
+import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 
 public class TestProvider extends ContentProvider {
@@ -98,6 +100,11 @@ public class TestProvider extends ContentProvider {
     		return getAllVoc();
     	else if (uri.toString().startsWith("content://com.mis.icequeen.testprovider/getAllChapter")){
     		return getAllCpt();
+    		}
+    	else if (uri.toString().startsWith("content://com.mis.icequeen.testprovider/getVOCbyChapter")){
+    		String[] t= uri.toString().split(":");
+    		System.out.println(t[2]);
+    		return getVOCbyChapter(t[2]);
     		}
     	else if (uri.toString().startsWith("content://com.mis.icequeen.testprovider/gbid")){
     		String[] t= uri.toString().split(":");
@@ -240,5 +247,4 @@ public class TestProvider extends ContentProvider {
 		}
 		return null;
     }
-
 }
