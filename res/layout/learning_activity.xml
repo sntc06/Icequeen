@@ -70,25 +70,32 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
-
-        <Button
-            android:id="@+id/btnPrevious"
+
+        <ImageButton
+            android:id="@+id/btnPrev"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@null"
+            android:contentDescription="Prev Button"
+            android:src="@drawable/button_prev"
             android:text="上一個" />
-
 
         <RatingBar
             android:id="@+id/ratingBar"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:numStars="3"
-            android:stepSize="1.0" />
-
-        <Button
+            android:stepSize="1.0"
+            android:progressDrawable="@drawable/rating_bar_style"
+            style="@style/RatingBarStyle" />
+
+        <ImageButton
             android:id="@+id/btnNext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@null"
+            android:contentDescription="Next Button"
+            android:src="@drawable/button_next"
             android:text="下一個" />
 
     </LinearLayout>

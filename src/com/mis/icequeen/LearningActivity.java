@@ -22,6 +22,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -82,8 +83,8 @@ public class LearningActivity extends Activity {
 		TextView classes = (TextView) findViewById(R.id.tvClass);
 		TextView sentence = (TextView) findViewById(R.id.tvSentence);
 		TextView count = (TextView) findViewById(R.id.tvCount);
-		Button btnPrev = (Button) findViewById(R.id.btnPrevious);
-		Button btnNext = (Button) findViewById(R.id.btnNext);
+		ImageButton btnPrev = (ImageButton) findViewById(R.id.btnPrev);
+		ImageButton btnNext = (ImageButton) findViewById(R.id.btnNext);
 		Button play = (Button) findViewById(R.id.pronounce);
 		ImageView KK = (ImageView) findViewById(R.id.KKView1);
 

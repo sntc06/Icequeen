@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<style name="RatingBarStyle" parent="@android:style/Widget.RatingBar">
+  <item name="android:minHeight">48px</item>
+  <item name="android:maxHeight">48px</item>
+</style>
+</resources>
