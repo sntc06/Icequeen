@@ -3,15 +3,22 @@
  */
 package com.mis.icequeen;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.BitmapFactory.Options;
+import android.graphics.Rect;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -21,6 +28,7 @@ import android.widget.Toast;
 
 public class LearningActivity extends Activity {
 	private ArrayList<Integer> showlist;
+	private final int KK_IMAGE_DESNITY = 240; // 圖片解析度，數值越小圖片越大
 	static int nowvocid =762;
     int[] cptrange;
     int from,to,totalstart,totalend,totalvoc,cptstart,cptend,nextcptstart,nextcptend;
@@ -90,11 +98,21 @@ public class LearningActivity extends Activity {
         }else
         	System.out.println("error1");
         
-        String vockk=word.getText().toString();
+        // 顯示 KK 音標 from assets
+        String vockk = word.getText().toString();
+        try {
+        	Options opts = new BitmapFactory.Options();
+        	opts.inDensity = KK_IMAGE_DESNITY;
+        	AssetManager am = getAssets();
+        	BufferedInputStream buf = new BufferedInputStream(am.open(vockk+".jpg"));
+        	Bitmap bitmap = BitmapFactory.decodeStream(buf, new Rect(), opts);
+        	KK.setImageBitmap(bitmap);
+        	buf.close();
+        	Log.v("ASSET_IMAGE", "read from assets:"+vockk);
+        } 
+       catch (IOException e) { e.printStackTrace(); }
         
-        int id=getResources().getIdentifier(getPackageName()+":drawable/"+vockk, null, null);
         
-        KK.setImageResource(id);
         
         btnPrev.setOnClickListener(new OnClickListener(){
         	public void onClick(View v) {

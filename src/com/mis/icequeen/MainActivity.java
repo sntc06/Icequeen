@@ -28,6 +28,7 @@ public class MainActivity extends Activity {
 			R.drawable.image05,
 			R.drawable.image06
 	};
+	// CoverFlow ªì©l¦ì¸m
 	public final int COVERFLOW_INIT_POSITION = 2;
 	
     /** Called when the activity is first created. */
@@ -71,7 +72,7 @@ public class MainActivity extends Activity {
 		
 	}
 
-	   /**
+	/**
      * Setup cover flow.
      * 
      * @param mCoverFlow
