@@ -2,7 +2,7 @@
 <resources>
 
     <string name="hello">Hello World, MainActivity!</string>
-    <string name="app_name">單字大學堂</string>
+    <string name="app_name">原文逆轉勝</string>
     <string name="mode_learn">學習模式</string>
     <string name="mode_review">複習模式</string>
     <string name="mode_test">測驗模式</string>
