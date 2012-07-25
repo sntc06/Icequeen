@@ -40,7 +40,7 @@ public class LearningActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		Bundle extras = getIntent().getExtras();
 		setContentView(R.layout.learning_activity);
-		setupView();
+
 		Uri total;
 		Cursor test;
 		int index;
