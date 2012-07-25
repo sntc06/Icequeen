@@ -31,8 +31,7 @@ public class LearningActivity extends Activity {
 	private final int KK_IMAGE_DESNITY = 240; // 圖片解析度，數值越小圖片越大
 	static int nowvocid = 762;
 	int[] cptrange;
-	int from, to, totalstart, totalend, totalvoc, cptstart, cptend,
-			nextcptstart, nextcptend;
+	int deforate;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,14 +46,12 @@ public class LearningActivity extends Activity {
 
 		showlist = new ArrayList<Integer>();
 		index = extras.getInt("index");
-
 		System.out.println("received intent" + nowvocid);
 		if (extras.getBoolean("init")) {
 			cptrange = extras.getIntArray("selected");
 			for (int i = 0; i < cptrange.length; i++) {
 				if (cptrange[i] == 1) {
-					getIntent()
-						.setData(Uri.parse("content://com.mis.icequeen.testprovider/getVOCbyChapter:"+(i+1)));
+					getIntent().setData(Uri.parse("content://com.mis.icequeen.testprovider/getVOCbyChapter:"+(i+1)));
 					total = getIntent().getData();
 					test = managedQuery(total, null, null, null, null);
 					test.moveToFirst();
@@ -73,8 +70,7 @@ public class LearningActivity extends Activity {
 
 		nowvocid = showlist.get(index);
 
-		getIntent().setData(
-				Uri.parse("content://com.mis.icequeen.testprovider/getsetbyid:"+nowvocid));
+		getIntent().setData(Uri.parse("content://com.mis.icequeen.testprovider/getsetbyid:"+nowvocid));
 		Uri uri = getIntent().getData();
 
 		final TextView word = (TextView) findViewById(R.id.tvWord);

@@ -98,6 +98,16 @@ public class TestProvider extends ContentProvider {
     	Cursor c=null;
     	if (uri.equals(Uri.parse("content://com.mis.icequeen.testprovider/getall")))
     		return getAllVoc();
+    	else if (uri.toString().startsWith("content://com.mis.icequeen.testprovider/getVOCbyRC")){
+    		String[] t= uri.toString().split(":");
+    		System.out.println(t[2]);
+    		return getVOCbyRC(t[2],t[3]);
+    		}
+    	else if (uri.toString().startsWith("content://com.mis.icequeen.testprovider/getVOCbyRating")){
+    		String[] t= uri.toString().split(":");
+    		System.out.println(t[2]);
+    		return getVOCbyRating(t[2]);
+    		}
     	else if (uri.toString().startsWith("content://com.mis.icequeen.testprovider/getAllChapter")){
     		return getAllCpt();
     		}
@@ -124,7 +134,15 @@ public class TestProvider extends ContentProvider {
     	
         return c;	
     }
-    private Cursor getVOCbyChapter(String cr) {
+    private Cursor getVOCbyRC(String r, String cr) {
+    	Cursor c = db.rawQuery("SELECT a.v_id,voc FROM VOCABULARY v JOIN VOCABULARY_SET a on a.v_id=v.v_id where a.ls_id=? and a.cr_id=?",new String[]{r,cr});
+    	return c;
+	}
+	private Cursor getVOCbyRating(String rating) {
+    	Cursor c = db.rawQuery("SELECT a.v_id,voc FROM VOCABULARY v JOIN VOCABULARY_SET a on a.v_id=v.v_id where a.ls_id=?",new String[]{rating});
+    	return c;
+    }
+	private Cursor getVOCbyChapter(String cr) {
     	Cursor c = db.rawQuery("SELECT a.v_id,voc FROM VOCABULARY v JOIN VOCABULARY_SET a on a.v_id=v.v_id where a.cr_id=?",new String[]{cr});
     	return c;
 	}
