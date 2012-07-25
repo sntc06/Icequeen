@@ -1,7 +1,11 @@
 package com.mis.icequeen;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,19 +19,27 @@ import android.widget.Toast;
 
 public class PreReview extends Activity {
 	
+	private ArrayList<Integer> showlist;
 	private TextView tvSelectedChapter;
 	private RatingBar ratingBar;
 	private LinearLayout pendingVocLinearLayout;
 	private Button btnConfirmReview;
-
+	private Uri total;
+	TextView tempTV;
+	int[] cptrange;
+	Cursor test;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pre_review);
-        
+        Bundle extras = getIntent().getExtras();
         // 取出選擇的章節
         Intent it = getIntent();
         
+        cptrange = extras.getIntArray("selected");
+       
+        showlist = new ArrayList<Integer>();
         tvSelectedChapter = (TextView) findViewById(R.id.tvSelectedChapter);
         tvSelectedChapter.setText("Chosen chapter: <CHANGE_ME>");
         RatingBarListener ratingBarListener = new RatingBarListener(); 
@@ -48,7 +60,7 @@ public class PreReview extends Activity {
      * @param rating
      */
     private void refreshPendingVoc(int rating) {
-    	TextView tempTV;
+    	
     	switch (rating) {
     	case 0:
     		tempTV = new TextView(this);
@@ -87,6 +99,27 @@ public class PreReview extends Activity {
     	// 在星等改變的時候呼叫 refreshPendingVoc
 		public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
 			refreshPendingVoc( (int) rating );
+			
+    		//query by R&C
+			showlist.clear();
+    		 for (int i = 0; i < cptrange.length; i++) {
+    				if (cptrange[i] == 1) {
+    					getIntent().setData(Uri.parse("content://com.mis.icequeen.testprovider/getVOCbyRC:"+(int) rating+":"+(i+1)));
+    					total = getIntent().getData();
+    					test = managedQuery(total, null, null, null, null);
+    					System.out.println("voc count: "+test.getCount());
+    					test.moveToFirst();
+    					for (int j = 0; j < test.getCount(); j++) {
+    						showlist.add(test.getInt(0));
+    						tempTV.append("\n"+test.getString(1));
+    						if (!test.isLast())
+    							test.moveToNext();
+    					}
+    					System.out.println(showlist.size());
+    					test.close();
+    				}
+    			}
+    		
 		}
     }
     
@@ -98,6 +131,11 @@ public class PreReview extends Activity {
 			
 			Intent it = new Intent();
 			it.setClass(PreReview.this, Review.class);
+			it.putExtra("init", true);
+			it.putExtra("index", 0);
+			it.putExtra("selected", cptrange);
+			it.putIntegerArrayListExtra("showlist", showlist);
+			it.putExtra("Rate",(int) ratingBar.getRating());
 			startActivity(it);
 			
 		}
