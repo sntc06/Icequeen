@@ -6,6 +6,7 @@ package com.mis.icequeen;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,30 +16,41 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapFactory.Options;
 import android.graphics.Rect;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
+import android.speech.tts.TextToSpeech.OnInitListener;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Review extends Activity {
+public class Review extends Activity implements OnInitListener {
 	private ArrayList<Integer> showlist;
 	private final int KK_IMAGE_DESNITY = 240; // 圖片解析度，數值越小圖片越大
 	static int nowvocid = 762;
 	int[] cptrange;
 	int deforate;
+	
+	private final Locale locale = Locale.UK;
+	private TextToSpeech tts;
+	private TextView word, meaning, classes, sentence, count;
+	private ImageButton btnPrev, btnNext;
+	private Button play;
+	private ImageView KK;
+	private RatingBar ratingBar;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		Bundle extras = getIntent().getExtras();
-		setContentView(R.layout.learning_activity);
+		setContentView(R.layout.review);
 
 		Uri total;
 		Cursor test;
@@ -56,16 +68,16 @@ public class Review extends Activity {
 		getIntent().setData(Uri.parse("content://com.mis.icequeen.testprovider/getsetbyid:"+nowvocid));
 		Uri uri = getIntent().getData();
 
-		final TextView word = (TextView) findViewById(R.id.tvWord);
-		TextView meaning = (TextView) findViewById(R.id.tvMeaning);
-		TextView classes = (TextView) findViewById(R.id.tvClass);
-		TextView sentence = (TextView) findViewById(R.id.tvSentence);
-		TextView count = (TextView) findViewById(R.id.tvCount);
-		Button btnPrev = (Button) findViewById(R.id.btnPrevious);
-		Button btnNext = (Button) findViewById(R.id.btnNext);
-		Button play = (Button) findViewById(R.id.pronounce);
-		ImageView KK = (ImageView) findViewById(R.id.KKView1);
-		RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+		word = (TextView) findViewById(R.id.tvWord);
+		meaning = (TextView) findViewById(R.id.tvMeaning);
+		classes = (TextView) findViewById(R.id.tvClass);
+		sentence = (TextView) findViewById(R.id.tvSentence);
+		count = (TextView) findViewById(R.id.tvCount);
+		btnPrev = (ImageButton) findViewById(R.id.btnPrev);
+		btnNext = (ImageButton) findViewById(R.id.btnNext);
+		play = (Button) findViewById(R.id.pronounce);
+		KK = (ImageView) findViewById(R.id.KKView1);
+		ratingBar = (RatingBar) findViewById(R.id.ratingBar);
 		ratingBar.setRating(deforate);
 		Cursor set = managedQuery(uri, null, null, null, null);
 		if (set.getCount() != 0) {
@@ -135,29 +147,55 @@ public class Review extends Activity {
 		// 播放按鈕
 		play.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				{
-					String playfile = word.getText().toString();
-					int id = getResources().getIdentifier(
-							getPackageName() + ":raw/" + playfile, null, null);
-
-					MediaPlayer mPlayer = MediaPlayer.create(
-							Review.this, id);
-
-					try {
-						mPlayer.prepare();
-					} catch (IllegalStateException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-
-					mPlayer.start();
-				}
+				// destroy duplicate service
+				onDestroy();
+				tts = new TextToSpeech(Review.this, Review.this);
+				Log.v("TTS","tts service created.");
 			}
 
 		});
 
 	}
+	
+	/**
+	 * TTS service 被建立之後開始說話
+	 * */
+	public void onInit(int status) {
+	      if (status == TextToSpeech.SUCCESS) {
+	    	  
+	            int result = tts.setLanguage(locale);
+	 
+	            if (result == TextToSpeech.LANG_MISSING_DATA
+	                    || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+	                Log.i("TTS", "This Language is not supported");
+	            } else {
+	            	// 利用 tts 說出單字
+	                speakOut();
+	                Log.v("TTS","tts service init");
+	            }
+	 
+	        } else {
+	            Log.e("TTS", "Initilization Failed!");
+	        }
+		
+	}
+	
+	/**
+	 * 利用 TTS 念出單字
+	 */
+    private void speakOut() {
+        String text2 = word.getText().toString();
+        tts.speak(text2, TextToSpeech.QUEUE_FLUSH, null);
+    }
+    
+    @Override
+    public void onDestroy() {
+        // Don't forget to shutdown!
+        if (tts != null) {
+            tts.stop();
+            tts.shutdown();
+            Log.v("TTS","tts service destroyed.");
+        }
+        super.onDestroy();
+    }
 }

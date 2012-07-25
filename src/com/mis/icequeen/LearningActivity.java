@@ -16,7 +16,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapFactory.Options;
 import android.graphics.Rect;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
@@ -32,9 +31,12 @@ import android.widget.Toast;
 
 public class LearningActivity extends Activity implements OnInitListener {
 	
-	private TextView sentence;
-	private TextView word;
+	private TextView word, sentence, meaning, classes, count;
+	private ImageButton btnPrev, btnNext;
+	private ImageView KK;
+	private Button play;
 	
+	private final Locale locale = Locale.UK;
 	private TextToSpeech tts;
 	private ArrayList<Integer> showlist;
 	private final int KK_IMAGE_DESNITY = 240; // 圖片解析度，數值越小圖片越大
@@ -81,16 +83,16 @@ public class LearningActivity extends Activity implements OnInitListener {
 
 		getIntent().setData(Uri.parse("content://com.mis.icequeen.testprovider/getsetbyid:"+nowvocid));
 		Uri uri = getIntent().getData();
-		//TODO
+		
 		word = (TextView) findViewById(R.id.tvWord);
-		TextView meaning = (TextView) findViewById(R.id.tvMeaning);
-		TextView classes = (TextView) findViewById(R.id.tvClass);
+		meaning = (TextView) findViewById(R.id.tvMeaning);
+		classes = (TextView) findViewById(R.id.tvClass);
 		sentence = (TextView) findViewById(R.id.tvSentence);
-		TextView count = (TextView) findViewById(R.id.tvCount);
-		ImageButton btnPrev = (ImageButton) findViewById(R.id.btnPrev);
-		ImageButton btnNext = (ImageButton) findViewById(R.id.btnNext);
-		Button play = (Button) findViewById(R.id.pronounce);
-		ImageView KK = (ImageView) findViewById(R.id.KKView1);
+		count = (TextView) findViewById(R.id.tvCount);
+		btnPrev = (ImageButton) findViewById(R.id.btnPrev);
+		btnNext = (ImageButton) findViewById(R.id.btnNext);
+		play = (Button) findViewById(R.id.pronounce);
+		KK = (ImageView) findViewById(R.id.KKView1);
 
 		Cursor set = managedQuery(uri, null, null, null, null);
 		if (set.getCount() != 0) {
@@ -162,51 +164,30 @@ public class LearningActivity extends Activity implements OnInitListener {
 		// 播放按鈕
 		play.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				{
-					String playfile = word.getText().toString();
-					int id = getResources().getIdentifier(
-							getPackageName() + ":raw/" + playfile, null, null);
-
-					MediaPlayer mPlayer = MediaPlayer.create(
-							LearningActivity.this, id);
-
-					try {
-						mPlayer.prepare();
-					} catch (IllegalStateException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-
-					//mPlayer.start();
-				}
-				
-				// tts test
+				// destroy duplicate service
+				onDestroy();
 				tts = new TextToSpeech(LearningActivity.this, LearningActivity.this);
-				speakOut();
-				
+				Log.v("TTS","tts service created.");
 			}
-
 		});
 
 	}
 
 	/**
-	 * TTS init
-	 */
+	 * TTS service 被建立之後開始說話
+	 * */
 	public void onInit(int status) {
 	      if (status == TextToSpeech.SUCCESS) {
 	    	  
-	            int result = tts.setLanguage(Locale.UK);
+	            int result = tts.setLanguage(locale);
 	 
 	            if (result == TextToSpeech.LANG_MISSING_DATA
 	                    || result == TextToSpeech.LANG_NOT_SUPPORTED) {
 	                Log.i("TTS", "This Language is not supported");
 	            } else {
-	                //btnSpeak.setEnabled(true);
+	            	// 利用 tts 說出單字
 	                speakOut();
+	                Log.v("TTS","tts service init");
 	            }
 	 
 	        } else {
@@ -218,20 +199,18 @@ public class LearningActivity extends Activity implements OnInitListener {
 	/**
 	 * 利用 TTS 念出單字
 	 */
-    private void speakOut() {
-        
+    private void speakOut() {    
         String text2 = word.getText().toString();
         tts.speak(text2, TextToSpeech.QUEUE_FLUSH, null);
     }
     
     @Override
-    public void onDestroy()
-    {
+    public void onDestroy() {
         // Don't forget to shutdown!
-        if (tts != null)
-        {
+        if (tts != null) {
             tts.stop();
             tts.shutdown();
+            Log.v("TTS","tts service destroyed.");
         }
         super.onDestroy();
     }
