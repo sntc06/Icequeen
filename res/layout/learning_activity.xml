@@ -2,104 +2,155 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color"
     android:orientation="vertical" >
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="390dp"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/tvWord"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="單字"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-
-            <ImageView
-                android:id="@+id/KKView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/button_style"
-                android:maxHeight="25dip"
-                android:maxWidth="50dip" />
-
-            <TextView
-                android:id="@+id/tvMeaning"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="單字說明"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <TextView
-                android:id="@+id/tvClass"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="單字詞性" />
-
-            <TextView
-                android:id="@+id/tvSentence"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="單字例句"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <Button
-                android:id="@+id/pronounce"
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="發音" />
-
-        </LinearLayout>
-
-    </FrameLayout>
-    
-    <TextView
-        android:id="@+id/tvCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="第幾個之第幾個" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
+        android:layout_height="0dp"
+        android:layout_weight="0.25" >
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:background="@drawable/vocabulary_background" >
+
+        <TextView
+            android:id="@+id/tvWord"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:text="單字單字"
+            android:textSize="30dp" />
+
+        <TextView
+            android:id="@+id/tvCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tvWord"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:text="第幾個之第幾個" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.25" >
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_weight="0.5"
+        android:padding="5dp" >
+
+        <Button
+            android:id="@+id/pronounce"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="發音" />
+
+        <ImageView
+            android:id="@+id/KKView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxHeight="25dip"
+            android:maxWidth="50dip"
+            android:src="@drawable/button_style" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:background="@drawable/vocabulary_class_bg"
+        android:orientation="vertical"
+        android:padding="10dp" >
+
+        <TextView
+            android:id="@+id/tvClass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="單字詞性"
+            android:textColor="#FF7D00" />
+
+        <TextView
+            android:id="@+id/tvMeaning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="單字說明"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="0dp"
+        android:layout_weight="1.5"
+        android:background="@drawable/vocabulary_sentence_bg"
+        android:padding="10dp" >
+
+        <TextView
+            android:id="@+id/tvSentence"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="單字例句"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#4B4C4E" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingTop="12dp" >
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            style="@style/RatingBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:numStars="3"
+            android:progressDrawable="@drawable/rating_bar_style"
+            android:stepSize="1.0" />
+
         <ImageButton
             android:id="@+id/btnPrev"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/ratingBar"
             android:background="@null"
             android:contentDescription="Prev Button"
             android:src="@drawable/button_prev"
             android:text="上一個" />
 
-        <RatingBar
-            android:id="@+id/ratingBar"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:numStars="3"
-            android:stepSize="1.0"
-            android:progressDrawable="@drawable/rating_bar_style"
-            style="@style/RatingBarStyle" />
-
         <ImageButton
             android:id="@+id/btnNext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/ratingBar"
             android:background="@null"
             android:contentDescription="Next Button"
             android:src="@drawable/button_next"
             android:text="下一個" />
-
-    </LinearLayout>
-
-
+    </RelativeLayout>
 
 </LinearLayout>

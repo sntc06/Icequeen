@@ -6,6 +6,7 @@ package com.mis.icequeen;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -18,6 +19,8 @@ import android.graphics.Rect;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
+import android.speech.tts.TextToSpeech.OnInitListener;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,7 +30,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class LearningActivity extends Activity {
+public class LearningActivity extends Activity implements OnInitListener {
+	
+	private TextView sentence;
+	private TextView word;
+	
+	private TextToSpeech tts;
 	private ArrayList<Integer> showlist;
 	private final int KK_IMAGE_DESNITY = 240; // 圖片解析度，數值越小圖片越大
 	static int nowvocid = 762;
@@ -77,11 +85,11 @@ public class LearningActivity extends Activity {
 		getIntent().setData(
 				Uri.parse("content://com.mis.icequeen.testprovider/getsetbyid:"+nowvocid));
 		Uri uri = getIntent().getData();
-
-		final TextView word = (TextView) findViewById(R.id.tvWord);
+		//TODO
+		word = (TextView) findViewById(R.id.tvWord);
 		TextView meaning = (TextView) findViewById(R.id.tvMeaning);
 		TextView classes = (TextView) findViewById(R.id.tvClass);
-		TextView sentence = (TextView) findViewById(R.id.tvSentence);
+		sentence = (TextView) findViewById(R.id.tvSentence);
 		TextView count = (TextView) findViewById(R.id.tvCount);
 		ImageButton btnPrev = (ImageButton) findViewById(R.id.btnPrev);
 		ImageButton btnNext = (ImageButton) findViewById(R.id.btnNext);
@@ -176,11 +184,59 @@ public class LearningActivity extends Activity {
 						e.printStackTrace();
 					}
 
-					mPlayer.start();
+					//mPlayer.start();
 				}
+				
+				// tts test
+				tts = new TextToSpeech(LearningActivity.this, LearningActivity.this);
+				speakOut();
+				
 			}
 
 		});
 
 	}
+
+	/**
+	 * TTS init
+	 */
+	public void onInit(int status) {
+	      if (status == TextToSpeech.SUCCESS) {
+	    	  
+	            int result = tts.setLanguage(Locale.UK);
+	 
+	            if (result == TextToSpeech.LANG_MISSING_DATA
+	                    || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+	                Log.i("TTS", "This Language is not supported");
+	            } else {
+	                //btnSpeak.setEnabled(true);
+	                speakOut();
+	            }
+	 
+	        } else {
+	            Log.e("TTS", "Initilization Failed!");
+	        }
+		
+	}
+	
+	/**
+	 * 利用 TTS 念出單字
+	 */
+    private void speakOut() {
+        
+        String text2 = word.getText().toString();
+        tts.speak(text2, TextToSpeech.QUEUE_FLUSH, null);
+    }
+    
+    @Override
+    public void onDestroy()
+    {
+        // Don't forget to shutdown!
+        if (tts != null)
+        {
+            tts.stop();
+            tts.shutdown();
+        }
+        super.onDestroy();
+    }
 }
