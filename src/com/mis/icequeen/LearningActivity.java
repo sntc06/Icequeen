@@ -7,7 +7,6 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetManager;
@@ -26,8 +25,10 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.RatingBar.OnRatingBarChangeListener;
 
 public class LearningActivity extends Activity implements OnInitListener {
 	
@@ -35,7 +36,9 @@ public class LearningActivity extends Activity implements OnInitListener {
 	private ImageButton btnPrev, btnNext;
 	private ImageView KK;
 	private Button play;
-	
+	private RatingBar ratingBar;
+	private Uri total;
+	private Cursor test;
 	private final Locale locale = Locale.UK;
 	private TextToSpeech tts;
 	private ArrayList<Integer> showlist;
@@ -91,8 +94,11 @@ public class LearningActivity extends Activity implements OnInitListener {
 		count = (TextView) findViewById(R.id.tvCount);
 		btnPrev = (ImageButton) findViewById(R.id.btnPrev);
 		btnNext = (ImageButton) findViewById(R.id.btnNext);
-		play = (Button) findViewById(R.id.pronounce);
 		KK = (ImageView) findViewById(R.id.KKView1);
+		play = (Button) findViewById(R.id.pronounce);
+		ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+		RatingBarListener ratingBarListener = new RatingBarListener(); 
+    	ratingBar.setOnRatingBarChangeListener(ratingBarListener);
 
 		Cursor set = managedQuery(uri, null, null, null, null);
 		if (set.getCount() != 0) {
@@ -101,6 +107,7 @@ public class LearningActivity extends Activity implements OnInitListener {
 			meaning.setText(set.getString(2));
 			classes.setText(set.getString(3) + "    " + set.getString(4));
 			sentence.setText(set.getString(5) + "\n" + set.getString(6));
+			ratingBar.setRating(set.getFloat(7));
 			count.setText((index + 1) + "/" + showlist.size());
 		} else
 			System.out.println("error1");
@@ -170,8 +177,24 @@ public class LearningActivity extends Activity implements OnInitListener {
 				Log.v("TTS","tts service created.");
 			}
 		});
+		
 
 	}
+	
+	private class RatingBarListener implements OnRatingBarChangeListener {
+    	// 在星等改變的時候呼叫 refreshPendingVoc
+		public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+			
+			getIntent().setData(Uri.parse("content://com.mis.icequeen.testprovider/UpdateRating:"+(int) rating+":"+nowvocid));
+			System.out.println("content://com.mis.icequeen.testprovider/UpdateRating:"+(int) rating+":"+nowvocid);
+    		total = getIntent().getData();
+    		test = managedQuery(total, null, null, null, null);
+    		test.moveToFirst();
+    		System.out.println("voc rating change:"+test.getString(7));
+    		test.close();
+    		
+		}
+    }
 
 	/**
 	 * TTS service 被建立之後開始說話

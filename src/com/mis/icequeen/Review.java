@@ -7,7 +7,6 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetManager;
@@ -29,6 +28,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.RatingBar.OnRatingBarChangeListener;
 
 public class Review extends Activity implements OnInitListener {
 	private ArrayList<Integer> showlist;
@@ -36,7 +36,8 @@ public class Review extends Activity implements OnInitListener {
 	static int nowvocid = 762;
 	int[] cptrange;
 	int deforate;
-	
+	private Uri total;
+	private Cursor test;
 	private final Locale locale = Locale.UK;
 	private TextToSpeech tts;
 	private TextView word, meaning, classes, sentence, count;
@@ -52,8 +53,6 @@ public class Review extends Activity implements OnInitListener {
 		Bundle extras = getIntent().getExtras();
 		setContentView(R.layout.review);
 
-		Uri total;
-		Cursor test;
 		int index;
 
 		showlist = new ArrayList<Integer>();
@@ -79,6 +78,10 @@ public class Review extends Activity implements OnInitListener {
 		KK = (ImageView) findViewById(R.id.KKView1);
 		ratingBar = (RatingBar) findViewById(R.id.ratingBar);
 		ratingBar.setRating(deforate);
+		ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+		RatingBarListener ratingBarListener = new RatingBarListener(); 
+    	ratingBar.setOnRatingBarChangeListener(ratingBarListener);
+    	
 		Cursor set = managedQuery(uri, null, null, null, null);
 		if (set.getCount() != 0) {
 			set.moveToFirst();
@@ -86,6 +89,7 @@ public class Review extends Activity implements OnInitListener {
 			meaning.setText(set.getString(2));
 			classes.setText(set.getString(3) + "    " + set.getString(4));
 			sentence.setText(set.getString(5) + "\n" + set.getString(6));
+			ratingBar.setRating(set.getFloat(7));
 			count.setText((index + 1) + "/" + showlist.size());
 		} else
 			System.out.println("error1");
@@ -156,6 +160,21 @@ public class Review extends Activity implements OnInitListener {
 		});
 
 	}
+	
+	private class RatingBarListener implements OnRatingBarChangeListener {
+    	// 在星等改變的時候呼叫 refreshPendingVoc
+		public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+			
+			getIntent().setData(Uri.parse("content://com.mis.icequeen.testprovider/UpdateRating:"+(int) rating+":"+nowvocid));
+			System.out.println("content://com.mis.icequeen.testprovider/UpdateRating:"+(int) rating+":"+nowvocid);
+    		total = getIntent().getData();
+    		test = managedQuery(total, null, null, null, null);
+    		test.moveToFirst();
+    		System.out.println("voc rating change:"+test.getString(7));
+    		test.close();
+    		
+		}
+    }
 	
 	/**
 	 * TTS service 被建立之後開始說話
