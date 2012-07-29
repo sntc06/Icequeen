@@ -15,6 +15,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.Toast;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -127,14 +128,16 @@ public class ChapterSelectionActivity extends Activity {
 				int cptrange[] = new int[data.size()];
 				//Intent it = new Intent(ChapterSelectionActivity.this, LearningActivity.class);
 				Intent it = new Intent();
-				
+				boolean checkempty=true;
 				if (MODE.equals("LEARN")) it.setClass(ChapterSelectionActivity.this, LearningActivity.class);
 				else if (MODE.equals("REVIEW")) it.setClass(ChapterSelectionActivity.this, PreReview.class);
 				else if (MODE.equals("TEST")) it.setClass(ChapterSelectionActivity.this, PreTest.class);
 
 				for (int i = 0; i < data.size(); i++) {
-					if (checkboxes[i].isChecked())
+					if (checkboxes[i].isChecked()){
 						cptrange[i] = 1;
+						checkempty=false;
+					}
 					else
 						cptrange[i] = 0;
 				}
@@ -145,7 +148,12 @@ public class ChapterSelectionActivity extends Activity {
 				it.putExtra("MODE", MODE);
 				it.putExtra("BOOK", BOOK);
 				Log.i("INT", "received intent MODE=" + MODE + ";BOOK=" + BOOK);
-				startActivity(it);
+				if(checkempty)
+					Toast.makeText(arg0.getContext(), "請至少選擇一章節", Toast.LENGTH_SHORT).show();
+				else{
+					finish();
+					startActivity(it);
+				}
 			}
 		});
 
