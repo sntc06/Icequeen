@@ -150,8 +150,10 @@ public class ChapterSelectionActivity extends Activity {
 				Log.i("INT", "received intent MODE=" + MODE + ";BOOK=" + BOOK);
 				if(checkempty)
 					Toast.makeText(arg0.getContext(), "請至少選擇一章節", Toast.LENGTH_SHORT).show();
-				else
+				else{
+					finish();
 					startActivity(it);
+				}
 			}
 		});
 

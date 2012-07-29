@@ -3,6 +3,8 @@ package com.mis.icequeen;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -98,6 +100,10 @@ public class TestProvider extends ContentProvider {
     	Cursor c=null;
     	if (uri.equals(Uri.parse("content://com.mis.icequeen.testprovider/getall")))
     		return getAllVoc();
+    	else if (uri.toString().startsWith("content://com.mis.icequeen.testprovider/Newtest")){
+    		String[] t= uri.toString().split(":");
+    		return InsertTest(t[2],t[3]);
+    		}
     	else if (uri.toString().startsWith("content://com.mis.icequeen.testprovider/UpdateRating")){
     		String[] t= uri.toString().split(":");
     		return UpdateRating(t[2],t[3]);
@@ -138,6 +144,22 @@ public class TestProvider extends ContentProvider {
     	
         return c;	
     }
+    
+    private Cursor InsertTest(String cr, String grade) {
+    	SimpleDateFormat formatter = new SimpleDateFormat("MM-dd hh:mm");
+        String now = formatter.format(new Date());
+    	ContentValues cv=new ContentValues();
+        cv.put("time", now);
+        cv.put("cr_id", cr);
+        cv.put("grade", grade);
+		db.insert("TEST", null, cv);
+		Cursor c = db.query("TEST", new String[] {"time","grade"}, null, null, null,null,null);
+    	return c;
+	}
+
+	
+    
+    
     private Cursor UpdateRating(String r,String id) {
     	ContentValues cv=new ContentValues();
         cv.put("ls_id", r);

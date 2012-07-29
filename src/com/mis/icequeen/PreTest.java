@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class PreTest extends Activity {
 	private Button btnConfirmTest;
@@ -50,6 +51,13 @@ public class PreTest extends Activity {
         btnConfirmTest = (Button) findViewById(R.id.btnConfirmTest);
         btnConfirmTest.setOnClickListener(buttonListener);
         pendingVocLinearLayout = (LinearLayout) findViewById(R.id.pendingVocLinearLayout);
+        TextView word = (TextView) findViewById(R.id.textView2);
+        for (int i = 0; i < cptrange.length; i++) {
+    		if (cptrange[i] == 1) {
+    			word.append(" Chapter "+(i+1)+"\n");
+    		}
+    	}
+        word.setText(word.getText().toString().substring(0, word.getText().length()-1));
         
     }
     
