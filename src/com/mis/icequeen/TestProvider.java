@@ -3,6 +3,8 @@ package com.mis.icequeen;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -98,6 +100,14 @@ public class TestProvider extends ContentProvider {
     	Cursor c=null;
     	if (uri.equals(Uri.parse("content://com.mis.icequeen.testprovider/getall")))
     		return getAllVoc();
+    	else if (uri.toString().startsWith("content://com.mis.icequeen.testprovider/Newtest")){
+    		String[] t= uri.toString().split(":");
+    		return InsertTest(t[2],t[3]);
+    		}
+    	else if (uri.toString().startsWith("content://com.mis.icequeen.testprovider/UpdateRating")){
+    		String[] t= uri.toString().split(":");
+    		return UpdateRating(t[2],t[3]);
+    		}
     	else if (uri.toString().startsWith("content://com.mis.icequeen.testprovider/getVOCbyRC")){
     		String[] t= uri.toString().split(":");
     		System.out.println(t[2]);
@@ -134,7 +144,28 @@ public class TestProvider extends ContentProvider {
     	
         return c;	
     }
-    private Cursor getVOCbyRC(String r, String cr) {
+    
+    private Cursor InsertTest(String cr, String grade) {
+    	SimpleDateFormat formatter = new SimpleDateFormat("MM-dd hh:mm");
+        String now = formatter.format(new Date());
+    	ContentValues cv=new ContentValues();
+        cv.put("time", now);
+        cv.put("cr_id", cr);
+        cv.put("grade", grade);
+		db.insert("TEST", null, cv);
+		Cursor c = db.query("TEST", new String[] {"time","grade"}, null, null, null,null,null);
+    	return c;
+	}
+    
+    private Cursor UpdateRating(String r,String id) {
+    	ContentValues cv=new ContentValues();
+        cv.put("ls_id", r);
+    	db.update("VOCABULARY_SET", cv, "`v_id` ='" + id +"'",null);
+    	//Cursor c=db.rawQuery("UPDATE VOCABULARY_SET SET ls_id=? where v_id=?",new String[]{r,id});
+    	Cursor c = db.rawQuery("SELECT a.v_id,voc,m_text,class_cht,class_eng,s_text,s_explain,a.ls_id FROM VOCABULARY v JOIN VOCABULARY_SET a on a.v_id=v.v_id JOIN CLASS c on a.c_id=c.c_id JOIN old_SENTENCE s on a.s_id=s.s_id JOIN MEANING m on s.wt_id=m.m_id where a.v_id=?",new String[]{id});
+    	return c;
+	}
+	private Cursor getVOCbyRC(String r, String cr) {
     	Cursor c = db.rawQuery("SELECT a.v_id,voc FROM VOCABULARY v JOIN VOCABULARY_SET a on a.v_id=v.v_id where a.ls_id=? and a.cr_id=?",new String[]{r,cr});
     	return c;
 	}
@@ -147,7 +178,7 @@ public class TestProvider extends ContentProvider {
     	return c;
 	}
 	private Cursor getSETbyID(String t) {
-    	Cursor c = db.rawQuery("SELECT a.v_id,voc,m_text,class_cht,class_eng,s_text,s_explain FROM VOCABULARY v JOIN VOCABULARY_SET a on a.v_id=v.v_id JOIN CLASS c on a.c_id=c.c_id JOIN old_SENTENCE s on a.s_id=s.s_id JOIN MEANING m on s.wt_id=m.m_id where a.v_id=?",new String[]{t});
+    	Cursor c = db.rawQuery("SELECT a.v_id,voc,m_text,class_cht,class_eng,s_text,s_explain,a.ls_id FROM VOCABULARY v JOIN VOCABULARY_SET a on a.v_id=v.v_id JOIN CLASS c on a.c_id=c.c_id JOIN old_SENTENCE s on a.s_id=s.s_id JOIN MEANING m on s.wt_id=m.m_id where a.v_id=?",new String[]{t});
     	return c;
 	}
     private Cursor getAllCpt() {
@@ -162,17 +193,8 @@ public class TestProvider extends ContentProvider {
     }
     //return all vocabularies in string[], start with 0
     public Cursor getAllVoc(){
-    	Cursor c = db.query("MEANING", new String[] {"m_text"}, null, null, null,null,null);
+    	Cursor c = db.rawQuery("SELECT a.v_id,voc,m_text,class_cht,class_eng,s_text,s_explain,a.ls_id FROM VOCABULARY v JOIN VOCABULARY_SET a on a.v_id=v.v_id JOIN CLASS c on a.c_id=c.c_id JOIN old_SENTENCE s on a.s_id=s.s_id JOIN MEANING m on s.wt_id=m.m_id",null);
     	return c;
-    	/*c.moveToFirst();
-        String[] s = new String[c.getCount()];
-        for (int i = 0; i < s.length; i++) {
-			s[i] = c.getString(0);
-			c.moveToNext();
-        }
-        c.close();
-        db.close();
-        */
     }
     public Cursor getVOCbyID(int id){
     	Cursor c = db.query("VOCABULARY", new String[] {"voc"}, "v_id='"+ id +"'", null, null,null,null);

@@ -20,14 +20,14 @@ import android.widget.Toast;
 public class PreReview extends Activity {
 	
 	private ArrayList<Integer> showlist;
+	private int[] cptrange;
 	private TextView tvSelectedChapter;
+	private TextView tempTV;
 	private RatingBar ratingBar;
 	private LinearLayout pendingVocLinearLayout;
 	private Button btnConfirmReview;
 	private Uri total;
-	TextView tempTV;
-	int[] cptrange;
-	Cursor test;
+	private Cursor test;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,13 +35,11 @@ public class PreReview extends Activity {
         setContentView(R.layout.pre_review);
         Bundle extras = getIntent().getExtras();
         // 取出選擇的章節
-        Intent it = getIntent();
-        
         cptrange = extras.getIntArray("selected");
        
         showlist = new ArrayList<Integer>();
         tvSelectedChapter = (TextView) findViewById(R.id.tvSelectedChapter);
-        tvSelectedChapter.setText("Chosen chapter: <CHANGE_ME>");
+        tvSelectedChapter.setText("Chosen :");
         RatingBarListener ratingBarListener = new RatingBarListener(); 
     	ratingBar = (RatingBar) findViewById(R.id.ratingBar);
     	ratingBar.setOnRatingBarChangeListener(ratingBarListener);
@@ -52,8 +50,16 @@ public class PreReview extends Activity {
     	btnConfirmReview.setOnClickListener(buttonListener);
     	
         refreshPendingVoc( (int) ratingBar.getRating() );
+    
+        for (int i = 0; i < cptrange.length; i++) {
+    		if (cptrange[i] == 1) {
+    			tvSelectedChapter.append(" Chapter "+(i+1)+",");
+    		}
+    	}
+        tvSelectedChapter.setText(tvSelectedChapter.getText().toString().substring(0, tvSelectedChapter.getText().length()-1));
         
     }
+    
     
     /**
      * 依照星等重新整理待複習單字
@@ -128,15 +134,27 @@ public class PreReview extends Activity {
      */
     private class ButtonListener implements OnClickListener {
 		public void onClick(View arg0) {
-			
+			if(showlist.size()==0)
+			{
+				Toast.makeText(arg0.getContext(), "查無單字", Toast.LENGTH_SHORT).show();
+			}else{
 			Intent it = new Intent();
+			Intent its = new Intent();
+			its.setClass(PreReview.this, PreReview.class);
 			it.setClass(PreReview.this, Review.class);
 			it.putExtra("init", true);
 			it.putExtra("index", 0);
 			it.putExtra("selected", cptrange);
+			its.putExtra("selected", cptrange);
 			it.putIntegerArrayListExtra("showlist", showlist);
 			it.putExtra("Rate",(int) ratingBar.getRating());
+			finish();
+			startActivity(its);
 			startActivity(it);
+			
+			}
+			
+			
 			
 		}
     }
