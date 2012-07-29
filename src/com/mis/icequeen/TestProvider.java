@@ -156,9 +156,6 @@ public class TestProvider extends ContentProvider {
 		Cursor c = db.query("TEST", new String[] {"time","grade"}, null, null, null,null,null);
     	return c;
 	}
-
-	
-    
     
     private Cursor UpdateRating(String r,String id) {
     	ContentValues cv=new ContentValues();

@@ -93,7 +93,7 @@ public class Test extends Activity {
         
         for (int i = 0; i < cptrange.length; i++) {
     		if (cptrange[i] == 1) {
-    			cpt+=(i+1)+":";
+    			cpt+=(i+1)+",";
     		}
     	}
         
@@ -143,8 +143,7 @@ public class Test extends Activity {
     	Qindex=rand.nextInt(showlist.size());
     	System.out.println(Qindex); 
     	
-		//test.moveToFirst();
-		optionId[0]=showlist.get(Qindex);
+    	optionId[0]=showlist.get(Qindex);
 		showlist.remove(Qindex);
 		for(int i=1;i<4;i++){
 			check=true;
@@ -168,12 +167,8 @@ public class Test extends Activity {
     	tvVoc.setText(test.getString(1));
     	tvClass.setText(test.getString(3)+" "+test.getString(4));
     	test.close();
-    	
+    	temp=rand.nextInt(4);
     	for(int i=0;i<4;i++){
-    		temp=rand.nextInt(4);
-    		while(optionId[temp]==0){
-    			temp=rand.nextInt(4);
-    		}
     		if(temp==0)
     			ANSWER=i+1;
     		getIntent().setData(Uri.parse("content://com.mis.icequeen.testprovider/getsetbyid:"+optionId[temp]));
@@ -186,7 +181,7 @@ public class Test extends Activity {
     			optionValue[i]=test.getString(2);
     		test.close();
     		optionId[temp]=0;
-    		
+    		temp=(temp+1)% 4;
     	}
 		radio1.setChecked(true);
 		radio1.setText(optionValue[0]);
@@ -208,7 +203,6 @@ public class Test extends Activity {
     	if(selection==ANSWER){
     		correct++;
     	}
-    	
     	if(showlist.isEmpty()){
     		Intent it = new Intent();
     		it.setClass(Test.this, PostTest.class);
