@@ -67,6 +67,7 @@ public class PreTest extends Activity {
 			it.setClass(PreTest.this, Test.class);
 			it.putExtra("init", true);
 			it.putExtra("selected", cptrange);
+			it.putExtra("BOOK", getIntent().getExtras().getInt("BOOK"));
 			it.putIntegerArrayListExtra("showlist", showlist);
 			startActivity(it);
 		}

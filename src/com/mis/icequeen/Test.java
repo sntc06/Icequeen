@@ -183,22 +183,21 @@ public class Test extends Activity {
     		optionId[temp]=0;
     		temp=(temp+1)% 4;
     	}
-		radio1.setChecked(true);
+		
+    	radioGroup.clearCheck();
 		radio1.setText(optionValue[0]);
 		radio2.setText(optionValue[1]);
 		radio3.setText(optionValue[2]);
 		radio4.setText(optionValue[3]);
 		System.out.println(ANSWER);
     }
-    
-    /**
+
+
+	/**
      * 檢查答案正確 並且紀錄至資料庫中
      * 執行完成後載入下一題
      * @param selection 選項
      */
-    
-    
-    
     private void submit(int selection) {
     	if(selection==ANSWER){
     		correct++;
@@ -209,6 +208,7 @@ public class Test extends Activity {
     		it.putExtra("Grade", (float) correct/testvocs * 100);
     		it.putExtra("Time",tvTime.getText().toString());
     		it.putExtra("cpt",cpt);
+    		it.putExtra("BOOK", getIntent().getExtras().getInt("BOOK"));
     		finish();
     		startActivity(it);
     	}else
@@ -245,12 +245,14 @@ public class Test extends Activity {
 				selection = 4;
 				break;
 			default:
+				Toast.makeText(v.getContext(), "請選擇一個選項！", Toast.LENGTH_SHORT).show();
 				break;
 			}
-			submit(selection);
 			Log.i("RADIO","SUBMITTED:"+selection);
+			if (selection != 0) submit(selection);
 		}
     }
+    
     /**
      * RadioButton Listener & 動態變更選擇高亮
      */
