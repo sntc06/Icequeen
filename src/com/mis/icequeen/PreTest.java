@@ -52,6 +52,7 @@ public class PreTest extends Activity {
         btnConfirmTest.setOnClickListener(buttonListener);
         pendingVocLinearLayout = (LinearLayout) findViewById(R.id.pendingVocLinearLayout);
         TextView word = (TextView) findViewById(R.id.textView2);
+        word.setText("");
         for (int i = 0; i < cptrange.length; i++) {
     		if (cptrange[i] == 1) {
     			word.append(" Chapter "+(i+1)+"\n");

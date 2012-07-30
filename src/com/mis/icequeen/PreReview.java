@@ -39,7 +39,6 @@ public class PreReview extends Activity {
        
         showlist = new ArrayList<Integer>();
         tvSelectedChapter = (TextView) findViewById(R.id.tvSelectedChapter);
-        tvSelectedChapter.setText("Chosen :");
         RatingBarListener ratingBarListener = new RatingBarListener(); 
     	ratingBar = (RatingBar) findViewById(R.id.ratingBar);
     	ratingBar.setOnRatingBarChangeListener(ratingBarListener);
@@ -50,7 +49,8 @@ public class PreReview extends Activity {
     	btnConfirmReview.setOnClickListener(buttonListener);
     	
         refreshPendingVoc( (int) ratingBar.getRating() );
-    
+        
+        tvSelectedChapter.append("\n");
         for (int i = 0; i < cptrange.length; i++) {
     		if (cptrange[i] == 1) {
     			tvSelectedChapter.append(" Chapter "+(i+1)+",");
@@ -76,19 +76,19 @@ public class PreReview extends Activity {
     		break;
     	case 1:
     		tempTV = new TextView(this);
-    		tempTV.setText("STAR 1");
+    		tempTV.setText("一星等的單字：\n");
     		pendingVocLinearLayout.removeAllViews();
     		pendingVocLinearLayout.addView(tempTV);
     		break;
     	case 2:
     		tempTV = new TextView(this);
-    		tempTV.setText("STAR 2");
+    		tempTV.setText("二星等的單字：\n");
     		pendingVocLinearLayout.removeAllViews();
     		pendingVocLinearLayout.addView(tempTV);
     		break;
     	case 3:
     		tempTV = new TextView(this);
-    		tempTV.setText("STAR 3");
+    		tempTV.setText("三星等的單字：\n");
     		pendingVocLinearLayout.removeAllViews();
     		pendingVocLinearLayout.addView(tempTV);
     		break;
@@ -121,10 +121,14 @@ public class PreReview extends Activity {
     						if (!test.isLast())
     							test.moveToNext();
     					}
-    					System.out.println(showlist.size());
+    					
+    					System.out.println("showsize: "+showlist.size());
     					test.close();
     				}
     			}
+    		 
+    		 if (showlist.size() == 0)
+    			 tempTV.setText("查無單字！");
     		
 		}
     }

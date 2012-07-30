@@ -16,6 +16,7 @@
         	android:id="@+id/textView1"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
+        	android:layout_margin="20dp" 
         	android:text="測驗模式"
         	android:textAppearance="?android:attr/textAppearanceLarge" />
         
@@ -53,13 +54,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/checkbox_background" >
+            android:background="@drawable/checkbox_background"
+            android:padding="20dp" >
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
+                android:text="Chapters"
+                android:lineSpacingExtra="6dp"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
         </LinearLayout>
