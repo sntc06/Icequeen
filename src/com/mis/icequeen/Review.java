@@ -42,7 +42,7 @@ public class Review extends Activity implements OnInitListener {
 	private TextToSpeech tts;
 	private TextView word, meaning, classes, sentence, count;
 	private ImageButton btnPrev, btnNext;
-	private Button play;
+	private Button play,btnRemoveStar;
 	private ImageView KK;
 	private RatingBar ratingBar;
 	
@@ -75,6 +75,7 @@ public class Review extends Activity implements OnInitListener {
 		btnPrev = (ImageButton) findViewById(R.id.btnPrev);
 		btnNext = (ImageButton) findViewById(R.id.btnNext);
 		play = (Button) findViewById(R.id.pronounce);
+		btnRemoveStar = (Button) findViewById(R.id.btnRemoveStar);
 		KK = (ImageView) findViewById(R.id.KKView1);
 		ratingBar = (RatingBar) findViewById(R.id.ratingBar);
 		ratingBar.setRating(deforate);
@@ -110,6 +111,7 @@ public class Review extends Activity implements OnInitListener {
 			e.printStackTrace();
 		}
 
+		
 		// ¤W¤@­Ó«ö¶s
 		btnPrev.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
@@ -158,6 +160,18 @@ public class Review extends Activity implements OnInitListener {
 			}
 
 		});
+		
+		btnRemoveStar.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				// destroy duplicate service
+				getIntent().setData(Uri.parse("content://com.mis.icequeen.testprovider/UpdateRating:0:"+nowvocid));
+	    		total = getIntent().getData();
+	    		test = managedQuery(total, null, null, null, null);
+	    		test.close();
+			}
+
+		});
+		
 
 	}
 	
