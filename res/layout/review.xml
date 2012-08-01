@@ -89,18 +89,21 @@
             android:id="@+id/tvClass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="單字詞性"
+            android:text=""
             android:textColor="#FF7D00" />
 
         <TextView
             android:id="@+id/tvMeaning"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="單字說明"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:text="點擊以顯示單字內容"
+            android:clickable="true"
+        	android:onClick="onClick"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/reviewshow"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="10dp"
@@ -109,7 +112,10 @@
         android:layout_marginTop="0dp"
         android:layout_weight="1.5"
         android:background="@drawable/vocabulary_sentence_bg"
-        android:padding="10dp" >
+        android:padding="10dp"
+        android:clickable="true"
+        android:onClick="onClick"
+        android:visibility="invisible" >
 
         <TextView
             android:id="@+id/tvSentence"

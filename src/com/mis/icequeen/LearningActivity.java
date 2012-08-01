@@ -7,6 +7,7 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetManager;
@@ -53,11 +54,16 @@ public class LearningActivity extends Activity implements OnInitListener {
 		super.onCreate(savedInstanceState);
 		Bundle extras = getIntent().getExtras();
 		setContentView(R.layout.learning_activity);
-
+		
+		overridePendingTransition(R.anim.push_left_in,R.anim.push_left_out);
 		Uri total;
 		Cursor test;
 		int index;
 
+		if(!extras.getString("side").equals("left"))
+			overridePendingTransition(R.anim.push_left_in,R.anim.push_left_out);
+		else
+			overridePendingTransition(R.anim.push_right_in,R.anim.push_right_out);
 		showlist = new ArrayList<Integer>();
 		index = extras.getInt("index");
 		System.out.println("received intent" + nowvocid);
@@ -138,6 +144,8 @@ public class LearningActivity extends Activity implements OnInitListener {
 					intent.putExtra("selected", cptrange);
 					intent.putExtra("index", showlist.indexOf(nowvocid) - 1);
 					intent.putIntegerArrayListExtra("showlist", showlist);
+					intent.putExtra("side", "left");
+					
 					finish();
 					startActivity(intent);
 				} else {
@@ -158,6 +166,7 @@ public class LearningActivity extends Activity implements OnInitListener {
 					intent.putExtra("init", false);
 					intent.putExtra("index", showlist.indexOf(nowvocid) + 1);
 					intent.putIntegerArrayListExtra("showlist", showlist);
+					intent.putExtra("side", "right");
 					finish();
 					startActivity(intent);
 				} else {

@@ -24,6 +24,7 @@ public class Test extends Activity {
 	private TextView tvVoc;
 	private TextView tvClass;
 	private TextView tvTime;
+	private TextView tvcount;
 	private RadioGroup radioGroup; 
 	private RadioButton radio1;
 	private RadioButton radio2;
@@ -32,9 +33,10 @@ public class Test extends Activity {
 	private Button btnConfirm;
 	private static int ANSWER;
 	private int testvocs;
-	private int correct=0;
+	private int correct=0,ans;
 	private ArrayList<Integer> showlist;
 	private ArrayList<Integer> idlist;
+	private ArrayList<String> wronglist;
 	private int[] cptrange;
 	private Uri total;
 	private Cursor test;
@@ -62,10 +64,12 @@ public class Test extends Activity {
         
         //showlist = new ArrayList<Integer>();
         idlist = new ArrayList<Integer>();
+        wronglist = new ArrayList<String>();
         
         tvVoc = (TextView) findViewById(R.id.tvVoc);
         tvClass = (TextView) findViewById(R.id.tvClass);
         tvTime = (TextView) findViewById(R.id.tvTime);
+        tvcount =(TextView) findViewById(R.id.tvCount);
         
         RadioListener radioListener = new RadioListener();
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
@@ -89,7 +93,7 @@ public class Test extends Activity {
         	testvocs=showlist.size();
         }
         
-        
+        tvcount.setText((testvocs-showlist.size()+1)+"/"+testvocs);
         
         for (int i = 0; i < cptrange.length; i++) {
     		if (cptrange[i] == 1) {
@@ -129,7 +133,8 @@ public class Test extends Activity {
             String seconds = String.valueOf((spentTime/1000) % 60);
             if(((spentTime/1000) % 60)<10)
             	seconds="0"+seconds;
-            tvTime.setText(h+":"+minius+":"+seconds+"::"+(testvocs-showlist.size()));
+            tvTime.setText(h+":"+minius+":"+seconds);
+            //+"::"+(testvocs-showlist.size())ÃD¸¹
             handler.postDelayed(this, 1000);
         }
     };
@@ -142,15 +147,20 @@ public class Test extends Activity {
     	rand.setSeed(System.currentTimeMillis());
     	Qindex=rand.nextInt(showlist.size());
     	System.out.println(Qindex); 
-    	
+    	ans=showlist.get(Qindex);
     	optionId[0]=showlist.get(Qindex);
 		showlist.remove(Qindex);
 		for(int i=1;i<4;i++){
 			check=true;
 			temp=rand.nextInt(idlist.size());
 				for(int j=0;j<i;j++){
-					if(optionId[j]==idlist.get(temp))
+					if(optionId[j]==idlist.get(temp)){
 						check=false;
+						j--;
+						temp=rand.nextInt(idlist.size());
+						continue;
+					}else
+						check=true;
 					System.out.println(idlist.get(temp));
 				}
 			if(check)
@@ -171,6 +181,7 @@ public class Test extends Activity {
     	for(int i=0;i<4;i++){
     		if(temp==0)
     			ANSWER=i+1;
+    		System.out.println("now temp is:"+temp);
     		getIntent().setData(Uri.parse("content://com.mis.icequeen.testprovider/getsetbyid:"+optionId[temp]));
     		total = getIntent().getData();
     		test = managedQuery(total, null, null, null, null);
@@ -180,12 +191,12 @@ public class Test extends Activity {
     		else
     			optionValue[i]=test.getString(2);
     		test.close();
-    		optionId[temp]=0;
+    		//optionId[temp]=0;
     		temp=(temp+1)% 4;
     	}
 		
     	radioGroup.clearCheck();
-		radio1.setText(optionValue[0]);
+    	radio1.setText(optionValue[0]);
 		radio2.setText(optionValue[1]);
 		radio3.setText(optionValue[2]);
 		radio4.setText(optionValue[3]);
@@ -201,13 +212,23 @@ public class Test extends Activity {
     private void submit(int selection) {
     	if(selection==ANSWER){
     		correct++;
+    	}else{
+    		wronglist.add(tvVoc.getText().toString()+":"+optionValue[ANSWER-1]);
+    		getIntent().setData(Uri.parse("content://com.mis.icequeen.testprovider/UpdateRating:3:"+ans));
+    		total = getIntent().getData();
+    		test = managedQuery(total, null, null, null, null);
+    		test.moveToFirst();
+    		System.out.println("wrong:"+ans);
+    		test.close();
     	}
+    	tvcount.setText((testvocs-showlist.size()+1)+"/"+testvocs);
     	if(showlist.isEmpty()){
     		Intent it = new Intent();
     		it.setClass(Test.this, PostTest.class);
     		it.putExtra("Grade", (float) correct/testvocs * 100);
     		it.putExtra("Time",tvTime.getText().toString());
     		it.putExtra("cpt",cpt);
+    		it.putExtra("wronglist",wronglist);
     		it.putExtra("BOOK", getIntent().getExtras().getInt("BOOK"));
     		finish();
     		startActivity(it);

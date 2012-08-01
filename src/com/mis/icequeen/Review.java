@@ -25,6 +25,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,7 +43,8 @@ public class Review extends Activity implements OnInitListener {
 	private TextToSpeech tts;
 	private TextView word, meaning, classes, sentence, count;
 	private ImageButton btnPrev, btnNext;
-	private Button play;
+	private LinearLayout layout;
+	private Button play,btnRemoveStar;
 	private ImageView KK;
 	private RatingBar ratingBar;
 	
@@ -52,16 +54,23 @@ public class Review extends Activity implements OnInitListener {
 		super.onCreate(savedInstanceState);
 		Bundle extras = getIntent().getExtras();
 		setContentView(R.layout.review);
-
+		layout = (LinearLayout) findViewById(R.id.reviewshow);
+		layout.setFocusable(true);
+		
 		int index;
-
+		if(!extras.getString("side").equals("left"))
+			overridePendingTransition(R.anim.push_left_in,R.anim.push_left_out);
+		else
+			overridePendingTransition(R.anim.push_right_in,R.anim.push_right_out);
+		
 		showlist = new ArrayList<Integer>();
 		index = extras.getInt("index");
 		deforate = extras.getInt("Rate");
 		System.out.println("received intent" + nowvocid);
+		cptrange = extras.getIntArray("selected");
 		
 			showlist = extras.getIntegerArrayList("showlist");
-
+			
 		nowvocid = showlist.get(index);
 
 		getIntent().setData(Uri.parse("content://com.mis.icequeen.testprovider/getsetbyid:"+nowvocid));
@@ -75,6 +84,7 @@ public class Review extends Activity implements OnInitListener {
 		btnPrev = (ImageButton) findViewById(R.id.btnPrev);
 		btnNext = (ImageButton) findViewById(R.id.btnNext);
 		play = (Button) findViewById(R.id.pronounce);
+		btnRemoveStar = (Button) findViewById(R.id.btnRemoveStar);
 		KK = (ImageView) findViewById(R.id.KKView1);
 		ratingBar = (RatingBar) findViewById(R.id.ratingBar);
 		ratingBar.setRating(deforate);
@@ -86,14 +96,14 @@ public class Review extends Activity implements OnInitListener {
 		if (set.getCount() != 0) {
 			set.moveToFirst();
 			word.setText(set.getString(1));
-			meaning.setText(set.getString(2));
-			classes.setText(set.getString(3) + "    " + set.getString(4));
+			//meaning.setText(set.getString(2));
+			//classes.setText(set.getString(3) + "    " + set.getString(4));
 			sentence.setText(set.getString(5) + "\n" + set.getString(6));
 			ratingBar.setRating(set.getFloat(7));
 			count.setText((index + 1) + "/" + showlist.size());
 		} else
 			System.out.println("error1");
-
+		set.close();
 		// 顯示 KK 音標 from assets
 		String vockk = word.getText().toString();
 		try {
@@ -110,6 +120,7 @@ public class Review extends Activity implements OnInitListener {
 			e.printStackTrace();
 		}
 
+		
 		// 上一個按鈕
 		btnPrev.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
@@ -120,6 +131,7 @@ public class Review extends Activity implements OnInitListener {
 					intent.putExtra("index", showlist.indexOf(nowvocid) - 1);
 					intent.putIntegerArrayListExtra("showlist", showlist);
 					intent.putExtra("Rate",deforate);
+					intent.putExtra("side", "left");
 					finish();
 					startActivity(intent);
 				} else {
@@ -139,6 +151,7 @@ public class Review extends Activity implements OnInitListener {
 					intent.putExtra("index", showlist.indexOf(nowvocid) + 1);
 					intent.putIntegerArrayListExtra("showlist", showlist);
 					intent.putExtra("Rate",deforate);
+					intent.putExtra("side", "right");
 					finish();
 					startActivity(intent);
 				} else {
@@ -158,8 +171,60 @@ public class Review extends Activity implements OnInitListener {
 			}
 
 		});
+		
+		btnRemoveStar.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				// destroy duplicate service
+				
+				getIntent().setData(Uri.parse("content://com.mis.icequeen.testprovider/UpdateRating:0:"+nowvocid));
+	    		total = getIntent().getData();
+	    		test = managedQuery(total, null, null, null, null);
+	    		test.close();
+	    		
+	    		Intent intent;
+	    		if(showlist.indexOf(nowvocid)==0 && showlist.size()==1)
+	    			intent = new Intent(Review.this, PreReview.class);
+	    		else
+	    			intent = new Intent(Review.this, Review.class);
+				intent.putExtra("init", false);
+				intent.putExtra("selected", cptrange);
+				if (nowvocid == showlist.get(showlist.size() - 1))
+					intent.putExtra("index", showlist.indexOf(nowvocid)-1);
+				else
+					intent.putExtra("index", showlist.indexOf(nowvocid));
+				
+				showlist.remove(showlist.indexOf(nowvocid));
+				intent.putIntegerArrayListExtra("showlist", showlist);
+				intent.putExtra("Rate",deforate);
+				intent.putExtra("side", "left");
+				finish();
+				startActivity(intent);
+			}
+
+		});
+		
+		
+		
 
 	}
+	public void onClick (View view) {
+		getIntent().setData(Uri.parse("content://com.mis.icequeen.testprovider/getsetbyid:"+nowvocid));
+		Uri uri = getIntent().getData();
+		Cursor set = managedQuery(uri, null, null, null, null);
+		if (set.getCount() != 0) {
+			set.moveToFirst();
+			//word.setText(set.getString(1));
+			meaning.setText(set.getString(2));
+			classes.setText(set.getString(3) + "    " + set.getString(4));
+			//sentence.setText(set.getString(5) + "\n" + set.getString(6));
+			//ratingBar.setRating(set.getFloat(7));
+			//count.setText((index + 1) + "/" + showlist.size());
+		} else
+			System.out.println("error1");
+		set.close();
+		layout.setVisibility(0);
+		System.out.println("CLICKKKKKKKKKKKKKKKKED");
+    }
 	
 	private class RatingBarListener implements OnRatingBarChangeListener {
     	// 在星等改變的時候呼叫 refreshPendingVoc
