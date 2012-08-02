@@ -24,6 +24,7 @@ public class Test extends Activity {
 	private TextView tvVoc;
 	private TextView tvClass;
 	private TextView tvTime;
+	private TextView tvcount;
 	private RadioGroup radioGroup; 
 	private RadioButton radio1;
 	private RadioButton radio2;
@@ -68,6 +69,7 @@ public class Test extends Activity {
         tvVoc = (TextView) findViewById(R.id.tvVoc);
         tvClass = (TextView) findViewById(R.id.tvClass);
         tvTime = (TextView) findViewById(R.id.tvTime);
+        tvcount =(TextView) findViewById(R.id.tvCount);
         
         RadioListener radioListener = new RadioListener();
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
@@ -91,7 +93,7 @@ public class Test extends Activity {
         	testvocs=showlist.size();
         }
         
-        
+        tvcount.setText((testvocs-showlist.size()+1)+"/"+testvocs);
         
         for (int i = 0; i < cptrange.length; i++) {
     		if (cptrange[i] == 1) {
@@ -131,7 +133,8 @@ public class Test extends Activity {
             String seconds = String.valueOf((spentTime/1000) % 60);
             if(((spentTime/1000) % 60)<10)
             	seconds="0"+seconds;
-            tvTime.setText(h+":"+minius+":"+seconds+"::"+(testvocs-showlist.size()));
+            tvTime.setText(h+":"+minius+":"+seconds);
+            //+"::"+(testvocs-showlist.size())ÃD¸¹
             handler.postDelayed(this, 1000);
         }
     };
@@ -192,7 +195,11 @@ public class Test extends Activity {
     		temp=(temp+1)% 4;
     	}
 		
+<<<<<<< HEAD
     	//radioGroup.clearCheck();
+=======
+    	radioGroup.clearCheck();
+>>>>>>> 81c77cafbf2e6a1cbd0f0dfc5460e1f82193e113
     	radio1.setText(optionValue[0]);
 		radio2.setText(optionValue[1]);
 		radio3.setText(optionValue[2]);
@@ -218,6 +225,7 @@ public class Test extends Activity {
     		System.out.println("wrong:"+ans);
     		test.close();
     	}
+    	tvcount.setText((testvocs-showlist.size()+1)+"/"+testvocs);
     	if(showlist.isEmpty()){
     		Intent it = new Intent();
     		it.setClass(Test.this, PostTest.class);
