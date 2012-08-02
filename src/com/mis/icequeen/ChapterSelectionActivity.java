@@ -144,6 +144,7 @@ public class ChapterSelectionActivity extends Activity {
 				it.putExtra("init", true);
 				it.putExtra("index", 0);
 				it.putExtra("selected", cptrange);
+				it.putExtra("side", "right");
 				
 				it.putExtra("MODE", MODE);
 				it.putExtra("BOOK", BOOK);

@@ -152,8 +152,9 @@ public class PreReview extends Activity {
 			its.putExtra("selected", cptrange);
 			it.putIntegerArrayListExtra("showlist", showlist);
 			it.putExtra("Rate",(int) ratingBar.getRating());
+			it.putExtra("side", "right");
 			finish();
-			startActivity(its);
+			//startActivity(its);
 			startActivity(it);
 			
 			}

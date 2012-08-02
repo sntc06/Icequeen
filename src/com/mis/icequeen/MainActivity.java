@@ -37,18 +37,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         setupView();
-        TestProvider t =new TestProvider();
-        getIntent().setData(Uri.parse("content://com.mis.icequeen.testprovider"));
-        Uri uri_test = getIntent().getData();
-        getIntent().setData(Uri.parse("content://com.mis.icequeen.testprovider/gbid:5"));
-        Uri uri = getIntent().getData();
-        Cursor c = managedQuery(uri, null, null, null, null);
-        if(c.getCount()!=0)
-        {	c.moveToFirst();
-        System.out.println(c.getString(0));
-        }else 
-        	System.out.println("FAIL");
-        c.close();
     }
 
 	/**
