@@ -163,6 +163,8 @@ public class Review extends Activity implements OnInitListener {
 		
 		btnRemoveStar.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
+				ratingBar.setRating(0);
+				//showlist.remove(nowvocid);
 				// destroy duplicate service
 				getIntent().setData(Uri.parse("content://com.mis.icequeen.testprovider/UpdateRating:0:"+nowvocid));
 	    		total = getIntent().getData();
