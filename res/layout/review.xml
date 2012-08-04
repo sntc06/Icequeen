@@ -7,13 +7,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.25" >
+        android:layout_weight="0.15" >
     </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.5"
+        android:layout_weight="0.7"
         android:background="@drawable/vocabulary_background" >
 
         <TextView
@@ -39,10 +39,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.25" >
+        android:layout_weight="0.15" >
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginLeft="24dp"
@@ -50,28 +50,39 @@
         android:layout_weight="0.5"
         android:padding="5dp" >
 
-        <Button
-            android:id="@+id/pronounce"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="發音" />
-
-        <Button
-            android:id="@+id/btnRemoveStar"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="移除星等" />
-
         <ImageView
             android:id="@+id/KKView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/pronounce"
+            android:layout_centerVertical="true"
             android:maxHeight="25dip"
             android:maxWidth="50dip"
             android:src="@drawable/button_style" />
-    </LinearLayout>
+
+        <Button
+            android:id="@+id/btnRemoveStar"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/button_style"
+            android:text="移除星等"
+            android:textSize="10dp"
+            style="?android:attr/buttonStyleSmall" />
+
+        <Button
+            android:id="@+id/pronounce"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignTop="@+id/btnRemoveStar"
+            android:layout_centerVertical="true"
+            android:background="@drawable/button_style"
+            android:drawableLeft="@drawable/speak"
+            style="?android:attr/buttonStyleSmall" />
+
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -136,34 +147,38 @@
             android:id="@+id/ratingBar"
             style="@style/RatingBarStyle"
             android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:layout_alignParentTop="true"
+            android:layout_height="32dp"
+            android:layout_alignTop="@+id/btnPrev"
+            android:layout_marginTop="10dp"
             android:layout_centerHorizontal="true"
             android:numStars="3"
             android:progressDrawable="@drawable/rating_bar_style"
             android:stepSize="1.0" />
 
         <ImageButton
+            android:id="@+id/btnNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="40dp"
+            android:background="@null"
+            android:contentDescription="Next Button"
+            android:src="@drawable/button_next"
+            android:text="下一個" />
+
+        <ImageButton
             android:id="@+id/btnPrev"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/ratingBar"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="40dp"
             android:background="@null"
             android:contentDescription="Prev Button"
             android:src="@drawable/button_prev"
             android:text="上一個" />
 
-        <ImageButton
-            android:id="@+id/btnNext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/ratingBar"
-            android:background="@null"
-            android:contentDescription="Next Button"
-            android:src="@drawable/button_next"
-            android:text="下一個" />
     </RelativeLayout>
 
 </LinearLayout>

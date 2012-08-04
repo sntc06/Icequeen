@@ -2,75 +2,84 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" 
-    android:background="@color/background_color">
-
-    <TextView
-        android:id="@+id/tvAppName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp" 
-        android:text="單字大學堂"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-    
-    <!-- coverFlow -->
-    
-    <pl.polidea.coverflow.CoverFlow 
-    	xmlns:coverflow="http://schemas.android.com/apk/res/com.mis.icequeen"
-    	class="pl.polidea.coverflow.CoverFlow" 
-		coverflow:imageWidth="180dip" 
-		coverflow:imageHeight="200dip" 
-		android:id="@+id/coverflowReflection" 
-		android:layout_width="fill_parent"
-		android:layout_height="300dp" 
-		android:layout_marginTop="20dip"
-		coverflow:withReflection="true"
-		coverflow:imageReflectionRatio="0.2" 
-		coverflow:reflectionGap="2dip" >
-    </pl.polidea.coverflow.CoverFlow>
-	
-	
-	<!-- end coverflow -->
-
+    android:background="@color/background_color"
+    android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-        
-        <Button
-            android:id="@+id/btnLearn"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="1" >
+
+        <TextView
+            android:id="@+id/tvAppName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_weight="1"
-            android:background="@drawable/button_style"
-            android:text="學習模式"
-            android:textColor="#4B4B4B"
-            android:textSize="16dip" />
+            android:layout_margin="20dp"
+            android:text="原文逆轉勝"
+            android:textSize="40dp" />
+    </LinearLayout>
+
+    <!-- coverFlow -->
+
+    <pl.polidea.coverflow.CoverFlow
+            xmlns:coverflow="http://schemas.android.com/apk/res/com.mis.icequeen"
+            android:id="@+id/coverflowReflection"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3" 
+            android:layout_marginTop="20dip"
+            class="pl.polidea.coverflow.CoverFlow"
+            coverflow:imageHeight="200dip"
+            coverflow:imageReflectionRatio="0.2"
+            coverflow:imageWidth="180dip"
+            coverflow:reflectionGap="2dip"
+            coverflow:withReflection="true" >
+        </pl.polidea.coverflow.CoverFlow>
+    <!-- end coverflow -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp" 
+        android:layout_weight="1" >
 
         <Button
             android:id="@+id/btnReview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="複習模式" 
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
             android:background="@drawable/button_style"
+            android:text="複習模式"
             android:textColor="#4B4B4B"
-            android:layout_weight="1"
             android:textSize="16dip" />
 
         <Button
             android:id="@+id/btnTest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="20dp"
-            android:text="測驗模式" 
+            android:layout_alignBaseline="@+id/btnReview"
+            android:layout_alignBottom="@+id/btnReview"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@+id/btnReview"
             android:background="@drawable/button_style"
+            android:text="測驗模式"
             android:textColor="#4B4B4B"
-            android:layout_weight="1" 
             android:textSize="16dip" />
-    </LinearLayout>
 
+        <Button
+            android:id="@+id/btnLearn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/btnReview"
+            android:layout_alignBottom="@+id/btnReview"
+            android:layout_marginRight="15dp"
+            android:layout_toLeftOf="@+id/btnReview"
+            android:background="@drawable/button_style"
+            android:text="學習模式"
+            android:textColor="#4B4B4B"
+            android:textSize="16dip" />
+
+    </RelativeLayout>
 
 </LinearLayout>
