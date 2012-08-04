@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<style name="RatingBarStyle" parent="@android:style/Widget.RatingBar">
-  <item name="android:minHeight">48px</item>
-  <item name="android:maxHeight">48px</item>
-</style>
+
+    <style name="RatingBarStyle" parent="@android:style/Widget.RatingBar">
+        <item name="android:minHeight">48px</item>
+        <item name="android:maxHeight">48px</item>
+    </style>
+
+    <style name="CustomTheme" parent="android:style/Theme.Light">
+        <item name="android:windowTitleBackgroundStyle">@style/titleBg</item>
+        <item name="android:windowTitleSize">26dp</item>
+        <item name="android:windowTitleStyle">@style/titleText</item>
+    </style>
+
+    <style name="titleBg">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">#111111</item>
+        <item name="android:paddingLeft">10dp</item>
+    </style>
+
+    <style name="titleText">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
 </resources>
