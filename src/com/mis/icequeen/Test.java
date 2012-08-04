@@ -195,11 +195,7 @@ public class Test extends Activity {
     		temp=(temp+1)% 4;
     	}
 		
-<<<<<<< HEAD
-    	//radioGroup.clearCheck();
-=======
     	radioGroup.clearCheck();
->>>>>>> 81c77cafbf2e6a1cbd0f0dfc5460e1f82193e113
     	radio1.setText(optionValue[0]);
 		radio2.setText(optionValue[1]);
 		radio3.setText(optionValue[2]);
