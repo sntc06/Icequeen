@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -17,6 +18,7 @@ import android.graphics.BitmapFactory.Options;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
 import android.util.Log;
@@ -203,7 +205,14 @@ public class Review extends BaseActivity implements OnInitListener {
 
 		});
 		
-		
+		// 自動發音
+		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+	    if (preferences.getBoolean("autospeak_review", true) == true) {
+	    	// destroy duplicate service
+			onDestroy();
+			tts = new TextToSpeech(Review.this, Review.this);
+			Log.v("TTS","tts service created.");
+	    }
 		
 
 	}

@@ -2,8 +2,18 @@
 <PreferenceScreen
   xmlns:android="http://schemas.android.com/apk/res/android" >
   <CheckBoxPreference
-    android:key="pronounce"
-    android:title="自動發音"
+    android:key="autospeak_learn"
+    android:title="學習模式自動發音"
     android:summary="設定學習模式是否自動播放發音"
     android:defaultValue="true" />
+  <CheckBoxPreference
+    android:key="autospeak_review"
+    android:title="複習模式自動發音"
+    android:summary="設定複習模式是否自動播放發音"
+    android:defaultValue="true" />
+  <CheckBoxPreference
+    android:key="autospeak_test"
+    android:title="測驗模式自動發音"
+    android:summary="設定測驗模式是否自動播放發音"
+    android:defaultValue="false" />
 </PreferenceScreen>

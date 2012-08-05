@@ -1,14 +1,19 @@
 package com.mis.icequeen;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Random;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
+import android.speech.tts.TextToSpeech;
+import android.speech.tts.TextToSpeech.OnInitListener;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,7 +24,7 @@ import android.widget.Toast;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 
-public class Test extends BaseActivity {
+public class Test extends BaseActivity implements OnInitListener {
 	
 	private TextView tvVoc;
 	private TextView tvClass;
@@ -42,12 +47,15 @@ public class Test extends BaseActivity {
 	private Cursor test;
 	private Long startTime;
 	private Handler handler = new Handler();
+	private final Locale locale = Locale.UK;
+	private TextToSpeech tts;
 	boolean check=true;
 	String cpt=new String();
 	int Qindex=0,temp=0;
 	static int[] optionId=new int[4];
 	String[] optionValue=new String[4];
 	Random rand=new Random();
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -201,6 +209,17 @@ public class Test extends BaseActivity {
 		radio3.setText(optionValue[2]);
 		radio4.setText(optionValue[3]);
 		System.out.println(ANSWER);
+		
+		
+		// 自動發音
+		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+	    if (preferences.getBoolean("autospeak_test", false) == true) {
+	    	// destroy duplicate service
+			onDestroy();
+			tts = new TextToSpeech(Test.this, Test.this);
+			Log.v("TTS","tts service created.");
+	    }
+		
     }
 
 
@@ -294,6 +313,47 @@ public class Test extends BaseActivity {
 			}
 		}
     	
+    }
+    
+	/**
+	 * TTS service 被建立之後開始說話
+	 * */
+	public void onInit(int status) {
+	      if (status == TextToSpeech.SUCCESS) {
+	    	  
+	            int result = tts.setLanguage(locale);
+	 
+	            if (result == TextToSpeech.LANG_MISSING_DATA
+	                    || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+	                Log.i("TTS", "This Language is not supported");
+	            } else {
+	            	// 利用 tts 說出單字
+	                speakOut();
+	                Log.v("TTS","tts service init");
+	            }
+	 
+	        } else {
+	            Log.e("TTS", "Initilization Failed!");
+	        }
+		
+	}
+	/**
+	 * 利用 TTS 念出單字
+	 */
+    private void speakOut() {
+        String text2 = tvVoc.getText().toString();
+        tts.speak(text2, TextToSpeech.QUEUE_FLUSH, null);
+    }
+    
+    @Override
+    public void onDestroy() {
+        // Don't forget to shutdown!
+        if (tts != null) {
+            tts.stop();
+            tts.shutdown();
+            Log.v("TTS","tts service destroyed.");
+        }
+        super.onDestroy();
     }
 
 }
