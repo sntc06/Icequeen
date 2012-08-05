@@ -14,7 +14,7 @@
 	    	<stroke
 	        	android:width="2dip"
     	    	android:color="#ACACAC" />
-    		<corners android:radius= "3dp" />
+    		<corners android:radius= "5dp" />
 		</shape>
     </item>
     <item>
@@ -24,7 +24,7 @@
                 android:endColor="#DCDDDF" 
                 android:angle="270" />
             <stroke android:width="2dip" android:color="#ACACAC" />
-            <corners android:radius="3dp" />
+            <corners android:radius="5dp" />
             <padding android:left="10dp" android:top="10dp" android:right="10dp" android:bottom="10dp" />
         </shape>
     </item>

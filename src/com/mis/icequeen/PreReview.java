@@ -17,7 +17,7 @@ import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class PreReview extends Activity {
+public class PreReview extends BaseActivity {
 	
 	private ArrayList<Integer> showlist;
 	private int[] cptrange;

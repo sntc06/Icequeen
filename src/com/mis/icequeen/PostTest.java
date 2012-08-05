@@ -19,7 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class PostTest extends Activity {
+public class PostTest extends BaseActivity {
 	private TextView tvTime;
 	private TextView tvScore;
 	private Uri total;

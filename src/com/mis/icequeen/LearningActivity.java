@@ -31,7 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.RatingBar.OnRatingBarChangeListener;
 
-public class LearningActivity extends Activity implements OnInitListener {
+public class LearningActivity extends BaseActivity implements OnInitListener {
 	
 	private TextView word, sentence, meaning, classes, count;
 	private ImageButton btnPrev, btnNext;

@@ -31,7 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.RatingBar.OnRatingBarChangeListener;
 
-public class Review extends Activity implements OnInitListener {
+public class Review extends BaseActivity implements OnInitListener {
 	private ArrayList<Integer> showlist;
 	private final int KK_IMAGE_DESNITY = 240; // 圖片解析度，數值越小圖片越大
 	static int nowvocid = 762;

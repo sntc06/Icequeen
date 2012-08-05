@@ -27,6 +27,8 @@
         <activity android:enabled="true" android:name=".PreTest"></activity>
         <activity android:enabled="true" android:name=".Test"></activity>
         <activity android:enabled="true" android:name=".PostTest"></activity>
+        <activity android:theme="@style/CustomTheme" android:name=".Settings"></activity>
+        <activity android:theme="@style/CustomTheme" android:name=".BaseActivity"></activity>
     </application>
 
 </manifest>

@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class PreTest extends Activity {
+public class PreTest extends BaseActivity {
 	private Button btnConfirmTest;
 	private ArrayList<Integer> showlist;
 	private int[] cptrange;

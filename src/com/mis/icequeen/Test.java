@@ -19,7 +19,7 @@ import android.widget.Toast;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 
-public class Test extends Activity {
+public class Test extends BaseActivity {
 	
 	private TextView tvVoc;
 	private TextView tvClass;
