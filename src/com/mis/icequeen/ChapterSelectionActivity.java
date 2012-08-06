@@ -15,6 +15,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.LinearLayout;
@@ -80,23 +81,45 @@ public class ChapterSelectionActivity extends BaseActivity {
 		LinearLayout chapterLinearLayoutMid = (LinearLayout) findViewById(R.id.chapterLinearLayoutMid);
 		LinearLayout chapterLinearLayoutFinal = (LinearLayout) findViewById(R.id.chapterLinearLayoutFinal);
 		final CheckBox[] checkboxes = new CheckBox[data.size()];
+		final TextView[] tvScores = new TextView[data.size()];
+		
 
 		final int half = data.size() / 2;
+		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(200, 50);
 
 		for (int i = 0; i < half; i++) {
 			checkboxes[i] = new CheckBox(this);
 			checkboxes[i].setText(data.get(i));
-			checkboxes[i].setButtonDrawable(this.getResources().getDrawable(
-					R.drawable.checkbox));
-			chapterLinearLayoutMid.addView(checkboxes[i]);
+			checkboxes[i].setWidth(100);
+			checkboxes[i].setButtonDrawable(this.getResources().getDrawable(R.drawable.checkbox));
+			checkboxes[i].setLayoutParams(lp);
+			tvScores[i] = new TextView(this);
+			tvScores[i].setText("100%");
+			
+			LinearLayout tempLayout = new LinearLayout(this);
+			TextView label = new TextView(this);
+			label.setText("正確率");
+			tempLayout.addView(checkboxes[i]);
+			tempLayout.addView(label);
+			tempLayout.addView(tvScores[i]);
+			chapterLinearLayoutMid.addView(tempLayout);
 		}
 
 		for (int i = half; i < data.size(); i++) {
 			checkboxes[i] = new CheckBox(this);
 			checkboxes[i].setText(data.get(i));
-			checkboxes[i].setButtonDrawable(this.getResources().getDrawable(
-					R.drawable.checkbox));
-			chapterLinearLayoutFinal.addView(checkboxes[i]);
+			checkboxes[i].setButtonDrawable(this.getResources().getDrawable(R.drawable.checkbox));
+			checkboxes[i].setLayoutParams(lp);
+			tvScores[i] = new TextView(this);
+			tvScores[i].setText("100%");
+			
+			LinearLayout tempLayout = new LinearLayout(this);
+			TextView label = new TextView(this);
+			label.setText("正確率");
+			tempLayout.addView(checkboxes[i]);
+			tempLayout.addView(label);
+			tempLayout.addView(tvScores[i]);
+			chapterLinearLayoutFinal.addView(tempLayout);
 		}
 
 		CheckBox checkBoxMid = (CheckBox) findViewById(R.id.checkBoxMid);

@@ -50,7 +50,7 @@
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:background="@drawable/button_style"
-            android:text="複習模式"
+            android:text="瀏覽複習本"
             android:textColor="#4B4B4B"
             android:textSize="16dip" />
 
