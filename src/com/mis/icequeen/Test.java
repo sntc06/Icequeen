@@ -1,5 +1,6 @@
 package com.mis.icequeen;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Random;
@@ -240,9 +241,18 @@ public class Test extends BaseActivity implements OnInitListener {
     	}
     	tvcount.setText((testvocs-showlist.size()+1)+"/"+testvocs);
     	if(showlist.isEmpty()){
+    		
+    		// 四捨五入到小數點後第二位
+    		
+    		float score = (float) correct/testvocs * 100;
+    		BigDecimal bd = new BigDecimal(score); 
+    	    bd=bd.setScale(4, BigDecimal.ROUND_HALF_UP); 
+    	    System.out.println(bd.floatValue());
+    	    score = bd.floatValue();
+    		
     		Intent it = new Intent();
     		it.setClass(Test.this, PostTest.class);
-    		it.putExtra("Grade", (float) correct/testvocs * 100);
+    		it.putExtra("Grade", score);
     		it.putExtra("Time",tvTime.getText().toString());
     		it.putExtra("cpt",cpt);
     		it.putExtra("selected", cptrange);
