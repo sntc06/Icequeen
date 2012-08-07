@@ -22,13 +22,13 @@
             </intent-filter>
         </activity>
         <activity android:enabled="true" android:name=".MainActivity"></activity>
-        <activity android:enabled="true" android:clearTaskOnLaunch="true" android:name=".ChapterSelectionActivity"></activity>
-        <activity android:launchMode="singleTask" android:name=".LearningActivity"></activity>
+        <activity android:launchMode="singleTask" android:enabled="true" android:clearTaskOnLaunch="true" android:name=".ChapterSelectionActivity"></activity>
+        <activity android:name=".LearningActivity"></activity>
         <activity android:enabled="true" android:name=".PreReview"></activity>
         <activity android:enabled="true" android:name=".Review"></activity>
         <activity android:enabled="true" android:name=".PreTest"></activity>
         <activity android:enabled="true" android:name=".Test"></activity>
-        <activity android:enabled="true" android:name=".PostTest"></activity>
+        <activity android:launchMode="singleTask" android:enabled="true" android:name=".PostTest"></activity>
         <activity android:name=".Settings"></activity>
         <activity android:name=".BaseActivity"></activity>
         <activity android:launchMode="singleTask" android:name=".ShowWrong"></activity>

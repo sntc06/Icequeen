@@ -1,17 +1,13 @@
 package com.mis.icequeen;
 
 import java.util.ArrayList;
-
-import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.TextView;
@@ -92,9 +88,10 @@ public class PreReview extends BaseActivity {
     					test = managedQuery(total, null, null, null, null);
     					System.out.println("voc count: "+test.getCount());
     					test.moveToFirst();
+    					tvPendingVoc.append("\n²Ä "+(i+1)+" ³¹\n");
     					for (int j = 0; j < test.getCount(); j++) {
     						showlist.add(test.getInt(0));
-    						tvPendingVoc.append("\n"+test.getString(1));
+    						tvPendingVoc.append("\t\t"+test.getString(1)+"\n");
     						if (!test.isLast())
     							test.moveToNext();
     					}

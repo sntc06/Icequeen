@@ -100,6 +100,10 @@ public class TestProvider extends ContentProvider {
     	Cursor c=null;
     	if (uri.equals(Uri.parse("content://com.mis.icequeen.testprovider/getall")))
     		return getAllVoc();
+    	else if (uri.toString().startsWith("content://com.mis.icequeen.testprovider/getLastTest")){
+    		String[] t= uri.toString().split(":");
+    		return TestGrade(t[2]);
+    		}
     	else if (uri.toString().startsWith("content://com.mis.icequeen.testprovider/Newtest")){
     		String[] t= uri.toString().split(":");
     		return InsertTest(t[2],t[3]);
@@ -145,7 +149,11 @@ public class TestProvider extends ContentProvider {
         return c;	
     }
     
-    private Cursor InsertTest(String cr, String grade) {
+    private Cursor TestGrade(String cr) {
+    	Cursor c = db.rawQuery("SELECT grade from test where cr_id=? order by t_id desc limit 1",new String[]{cr});
+    	return c;
+	}
+	private Cursor InsertTest(String cr, String grade) {
     	SimpleDateFormat formatter = new SimpleDateFormat("MM-dd hh:mm");
         String now = formatter.format(new Date());
     	ContentValues cv=new ContentValues();

@@ -4,9 +4,9 @@
 package com.mis.icequeen;
 
 import java.util.ArrayList;
-import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,7 +19,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 
 /**
  * 收到選擇模式的 Intent 之後，選擇章節之後再啟動對應的 Activity
@@ -59,7 +58,6 @@ public class ChapterSelectionActivity extends BaseActivity {
 
 		data = new ArrayList<String>();
 
-		// TODO: FIX get all chapter
 		getIntent().setData(Uri.parse("content://com.mis.icequeen.testprovider/getAllChapter"));
 		Uri uri = getIntent().getData();
 		Cursor c = managedQuery(uri, null, null, null, null);
@@ -73,7 +71,6 @@ public class ChapterSelectionActivity extends BaseActivity {
 		}
 		c.close();
 
-		// TODO: Fill in test chapter data
 		/*
 		 * data.clear(); for (int i=1; i<=11; i++) data.add("Chapter "+i);
 		 * Log.i("FILL_CH", data.toString());
@@ -94,11 +91,22 @@ public class ChapterSelectionActivity extends BaseActivity {
 			checkboxes[i].setButtonDrawable(this.getResources().getDrawable(R.drawable.checkbox));
 			checkboxes[i].setLayoutParams(lp);
 			tvScores[i] = new TextView(this);
-			tvScores[i].setText("100%");
-			
+			getIntent().setData(Uri.parse("content://com.mis.icequeen.testprovider/getLastTest:"+(i+1)));
+			uri = getIntent().getData();
+			c = managedQuery(uri, null, null, null, null);
+			if(c.getCount()!=0){
+				c.moveToFirst();
+				tvScores[i].setText(c.getString(0));
+			}
+			else
+				tvScores[i].setText("尚未測驗!");
+			c.close();
+			System.out.println("SCORE:");
+			if(!tvScores[i].getText().equals("尚未測驗!") && Integer.valueOf(tvScores[i].getText().toString().substring(0,2))<70)
+				tvScores[i].setTextColor(Color.RED);
 			LinearLayout tempLayout = new LinearLayout(this);
 			TextView label = new TextView(this);
-			label.setText("正確率");
+			label.setText("正確率: ");
 			tempLayout.addView(checkboxes[i]);
 			tempLayout.addView(label);
 			tempLayout.addView(tvScores[i]);
@@ -111,11 +119,19 @@ public class ChapterSelectionActivity extends BaseActivity {
 			checkboxes[i].setButtonDrawable(this.getResources().getDrawable(R.drawable.checkbox));
 			checkboxes[i].setLayoutParams(lp);
 			tvScores[i] = new TextView(this);
-			tvScores[i].setText("100%");
+			getIntent().setData(Uri.parse("content://com.mis.icequeen.testprovider/getLastTest:"+(i+1)));
+			uri = getIntent().getData();
+			c = managedQuery(uri, null, null, null, null);
+			if(c.getCount()!=0){
+				c.moveToFirst();
+				tvScores[i].setText(c.getString(0));}
+			else
+				tvScores[i].setText("尚未測驗!");
+			c.close();
 			
 			LinearLayout tempLayout = new LinearLayout(this);
 			TextView label = new TextView(this);
-			label.setText("正確率");
+			label.setText("正確率: ");
 			tempLayout.addView(checkboxes[i]);
 			tempLayout.addView(label);
 			tempLayout.addView(tvScores[i]);

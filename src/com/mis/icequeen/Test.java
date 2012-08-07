@@ -3,8 +3,6 @@ package com.mis.icequeen;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Random;
-
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -203,7 +201,7 @@ public class Test extends BaseActivity implements OnInitListener {
     		temp=(temp+1)% 4;
     	}
 		
-    	radioGroup.clearCheck();
+    	//radioGroup.clearCheck();
     	radio1.setText(optionValue[0]);
 		radio2.setText(optionValue[1]);
 		radio3.setText(optionValue[2]);
@@ -247,6 +245,7 @@ public class Test extends BaseActivity implements OnInitListener {
     		it.putExtra("Grade", (float) correct/testvocs * 100);
     		it.putExtra("Time",tvTime.getText().toString());
     		it.putExtra("cpt",cpt);
+    		it.putExtra("selected", cptrange);
     		it.putExtra("wronglist",wronglist);
     		it.putExtra("BOOK", getIntent().getExtras().getInt("BOOK"));
     		finish();

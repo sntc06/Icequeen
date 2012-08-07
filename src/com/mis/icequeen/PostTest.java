@@ -1,8 +1,6 @@
 package com.mis.icequeen;
 
 import java.util.ArrayList;
-
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.database.Cursor;
@@ -23,6 +21,8 @@ public class PostTest extends BaseActivity {
 	private TextView tvTime;
 	private TextView tvScore;
 	private Uri total;
+	private int[] cptrange;
+	private String[] cpt;
 	private Cursor test;
 	private Button btnReselect;
 	private ArrayList<String> wronglist;
@@ -32,18 +32,21 @@ public class PostTest extends BaseActivity {
         setContentView(R.layout.post_test);
         
         Bundle extras = getIntent().getExtras();
+        cptrange = extras.getIntArray("selected");
         wronglist=extras.getStringArrayList("wronglist");
         tvScore = (TextView) findViewById(R.id.tvScore);
         tvTime = (TextView) findViewById(R.id.tvTime);
-        
         tvScore.setText(extras.getFloat("Grade")+"%");
         tvTime.setText(extras.getString("Time"));
-        getIntent().setData(Uri.parse("content://com.mis.icequeen.testprovider/Newtest:"+extras.getString("cpt")+":"+tvScore.getText().toString()));
-		total = getIntent().getData();
-		test = managedQuery(total, null, null, null, null);
-		test.moveToLast();
-		System.out.println("insert:"+test.getString(0)+test.getString(1));
-		
+        
+        cpt=extras.getString("cpt").toString().split(",");
+        for(int i=0;i<cpt.length;i++){
+        	getIntent().setData(Uri.parse("content://com.mis.icequeen.testprovider/Newtest:"+(i+1)+":"+tvScore.getText().toString()));
+        	total = getIntent().getData();
+        	test = managedQuery(total, null, null, null, null);
+        	test.moveToLast();
+        	System.out.println("insert:"+test.getString(0)+test.getString(1));
+        }
 		btnReselect = (Button) findViewById(R.id.btnReselect);
 		btnReselect.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
@@ -82,15 +85,17 @@ public class PostTest extends BaseActivity {
 		
 		});
 		
-		/*
-		Button btnViewError= (Button) findViewById(R.id.btnViewError);
-		btnViewError.setOnClickListener(new OnClickListener() {
+		Button btnRetry= (Button) findViewById(R.id.btnRetry);
+		btnRetry.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
-				ViewWrongDialog.show();
-				
+				Intent it = new Intent();
+				it.setClass(PostTest.this,PreTest.class);
+				it.putExtra("selected", cptrange);
+				finish();
+				startActivity(it);
 			}
-		});*/
-		
+		});
+
 		Button btnViewError= (Button) findViewById(R.id.btnViewError);
 		btnViewError.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
