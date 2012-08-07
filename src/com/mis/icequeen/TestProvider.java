@@ -18,9 +18,9 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 
 public class TestProvider extends ContentProvider {
-	private final String DATABASE_PATH = android.os.Environment.getExternalStorageDirectory().getAbsolutePath()	+ "/icequeen";
-	public static final String PATH = "/db";
-	private final String DATABASE_FILENAME = "iceqdb.db";
+	public final static String DATABASE_PATH = android.os.Environment.getExternalStorageDirectory().getAbsolutePath()	+ "/icequeen";
+	public final static String PATH = "/db";
+	public final static String DATABASE_FILENAME = "iceqdb.db";
 	static SQLiteDatabase db ;
 	//SQLiteOpenHelper-建立資料庫PhoneContentDB和Table:Users
 	private static class DatabaseHelper extends SQLiteOpenHelper {

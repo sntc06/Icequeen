@@ -16,4 +16,12 @@
     android:title="測驗模式自動發音"
     android:summary="設定測驗模式是否自動播放發音"
     android:defaultValue="false" />
+  <com.mis.icequeen.ResetDialog 
+    android:key="reset_db"
+    android:title="重設資料庫"
+    android:summary="若程式運作出現問題，點此重設資料庫與學習紀錄"
+    android:positiveButtonText="確定"
+    android:negativeButtonText="取消"
+    android:dialogTitle="重設資料庫"
+    android:dialogIcon="@android:drawable/ic_dialog_alert" />
 </PreferenceScreen>
