@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import android.app.Dialog;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -37,6 +38,9 @@ public class PostTest extends BaseActivity {
         tvScore = (TextView) findViewById(R.id.tvScore);
         tvTime = (TextView) findViewById(R.id.tvTime);
         tvScore.setText(extras.getFloat("Grade")+"%");
+        if (extras.getFloat("Grade") < 70 ) {
+        	tvScore.setTextColor(Color.RED);
+        }
         tvTime.setText(extras.getString("Time"));
         
         cpt=extras.getString("cpt").toString().split(",");

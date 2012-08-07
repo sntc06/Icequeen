@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/posttest_bg"
     android:orientation="vertical" >
 
     <!-- 標題區 -->
@@ -46,7 +47,7 @@
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
+            android:layout_marginLeft="50dp"
             android:layout_marginTop="20dp"
             android:layout_alignParentTop="true"
             android:text="Result:"
@@ -60,7 +61,6 @@
             android:layout_below="@+id/textView1"
             android:layout_marginRight="30dp"
             android:text="100%"
-            android:textColor="#FF0000"
             android:textSize="26dp" />
 
         <TextView
@@ -68,8 +68,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/textView1"
+            android:layout_marginTop="20dp"
             android:layout_below="@+id/tvScore"
-            android:text="TIme:"
+            android:text="Time:"
             android:textSize="30dp" />
 
         <TextView

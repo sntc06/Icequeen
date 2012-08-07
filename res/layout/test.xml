@@ -2,8 +2,37 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color"
+    android:background="@drawable/test_bg"
     android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.15" >
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.7"
+        android:background="@drawable/review_background" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:text="測驗模式"
+            android:textSize="30dp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.15" >
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -15,10 +44,9 @@
             android:id="@+id/tvVoc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:layout_marginBottom="60dp"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="40dp"
+            android:layout_centerVertical="true"
             android:text="Word"
             android:textSize="40dp" />
 
@@ -27,10 +55,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/tvVoc"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="24dp"
+            android:layout_below="@+id/tvVoc"
             android:text="(n.)"
-            android:textSize="20dp"  />
+            android:textSize="20dp"
+            android:textColor="#FF7E00" />
 
     </RelativeLayout>
 
@@ -38,6 +66,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="2.5"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="20dp"
         android:orientation="vertical" >
 
         <RadioGroup
@@ -49,29 +80,33 @@
                 android:id="@+id/radio1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:text="A" />
+                android:button="@drawable/radiobutton"
+                android:text="A"
+                android:textSize="18dp" />
 
             <RadioButton
                 android:id="@+id/radio2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:text="B" />
+                android:button="@drawable/radiobutton"
+                android:text="B"
+                android:textSize="18dp" />
 
             <RadioButton
                 android:id="@+id/radio3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:text="C" />
+                android:button="@drawable/radiobutton"
+                android:text="C"
+                android:textSize="18dp" />
 
             <RadioButton
                 android:id="@+id/radio4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:text="D" />
+                android:button="@drawable/radiobutton"
+                android:text="D"
+                android:textSize="18dp" />
         </RadioGroup>
     </RelativeLayout>
 
@@ -111,9 +146,8 @@
             android:layout_height="wrap_content"
             android:layout_above="@+id/btnConfirm"
             android:layout_alignLeft="@+id/tvTime"
-            android:text="" 
-            android:textAppearance="?android:attr/textAppearanceMedium"/>
-
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceMedium" />
     </RelativeLayout>
 
 </LinearLayout>

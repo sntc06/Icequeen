@@ -87,7 +87,7 @@ public class ChapterSelectionActivity extends BaseActivity {
 		for (int i = 0; i < half; i++) {
 			checkboxes[i] = new CheckBox(this);
 			checkboxes[i].setText(data.get(i));
-			checkboxes[i].setWidth(100);
+			checkboxes[i].setWidth(80);
 			checkboxes[i].setButtonDrawable(this.getResources().getDrawable(R.drawable.checkbox));
 			checkboxes[i].setLayoutParams(lp);
 			tvScores[i] = new TextView(this);
