@@ -16,6 +16,7 @@ import android.widget.BaseAdapter;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class MainActivity extends BaseActivity {
@@ -60,7 +61,14 @@ public class MainActivity extends BaseActivity {
         btnReview.setOnClickListener(buttonListener);
         btnTest.setOnClickListener(buttonListener);
         
-		
+		ImageButton ic_gear_button = (ImageButton) findViewById(R.id.ic_gear_button);
+		ic_gear_button.setOnClickListener(new OnClickListener(){
+			public void onClick(View arg0) {
+				Intent it = new Intent();
+				it.setClass(MainActivity.this, Settings.class);
+		        startActivity(it);
+			}
+		});
 	}
 
 	/**

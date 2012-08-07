@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -44,8 +45,13 @@ public class PostTest extends BaseActivity {
         tvTime.setText(extras.getString("Time"));
         
         cpt=extras.getString("cpt").toString().split(",");
+        
+        for (String temp: cpt) {
+        	Log.i("CHAPTER",":"+temp);
+        }
+        
         for(int i=0;i<cpt.length;i++){
-        	getIntent().setData(Uri.parse("content://com.mis.icequeen.testprovider/Newtest:"+(i+1)+":"+tvScore.getText().toString()));
+        	getIntent().setData(Uri.parse("content://com.mis.icequeen.testprovider/Newtest:"+cpt[i]+":"+tvScore.getText().toString()));
         	total = getIntent().getData();
         	test = managedQuery(total, null, null, null, null);
         	test.moveToLast();

@@ -104,6 +104,7 @@ public class ChapterSelectionActivity extends BaseActivity {
 			System.out.println("SCORE:");
 			if(!tvScores[i].getText().equals("尚未測驗!") && Integer.valueOf(tvScores[i].getText().toString().substring(0,2))<70)
 				tvScores[i].setTextColor(Color.RED);
+			else tvScores[i].setTextColor(Color.BLACK);
 			LinearLayout tempLayout = new LinearLayout(this);
 			TextView label = new TextView(this);
 			label.setText("正確率: ");
@@ -128,7 +129,10 @@ public class ChapterSelectionActivity extends BaseActivity {
 			else
 				tvScores[i].setText("尚未測驗!");
 			c.close();
-			
+			System.out.println("SCORE:");
+			if(!tvScores[i].getText().equals("尚未測驗!") && Integer.valueOf(tvScores[i].getText().toString().substring(0,2))<70)
+				tvScores[i].setTextColor(Color.RED);
+			else tvScores[i].setTextColor(Color.BLACK);
 			LinearLayout tempLayout = new LinearLayout(this);
 			TextView label = new TextView(this);
 			label.setText("正確率: ");

@@ -146,8 +146,7 @@
             android:layout_height="wrap_content"
             android:layout_above="@+id/btnConfirm"
             android:layout_alignLeft="@+id/tvTime"
-            android:text=""
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:text="10/100" />
     </RelativeLayout>
 
 </LinearLayout>
