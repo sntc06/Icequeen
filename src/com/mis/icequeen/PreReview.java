@@ -36,11 +36,9 @@ public class PreReview extends BaseActivity {
         cptrange = extras.getIntArray("selected");
        
         showlist = new ArrayList<Integer>();
-        tvSelectedChapter = (TextView) findViewById(R.id.tvSelectedChapter);
         RatingBarListener ratingBarListener = new RatingBarListener(); 
     	ratingBar = (RatingBar) findViewById(R.id.ratingBar);
     	ratingBar.setOnRatingBarChangeListener(ratingBarListener);
-    	pendingVocLinearLayout = (LinearLayout) findViewById(R.id.pendingVocLinearLayout);
     	
     	ButtonListener buttonListener = new ButtonListener();
     	btnConfirmReview = (Button) findViewById(R.id.btnConfirmReview);
