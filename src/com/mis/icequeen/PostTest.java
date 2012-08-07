@@ -82,11 +82,24 @@ public class PostTest extends BaseActivity {
 		
 		});
 		
+		/*
 		Button btnViewError= (Button) findViewById(R.id.btnViewError);
 		btnViewError.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
 				ViewWrongDialog.show();
 				
+			}
+		});*/
+		
+		Button btnViewError= (Button) findViewById(R.id.btnViewError);
+		btnViewError.setOnClickListener(new OnClickListener() {
+			public void onClick(View arg0) {
+				Intent it = new Intent();
+				it.setClass(PostTest.this,ShowWrong.class);
+				Bundle extras = new Bundle();
+				extras.putStringArrayList("wronglist", wronglist);
+				it.putExtras(extras);
+				startActivity(it);
 			}
 		});
     }

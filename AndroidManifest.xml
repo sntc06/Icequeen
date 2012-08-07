@@ -31,6 +31,7 @@
         <activity android:enabled="true" android:name=".PostTest"></activity>
         <activity android:name=".Settings"></activity>
         <activity android:name=".BaseActivity"></activity>
+        <activity android:launchMode="singleTask" android:name=".ShowWrong"></activity>
     </application>
 
 </manifest>

@@ -21,10 +21,8 @@ public class PreReview extends BaseActivity {
 	
 	private ArrayList<Integer> showlist;
 	private int[] cptrange;
-	private TextView tvSelectedChapter;
-	private TextView tempTV;
+	private TextView tvPendingVoc;
 	private RatingBar ratingBar;
-	private LinearLayout pendingVocLinearLayout;
 	private Button btnConfirmReview;
 	private Uri total;
 	private Cursor test;
@@ -47,16 +45,9 @@ public class PreReview extends BaseActivity {
     	ButtonListener buttonListener = new ButtonListener();
     	btnConfirmReview = (Button) findViewById(R.id.btnConfirmReview);
     	btnConfirmReview.setOnClickListener(buttonListener);
+    	tvPendingVoc = (TextView) findViewById(R.id.tvPendingVoc); 
     	
         refreshPendingVoc( (int) ratingBar.getRating() );
-        
-        tvSelectedChapter.append("\n");
-        for (int i = 0; i < cptrange.length; i++) {
-    		if (cptrange[i] == 1) {
-    			tvSelectedChapter.append(" Chapter "+(i+1)+",");
-    		}
-    	}
-        tvSelectedChapter.setText(tvSelectedChapter.getText().toString().substring(0, tvSelectedChapter.getText().length()-1));
         
     }
     
@@ -69,28 +60,16 @@ public class PreReview extends BaseActivity {
     	
     	switch (rating) {
     	case 0:
-    		tempTV = new TextView(this);
-    		tempTV.setText("請選擇星星數量！");
-    		pendingVocLinearLayout.removeAllViews();
-    		pendingVocLinearLayout.addView(tempTV);
+    		tvPendingVoc.setText("請選擇星星數量！");
     		break;
     	case 1:
-    		tempTV = new TextView(this);
-    		tempTV.setText("一星等的單字：\n");
-    		pendingVocLinearLayout.removeAllViews();
-    		pendingVocLinearLayout.addView(tempTV);
+    		tvPendingVoc.setText("一星等的單字：\n");
     		break;
     	case 2:
-    		tempTV = new TextView(this);
-    		tempTV.setText("二星等的單字：\n");
-    		pendingVocLinearLayout.removeAllViews();
-    		pendingVocLinearLayout.addView(tempTV);
+    		tvPendingVoc.setText("二星等的單字：\n");
     		break;
     	case 3:
-    		tempTV = new TextView(this);
-    		tempTV.setText("三星等的單字：\n");
-    		pendingVocLinearLayout.removeAllViews();
-    		pendingVocLinearLayout.addView(tempTV);
+    		tvPendingVoc.setText("三星等的單字：\n");
     		break;
     	default:
     		break;
@@ -117,7 +96,7 @@ public class PreReview extends BaseActivity {
     					test.moveToFirst();
     					for (int j = 0; j < test.getCount(); j++) {
     						showlist.add(test.getInt(0));
-    						tempTV.append("\n"+test.getString(1));
+    						tvPendingVoc.append("\n"+test.getString(1));
     						if (!test.isLast())
     							test.moveToNext();
     					}
@@ -128,7 +107,7 @@ public class PreReview extends BaseActivity {
     			}
     		 
     		 if (showlist.size() == 0)
-    			 tempTV.setText("查無單字！");
+    			 tvPendingVoc.setText("查無單字！");
     		
 		}
     }

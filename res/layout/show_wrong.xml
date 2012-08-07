@@ -4,70 +4,57 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-   	<LinearLayout
+    <!-- 標題區 -->
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.15" >
     </LinearLayout>
-    
-    
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@drawable/review_background" 
-        android:layout_weight="0.7"  >
-        
+        android:layout_weight="0.7"
+        android:background="@drawable/review_background" >
+
         <TextView
-        	android:id="@+id/textView1"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-        	android:text="複習模式"
-        	android:textSize="30dp" />       	
-        
+            android:text="錯誤單字一覽"
+            android:textSize="30dp" />
     </RelativeLayout>
 
-	<LinearLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.15" >
     </LinearLayout>
-    
-	<RelativeLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.6" >
 
-       	<RatingBar
-       	    android:id="@+id/ratingBar"
-       	    style="@style/RatingBarStyle"
-       	    android:layout_width="wrap_content"
-       	    android:layout_height="32dp"
-       	    android:layout_alignParentRight="true"
-       	    android:layout_centerVertical="true"
-       	    android:layout_marginRight="20dp"
-       	    android:numStars="3"
-       	    android:progressDrawable="@drawable/rating_bar_style"
-       	    android:stepSize="1.0" />
+        <TextView
+            android:id="@+id/tvSelectedChapter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:text="錯誤單字已自動標為三星等"
+            android:textSize="20dp" />
+    </RelativeLayout>
 
-       	<TextView
-       	    android:id="@+id/tvSelectedChapter"
-       	    android:layout_width="wrap_content"
-       	    android:layout_height="wrap_content"
-       	    android:layout_alignParentLeft="true"
-       	    android:layout_centerVertical="true"
-       	    android:layout_marginLeft="20dp"
-       	    android:textSize="20dp"
-       	    android:text="指定星等單字" />
-       	
-	</RelativeLayout>
-	
-	
-	<!-- 單字預覽區 -->
-	
-	<RelativeLayout
+    
+    <!-- 單字區 -->
+    
+		<RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.2"
@@ -83,54 +70,54 @@
        	    android:layout_centerHorizontal="true"
        	    android:text="單字總覽" />
 	   
-    </RelativeLayout>
-	
+    </RelativeLayout>    
+    
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2.2"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
+        android:layout_weight="2.2"
         android:background="@drawable/selected_chapter_bg" >
 
         <LinearLayout
             android:id="@+id/pendingVocLinearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="20dp" 
-            android:orientation="vertical">
-            
+            android:orientation="vertical"
+            android:padding="20dp" >
 
             <TextView
-                android:id="@+id/tvPendingVoc"
+                android:id="@+id/tvWrongList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pending voc"
-                android:textSize="18dp"
-                android:lineSpacingExtra="4dp" />
-
+                android:lineSpacingExtra="4dp"
+                android:text=""
+                android:textSize="16dp" />
         </LinearLayout>
     </ScrollView>
 
-	<!-- 按鈕區 -->
-    <RelativeLayout    
-        android:layout_marginTop="10dp"
+    <!-- 按鈕區 -->
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"  >
+        android:layout_marginTop="10dp"
+        android:layout_weight="1" >
+
         <Button
             android:id="@+id/btnConfirmReview"
-            android:layout_width="120dp"
+            android:layout_width="140dp"
             android:layout_height="50dp"
             android:layout_centerInParent="true"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/button_style"
-            android:textColor="#4B4B4B"
-            android:textSize="20dp" 
             android:gravity="center"
-            android:text="確認選擇" />
+            android:text="複習本"
+            android:textColor="#4B4B4B"
+            android:textSize="20dp"
+            android:drawableLeft="@drawable/review_icon" />
     </RelativeLayout>
-
 
 </LinearLayout>
