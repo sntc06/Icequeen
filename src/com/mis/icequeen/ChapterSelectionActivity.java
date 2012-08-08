@@ -15,6 +15,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +30,9 @@ public class ChapterSelectionActivity extends BaseActivity {
 	private ArrayList<String> data;
 	private static String MODE;
 	private static int BOOK;
+	
+	private TextView tvSelectedTitle,tvSelectedAuthor,tvSelectedVersion;
+	private ImageView imageView;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -45,11 +49,14 @@ public class ChapterSelectionActivity extends BaseActivity {
 		Cursor c = managedQuery(uri, null, null, null, null);
 		
 		// setting Title
-		
 		if (MODE.equals("LEARN")) setTitle(getResources().getString(R.string.mode_learn));
 		else if (MODE.equals("REVIEW")) setTitle(getResources().getString(R.string.mode_review));
 		else if (MODE.equals("TEST")) setTitle(getResources().getString(R.string.mode_test));
 		
+		tvSelectedTitle = (TextView) findViewById(R.id.tvSelectedTitle);
+		tvSelectedAuthor = (TextView) findViewById(R.id.tvSelectedAuthor);
+		tvSelectedVersion = (TextView) findViewById(R.id.tvSelectedVersion);
+		imageView = (ImageView) findViewById(R.id.imageView);
 		
 		Log.i("INT", "received intent MODE=" + MODE + ";BOOK=" + BOOK);
 
@@ -169,6 +176,26 @@ public class ChapterSelectionActivity extends BaseActivity {
 
 			}
 		});
+		
+		// 顯示相對應的課本與其圖片
+		//TODO
+		
+		switch (BOOK) {
+		case 1: //第二本書
+			imageView.setImageResource(R.drawable.image02);
+			tvSelectedTitle.setText("Economics");
+			tvSelectedAuthor.setText("John Sloman");
+			tvSelectedVersion.setText("Version 6");
+			break;
+		case 2:
+			imageView.setImageResource(R.drawable.image03);
+			tvSelectedTitle.setText("Marketing");
+			tvSelectedAuthor.setText("Iceking162");
+			tvSelectedVersion.setText("Version 20");
+			break;
+		default:
+			break;
+		}
 
 		// 點了確定按鈕
 		// Confirm chapter selection

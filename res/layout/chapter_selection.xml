@@ -4,114 +4,120 @@
     android:layout_height="match_parent"
     android:background="@color/background_color"
     android:orientation="vertical" >
-	<!-- 書本資訊 -->
-    <LinearLayout
+
+    <!-- 書本資訊 -->
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2.5" >
+        android:layout_weight="2.5" >
+
         <ImageView
-            android:id="@+id/imageView1"
+            android:id="@+id/imageView"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
             android:src="@drawable/image02" />
 
-        <LinearLayout
-            android:layout_marginLeft="10dp"
+        <TextView
+            android:id="@+id/tvSelectedTitle"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/imageView"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/imageView"
+            android:text="Economics"
+            android:textSize="30dp"
+            android:textColor="#000000" />
 
-            <TextView
-                android:id="@+id/tvSelectedTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Economics"
-                android:textSize="28dp" />
+        <TextView
+            android:id="@+id/tvSelectedAuthor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tvSelectedTitle"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/tvSelectedTitle"
+            android:text="John Sloman"
+            android:textSize="16dp" />
 
-            <TextView
-                android:id="@+id/tvSelectedAuthor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="14dp"
-                android:text="John Sloman" />
+        <TextView
+            android:id="@+id/tvSelectedVersion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvSelectedAuthor"
+            android:layout_marginTop="8dp"
+            android:layout_alignLeft="@+id/tvSelectedTitle"
+            android:text="version 6"
+            android:textSize="14dp" />
 
-            <TextView
-                android:id="@+id/tvSelectedVersion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="14dp"
-                android:text="version 6" />
-        </LinearLayout>
-    </LinearLayout>
-
+    </RelativeLayout>
+
     <!-- 章節選擇 -->
-    
+
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
         android:layout_height="0dip"
-        android:layout_weight="6"  >
-    
-    
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
-
-        <!-- 期中考 -->
-        <CheckBox
-            android:id="@+id/checkBoxMid"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
-            android:layout_marginLeft="10dp"
-            android:text="期中考"
-            android:button="@drawable/checkbox" />
+        android:layout_weight="6" >
 
         <LinearLayout
-            android:id="@+id/chapterLinearLayoutMid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:background="@drawable/checkbox_background" >
+            android:orientation="vertical" >
 
+            <!-- 期中考 -->
+
+            <CheckBox
+                android:id="@+id/checkBoxMid"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_marginLeft="10dp"
+                android:button="@drawable/checkbox"
+                android:text="期中考" />
+
+            <LinearLayout
+                android:id="@+id/chapterLinearLayoutMid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/checkbox_background"
+                android:orientation="vertical" >
+            </LinearLayout>
+
+            <!-- 期末考 -->
+
+            <CheckBox
+                android:id="@+id/checkBoxFinal"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="12dp"
+                android:button="@drawable/checkbox"
+                android:text="期末考" />
+
+            <LinearLayout
+                android:id="@+id/chapterLinearLayoutFinal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/checkbox_background"
+                android:orientation="vertical" >
+            </LinearLayout>
         </LinearLayout>
-        
-        <!-- 期末考 -->
-        <CheckBox
-            android:id="@+id/checkBoxFinal"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginLeft="10dp"
-            android:text="期末考" 
-            android:button="@drawable/checkbox" />
-
-        <LinearLayout
-            android:id="@+id/chapterLinearLayoutFinal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:background="@drawable/checkbox_background" >
-
-        </LinearLayout>
-
-    </LinearLayout>
-    
     </ScrollView>
 
-    
     <!-- 按鈕區 -->
-    
-    <RelativeLayout    
-        android:layout_marginTop="10dp"
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.5"  >
+        android:layout_marginTop="10dp"
+        android:layout_weight="1.5" >
+
         <Button
             android:id="@+id/btnConfirmChapter"
             android:layout_width="120dp"
@@ -119,15 +125,10 @@
             android:layout_centerInParent="true"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/button_style"
-            android:textColor="#4B4B4B"
-            android:textSize="20dp" 
             android:gravity="center"
-            android:text="確認選擇" />
-
+            android:text="確認選擇"
+            android:textColor="#4B4B4B"
+            android:textSize="20dp" />
     </RelativeLayout>
-
-	    
-
-
 
 </LinearLayout>
