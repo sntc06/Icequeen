@@ -64,9 +64,9 @@
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:background="@drawable/button_style"
-            android:text="瀏覽複習本"
+            android:text="複習本"
             android:textColor="#4B4B4B"
-            android:textSize="16dip" />
+            android:textSize="22dip" />
 
         <Button
             android:id="@+id/btnTest"
@@ -77,9 +77,9 @@
             android:layout_marginLeft="15dp"
             android:layout_toRightOf="@+id/btnReview"
             android:background="@drawable/button_style"
-            android:text="測驗模式"
+            android:text="測驗"
             android:textColor="#4B4B4B"
-            android:textSize="16dip" />
+            android:textSize="22dip" />
 
         <Button
             android:id="@+id/btnLearn"
@@ -90,9 +90,9 @@
             android:layout_marginRight="15dp"
             android:layout_toLeftOf="@+id/btnReview"
             android:background="@drawable/button_style"
-            android:text="學習模式"
+            android:text="學習"
             android:textColor="#4B4B4B"
-            android:textSize="16dip" />
+            android:textSize="22dip" />
 
     </RelativeLayout>
 

@@ -88,7 +88,8 @@ public class PreReview extends BaseActivity {
     					test = managedQuery(total, null, null, null, null);
     					System.out.println("voc count: "+test.getCount());
     					test.moveToFirst();
-    					tvPendingVoc.append("\n²Ä "+(i+1)+" ³¹\n");
+    					if(test.getCount()!=0)
+    						tvPendingVoc.append("\n²Ä "+(i+1)+" ³¹\n");
     					for (int j = 0; j < test.getCount(); j++) {
     						showlist.add(test.getInt(0));
     						tvPendingVoc.append("\t\t"+test.getString(1)+"\n");

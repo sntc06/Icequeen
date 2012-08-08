@@ -15,6 +15,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -37,6 +38,11 @@ public class ChapterSelectionActivity extends BaseActivity {
 		Intent intent = getIntent();
 		MODE = intent.getExtras().getString("MODE");
 		BOOK = intent.getExtras().getInt("BOOK");
+		
+		// selected db
+		getIntent().setData(Uri.parse("content://com.mis.icequeen.testprovider/BookSet:"+BOOK));
+		Uri uri = getIntent().getData();
+		Cursor c = managedQuery(uri, null, null, null, null);
 		
 		// setting Title
 		
@@ -82,12 +88,12 @@ public class ChapterSelectionActivity extends BaseActivity {
 		
 
 		final int half = data.size() / 2;
-		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(200, 50);
+		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
+		lp.setMargins(0, 0, 20, 0);
 
 		for (int i = 0; i < half; i++) {
 			checkboxes[i] = new CheckBox(this);
 			checkboxes[i].setText(data.get(i));
-			checkboxes[i].setWidth(80);
 			checkboxes[i].setButtonDrawable(this.getResources().getDrawable(R.drawable.checkbox));
 			checkboxes[i].setLayoutParams(lp);
 			tvScores[i] = new TextView(this);
@@ -136,6 +142,7 @@ public class ChapterSelectionActivity extends BaseActivity {
 			LinearLayout tempLayout = new LinearLayout(this);
 			TextView label = new TextView(this);
 			label.setText("¥¿½T²v: ");
+			
 			tempLayout.addView(checkboxes[i]);
 			tempLayout.addView(label);
 			tempLayout.addView(tvScores[i]);

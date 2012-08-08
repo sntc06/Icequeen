@@ -223,8 +223,10 @@ public class Test extends BaseActivity implements OnInitListener {
 			// destroy duplicate service
 				tts = new TextToSpeech(Test.this, Test.this);
 				Log.v("TTS", "tts service created.");
-				tts.stop();
-				tts.shutdown();
+				if (tts != null) {
+					tts.stop();
+					tts.shutdown();
+				}
 		}
 
 	}
@@ -255,8 +257,10 @@ public class Test extends BaseActivity implements OnInitListener {
 		if (showlist.isEmpty()) {
 
 			// stop tts
+			if (tts != null) {
 				tts.stop();
 				tts.shutdown();
+			}
 				Log.v("TTS", "tts service destroyed.");
 
 			// 四捨五入到小數點後第二位
@@ -374,8 +378,10 @@ public class Test extends BaseActivity implements OnInitListener {
 	@Override
 	public void onDestroy() {
 		// Don't forget to shutdown!
-		tts.stop();
-		tts.shutdown();
+		if (tts != null) {
+			tts.stop();
+			tts.shutdown();
+		}
 		Log.v("TTS", "tts service destroyed.");
 		Log.v("ACTIVITY", "onDestroy");
 		super.onDestroy();
@@ -383,8 +389,10 @@ public class Test extends BaseActivity implements OnInitListener {
 
 	@Override
 	public void onPause() {
-		tts.stop();
-		tts.shutdown();
+		if (tts != null) {
+			tts.stop();
+			tts.shutdown();
+		}
 		Log.v("TTS", "tts service destroyed.");
 		Log.v("ACTIVITY", "onPause");
 		super.onPause();

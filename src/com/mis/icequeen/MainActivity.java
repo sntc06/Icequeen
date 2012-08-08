@@ -18,11 +18,12 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends BaseActivity {
 
-	private static long selectedBookId;
-	
+	private static long selectedBookId=2;
+	public static String BookName[] = new String[]{"null","Marketing","Economic","null","null","null"};
 	// CoverFlow 顯示的圖片 
 	private final int[] RESOURCE_IMAGES = {
 			R.drawable.image01,
@@ -144,7 +145,10 @@ public class MainActivity extends BaseActivity {
 			it.putExtra("MODE", mode);
 			it.putExtra("BOOK", (int)selectedBookId);
 			it.setClass(MainActivity.this, ChapterSelectionActivity.class);
-	        startActivity(it);
+			if(BookName[(int)selectedBookId].equals("null"))
+        		Toast.makeText(v.getContext(), "未擁有此課本", Toast.LENGTH_LONG).show();
+			else
+				startActivity(it);
 
 		}
     	

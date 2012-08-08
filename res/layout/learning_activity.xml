@@ -63,9 +63,9 @@
             android:id="@+id/KKView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:maxHeight="25dip"
             android:maxWidth="50dip"
-            android:layout_centerVertical="true"
             android:src="@drawable/button_style" />
     </LinearLayout>
 
@@ -96,25 +96,30 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </LinearLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
         android:layout_marginTop="0dp"
-        android:layout_weight="1.5"
         android:background="@drawable/vocabulary_sentence_bg"
-        android:padding="10dp" >
-
-        <TextView
-            android:id="@+id/tvSentence"
-            android:layout_width="wrap_content"
+        android:layout_weight="1.5" >
+        
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="單字例句"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#4B4C4E" />
-    </LinearLayout>
+            android:padding="10dp" >
+
+            <TextView
+                android:id="@+id/tvSentence"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="單字例句"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#4B4C4E" />
+        </LinearLayout>
+    </ScrollView>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -126,8 +131,8 @@
             android:id="@+id/btnNext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
             android:layout_marginRight="40dp"
             android:background="@null"
             android:contentDescription="Next Button"
@@ -138,8 +143,8 @@
             android:id="@+id/btnPrev"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
             android:layout_marginLeft="40dp"
             android:background="@null"
             android:contentDescription="Prev Button"
@@ -152,12 +157,11 @@
             android:layout_width="wrap_content"
             android:layout_height="32dp"
             android:layout_alignTop="@+id/btnPrev"
-            android:layout_marginTop="10dp"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
             android:numStars="3"
             android:progressDrawable="@drawable/rating_bar_style"
             android:stepSize="1.0" />
-
     </RelativeLayout>
 
 </LinearLayout>
