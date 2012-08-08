@@ -21,9 +21,9 @@ import android.net.Uri;
 public class TestProvider extends ContentProvider {
 	public final static String DATABASE_PATH = android.os.Environment.getExternalStorageDirectory().getAbsolutePath()	+ "/icequeen";
 	public final static String PATH = "/db";
-	public static String DATABASE_FILENAME[] = new String[]{"index0","Marketing.db","Economic.db","index3","index4","index5"};
+	public static String DATABASE_FILENAME[] = new String[]{"Economics.db","Marketing.db","index2","index3","index4","index5"};
 	static SQLiteDatabase db ;
-	private int[] rawDB=new int[]{0,R.raw.test,R.raw.iceq,0,0,0};
+	private int[] rawDB=new int[]{R.raw.iceq,R.raw.test,0,0,0,0};
 	
     //¹ê§@Content ProvidersªºonCreate()
     @Override

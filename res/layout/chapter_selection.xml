@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
-            android:src="@drawable/image02" />
+            android:src="@drawable/book_1" />
 
         <TextView
             android:id="@+id/tvSelectedTitle"
@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/tvSelectedTitle"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="6dp"
             android:layout_below="@+id/tvSelectedTitle"
             android:text="John Sloman"
             android:textSize="16dp" />
@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvSelectedAuthor"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:layout_alignLeft="@+id/tvSelectedTitle"
             android:text="version 6"
             android:textSize="14dp" />

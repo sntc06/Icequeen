@@ -181,14 +181,14 @@ public class ChapterSelectionActivity extends BaseActivity {
 		//TODO
 		
 		switch (BOOK) {
-		case 1: //第二本書
-			imageView.setImageResource(R.drawable.image02);
+		case 0: //第一本書
+			imageView.setImageResource(R.drawable.book_1);
 			tvSelectedTitle.setText("Economics");
 			tvSelectedAuthor.setText("John Sloman");
 			tvSelectedVersion.setText("Version 6");
 			break;
-		case 2:
-			imageView.setImageResource(R.drawable.image03);
+		case 1:
+			imageView.setImageResource(R.drawable.book_2);
 			tvSelectedTitle.setText("Marketing");
 			tvSelectedAuthor.setText("Iceking162");
 			tvSelectedVersion.setText("Version 20");

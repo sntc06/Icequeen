@@ -107,7 +107,7 @@
         android:layout_weight="1" >
 
         <Button
-            android:id="@+id/btnConfirmReview"
+            android:id="@+id/btnGoToReview"
             android:layout_width="140dp"
             android:layout_height="50dp"
             android:layout_centerInParent="true"

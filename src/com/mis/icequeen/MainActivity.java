@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -18,19 +19,15 @@ import android.widget.Toast;
 
 public class MainActivity extends BaseActivity {
 
-	private static long selectedBookId=2;
-	public static String BookName[] = new String[]{"null","Marketing","Economic","null","null","null"};
+	// 預設選擇的課本
+	private static long selectedBookId = 0;
+	public static String BookName[] = new String[]{"Economics","Marketing","null","null","null","null"};
 	// CoverFlow 顯示的圖片 
 	private final int[] RESOURCE_IMAGES = {
-			R.drawable.image01,
-			R.drawable.image02,
-			R.drawable.image03,
-			R.drawable.image04,
-			R.drawable.image05,
-			R.drawable.image06
+			R.drawable.book_1
 	};
 	// CoverFlow 初始位置
-	public final int COVERFLOW_INIT_POSITION = 2;
+	public final int COVERFLOW_INIT_POSITION = 0;
 	
     /** Called when the activity is first created. */
     @Override
@@ -103,12 +100,14 @@ public class MainActivity extends BaseActivity {
         mCoverFlow.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(final AdapterView< ? > parent, final View view, final int position, final long id) {
             	selectedBookId = id;
+            	Log.i("COVERFLOW","clicked:"+id);
             }
 
         });
         mCoverFlow.setOnItemSelectedListener(new OnItemSelectedListener() {
             public void onItemSelected(final AdapterView< ? > parent, final View view, final int position, final long id) {
             	selectedBookId = id;
+            	Log.i("COVERFLOW","selected:"+id);
             }
             public void onNothingSelected(final AdapterView< ? > parent) { /*Do nothing */ }
         });

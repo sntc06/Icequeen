@@ -223,10 +223,6 @@ public class Test extends BaseActivity implements OnInitListener {
 			// destroy duplicate service
 				tts = new TextToSpeech(Test.this, Test.this);
 				Log.v("TTS", "tts service created.");
-				if (tts != null) {
-					tts.stop();
-					tts.shutdown();
-				}
 		}
 
 	}
@@ -385,17 +381,6 @@ public class Test extends BaseActivity implements OnInitListener {
 		Log.v("TTS", "tts service destroyed.");
 		Log.v("ACTIVITY", "onDestroy");
 		super.onDestroy();
-	}
-
-	@Override
-	public void onPause() {
-		if (tts != null) {
-			tts.stop();
-			tts.shutdown();
-		}
-		Log.v("TTS", "tts service destroyed.");
-		Log.v("ACTIVITY", "onPause");
-		super.onPause();
 	}
 
 }

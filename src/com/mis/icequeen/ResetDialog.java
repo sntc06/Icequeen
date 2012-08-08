@@ -70,9 +70,8 @@ public class ResetDialog extends DialogPreference {
 	 */
 	private void resetDB() {
 		try {
-			File myDataPath = new File(TestProvider.DATABASE_PATH
-					+ TestProvider.PATH);
-			System.out.println(TestProvider.DATABASE_PATH + TestProvider.PATH);
+			File myDataPath = new File(TestProvider.DATABASE_PATH + TestProvider.PATH);
+			//System.out.println(TestProvider.DATABASE_PATH + TestProvider.PATH);
 			if (myDataPath.exists()) {
 				if (myDataPath.isDirectory()) {
 					String[] children = myDataPath.list();
