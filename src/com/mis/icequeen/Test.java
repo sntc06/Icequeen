@@ -209,7 +209,7 @@ public class Test extends BaseActivity implements OnInitListener {
 			temp = (temp + 1) % 4;
 		}
 
-		// radioGroup.clearCheck();
+		radioGroup.clearCheck();
 		radio1.setText(optionValue[0]);
 		radio2.setText(optionValue[1]);
 		radio3.setText(optionValue[2]);

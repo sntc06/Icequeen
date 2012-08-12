@@ -23,7 +23,7 @@ public class TestProvider extends ContentProvider {
 	public final static String PATH = "/db";
 	public static String DATABASE_FILENAME[] = new String[]{"Economics.db","Marketing.db","index2","index3","index4","index5"};
 	static SQLiteDatabase db ;
-	private int[] rawDB=new int[]{R.raw.iceq,R.raw.test,0,0,0,0};
+	private int[] rawDB=new int[]{R.raw.economic,R.raw.iceq,0,0,0,0};
 	
     //¹ê§@Content ProvidersªºonCreate()
     @Override
@@ -149,7 +149,7 @@ public class TestProvider extends ContentProvider {
         cv.put("ls_id", r);
     	db.update("VOCABULARY_SET", cv, "`v_id` ='" + id +"'",null);
     	//Cursor c=db.rawQuery("UPDATE VOCABULARY_SET SET ls_id=? where v_id=?",new String[]{r,id});
-    	Cursor c = db.rawQuery("SELECT a.v_id,voc,m_text,class_cht,class_eng,s_text,s_explain,a.ls_id FROM VOCABULARY v JOIN VOCABULARY_SET a on a.v_id=v.v_id JOIN CLASS c on a.c_id=c.c_id JOIN old_SENTENCE s on a.s_id=s.s_id JOIN MEANING m on s.wt_id=m.m_id where a.v_id=?",new String[]{id});
+    	Cursor c = db.rawQuery("SELECT a.v_id,voc,m_text,class_cht,class_eng,s_text,s_explain,a.ls_id FROM VOCABULARY v JOIN VOCABULARY_SET a on a.v_id=v.v_id JOIN CLASS c on a.c_id=c.c_id JOIN SENTENCE s on a.s_id=s.s_id JOIN MEANING m on s.s_id=m.m_id where a.v_id=?",new String[]{id});
     	return c;
 	}
 	private Cursor getVOCbyRC(String r, String cr) {
@@ -165,7 +165,7 @@ public class TestProvider extends ContentProvider {
     	return c;
 	}
 	private Cursor getSETbyID(String t) {
-    	Cursor c = db.rawQuery("SELECT a.v_id,voc,m_text,class_cht,class_eng,s_text,s_explain,a.ls_id FROM VOCABULARY v JOIN VOCABULARY_SET a on a.v_id=v.v_id JOIN CLASS c on a.c_id=c.c_id JOIN old_SENTENCE s on a.s_id=s.s_id JOIN MEANING m on s.wt_id=m.m_id where a.v_id=?",new String[]{t});
+    	Cursor c = db.rawQuery("SELECT a.v_id,voc,m_text,class_cht,class_eng,s_text,s_explain,a.ls_id FROM VOCABULARY v JOIN VOCABULARY_SET a on a.v_id=v.v_id JOIN CLASS c on a.c_id=c.c_id JOIN SENTENCE s on a.s_id=s.s_id JOIN MEANING m on s.s_id=m.m_id where a.v_id=?",new String[]{t});
     	return c;
 	}
     private Cursor getAllCpt() {
@@ -180,7 +180,7 @@ public class TestProvider extends ContentProvider {
     }
     //return all vocabularies in string[], start with 0
     public Cursor getAllVoc(){
-    	Cursor c = db.rawQuery("SELECT a.v_id,voc,m_text,class_cht,class_eng,s_text,s_explain,a.ls_id FROM VOCABULARY v JOIN VOCABULARY_SET a on a.v_id=v.v_id JOIN CLASS c on a.c_id=c.c_id JOIN old_SENTENCE s on a.s_id=s.s_id JOIN MEANING m on s.wt_id=m.m_id",null);
+    	Cursor c = db.rawQuery("SELECT a.v_id,voc,m_text,class_cht,class_eng,s_text,s_explain,a.ls_id FROM VOCABULARY v JOIN VOCABULARY_SET a on a.v_id=v.v_id JOIN CLASS c on a.c_id=c.c_id JOIN SENTENCE s on a.s_id=s.s_id JOIN MEANING m on s.s_id=m.m_id",null);
     	return c;
     }
     public Cursor getVOCbyID(int id){
