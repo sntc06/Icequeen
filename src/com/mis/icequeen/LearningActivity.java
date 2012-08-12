@@ -210,7 +210,7 @@ public class LearningActivity extends BaseActivity implements OnInitListener {
     		total = getIntent().getData();
     		test = managedQuery(total, null, null, null, null);
     		test.moveToFirst();
-    		System.out.println("voc rating change:"+test.getString(7));
+    		//System.out.println("voc rating change:"+test.getString(7));
     		test.close();
     		
 		}
